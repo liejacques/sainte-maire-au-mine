@@ -48,6 +48,9 @@ const fullTitle = title.includes("Sainte-Marie")
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Active JS au plus tôt : l'état initial caché des animations n'existe que
+        si `html.js` est présent → sans JS, tout le contenu reste visible. */}
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />

@@ -75,4 +75,38 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMobile();
   });
+
+  // ---- 3) Socle d'animations : révélation au défilement -------------
+  // Un seul IntersectionObserver réutilisable (onVisible) : déclenche un
+  // callback une fois quand l'élément entre dans le viewport, puis cesse de
+  // l'observer (pas de re-déclenchement). Sans IntersectionObserver, le
+  // callback s'exécute immédiatement (contenu visible, pas de régression).
+  const onceCallbacks = new WeakMap<Element, (el: Element) => void>();
+  const onceObserver =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const cb = onceCallbacks.get(entry.target);
+              if (cb) cb(entry.target);
+              obs.unobserve(entry.target);
+              onceCallbacks.delete(entry.target);
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.05 },
+        )
+      : null;
+
+  const onVisible = (el: Element, cb: (el: Element) => void) => {
+    if (!onceObserver) { cb(el); return; }
+    onceCallbacks.set(el, cb);
+    onceObserver.observe(el);
+  };
+
+  // Révélations : ajoute .is-visible (l'animation est portée par le CSS, qui
+  // ne masque rien sans JS ni en reduced-motion).
+  document
+    .querySelectorAll(".reveal")
+    .forEach((el) => onVisible(el, (t: Element) => t.classList.add("is-visible")));
 </script>
