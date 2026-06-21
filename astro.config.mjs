@@ -3,7 +3,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Domaine officiel de la commune (sert aux URLs canoniques, sitemap, Open Graph).
-const SITE = 'https://www.sainte-marie-aux-mines.fr';
+// Configurable par variable d'environnement `SITE` au build : un changement de
+// domaine = une seule valeur à fournir, jamais de domaine en dur ailleurs.
+const SITE = process.env.SITE || 'https://www.sainte-marie-aux-mines.fr';
 
 // https://astro.build/config
 export default defineConfig({
