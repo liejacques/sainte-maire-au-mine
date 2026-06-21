@@ -48,6 +48,20 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Recherche" }];
           input.dispatchEvent(new Event("input", { bubbles: true }));
         }
       }
+
+      // A11y : Pagefind n'annonce pas le nombre de résultats. On pose un
+      // aria-live sur le compteur dès qu'il apparaît (annonce aux lecteurs d'écran).
+      var searchEl = document.getElementById("search");
+      if (searchEl && "MutationObserver" in window) {
+        var obs = new MutationObserver(function () {
+          var msg = searchEl.querySelector(".pagefind-ui__message");
+          if (msg && !msg.getAttribute("aria-live")) {
+            msg.setAttribute("aria-live", "polite");
+            msg.setAttribute("aria-atomic", "true");
+          }
+        });
+        obs.observe(searchEl, { childList: true, subtree: true });
+      }
     });
   </script>
 
