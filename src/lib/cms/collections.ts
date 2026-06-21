@@ -1,6 +1,6 @@
-// Configuration déclarative des modules de l'admin.
-// L'interface CRUD (listes + formulaires) est générée à partir d'ici :
-// ajouter un champ = une ligne, pas de code d'UI à écrire.
+// Configuration déclarative des modules de l’admin.
+// L’interface CRUD (listes + formulaires) est générée à partir d’ici :
+// ajouter un champ = une ligne, pas de code d’UI à écrire.
 
 export type FieldType =
   | "text" | "textarea" | "richtext" | "select" | "date" | "datetime"
@@ -63,7 +63,7 @@ export const collections: Collection[] = [
       { name: "image", label: "Image principale", type: "image", section: "Médias" },
       { name: "galerie", label: "Galerie (optionnelle)", type: "gallery", section: "Médias" },
       { name: "miseEnAvant", label: "Mettre à la une", type: "checkbox", section: "Publication" },
-      { name: "datePublication", label: "Date de publication", type: "date", section: "Publication", help: "Si programmé, l'actu paraît à cette date à 00:00." },
+      { name: "datePublication", label: "Date de publication", type: "date", section: "Publication", help: "Si programmé, l’actu paraît à cette date à 00:00." },
     ],
   },
   {
@@ -227,6 +227,6 @@ export const byKey = (k: string) => collections.find((c) => c.key === k);
 
 // Pages éditoriales (module « Pages du site »).
 export const PAGES_EDITABLES = [
-  "Découvrir & sortir", "Patrimoine & mines", "Pays d'art et d'histoire", "Tourisme & Tellure",
+  "Découvrir & sortir", "Patrimoine & mines", "Pays d’art et d’histoire", "Tourisme & Tellure",
   "Mes démarches", "Mon quotidien", "Cadre de vie", "Économie", "Ma mairie", "Contact",
 ];

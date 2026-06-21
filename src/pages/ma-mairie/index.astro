@@ -10,13 +10,13 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Ma mairie" }];
 const services = [
   {
     nom: "État civil & formalités",
-    desc: "Naissances, mariages, décès, reconnaissances, recensement citoyen, attestations d'accueil et légalisation de signature.",
+    desc: "Naissances, mariages, décès, reconnaissances, recensement citoyen, attestations d’accueil et légalisation de signature.",
     href: "/mes-demarches/#etat-civil",
     icon: `<path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/>`,
   },
   {
     nom: "Urbanisme & cadre de vie",
-    desc: "Permis de construire, déclarations préalables, certificats d'urbanisme, consultation du PLU et autorisations de voirie.",
+    desc: "Permis de construire, déclarations préalables, certificats d’urbanisme, consultation du PLU et autorisations de voirie.",
     href: "/mes-demarches/#urbanisme",
     icon: `<path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>`,
   },
@@ -34,13 +34,13 @@ const services = [
   },
   {
     nom: "CCAS & solidarités",
-    desc: "Centre communal d'action sociale : accompagnement social, aide aux personnes âgées, domiciliation, demande de logement et soutien aux familles.",
+    desc: "Centre communal d’action sociale : accompagnement social, aide aux personnes âgées, domiciliation, demande de logement et soutien aux familles.",
     href: "/contact/",
     icon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>`,
   },
   {
     nom: "Accueil & coordonnées",
-    desc: "Un seul guichet pour vous orienter vers le bon service, prendre rendez-vous ou déposer une demande. Horaires et plan d'accès en bas de page.",
+    desc: "Un seul guichet pour vous orienter vers le bon service, prendre rendez-vous ou déposer une demande. Horaires et plan d’accès en bas de page.",
     href: "/contact/",
     icon: `<path d="M21 16.5v3a2 2 0 0 1-2.2 2 19 19 0 0 1-8.3-3 19 19 0 0 1-6-6 19 19 0 0 1-3-8.3A2 2 0 0 1 3.5 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.5 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/>`,
   },
@@ -53,16 +53,16 @@ const services = [
   eyebrow="Vie municipale"
   mark={true}
   breadcrumb={fil}
-  lede="Le maire, les élus et l'ensemble des services de la Ville de Sainte-Marie-aux-Mines à votre service. Conseil municipal, état civil, urbanisme, action sociale, recrutement et finances : retrouvez ici qui fait quoi et comment nous joindre."
+  lede="Le maire, les élus et l’ensemble des services de la Ville de Sainte-Marie-aux-Mines à votre service. Conseil municipal, état civil, urbanisme, action sociale, recrutement et finances : retrouvez ici qui fait quoi et comment nous joindre."
 >
 
   <!-- ============ LE MAIRE & LES ÉLUS ============ -->
   <section class="section--tight" id="elus" aria-labelledby="elus-title">
     <div class="ma-head">
-      <span class="eyebrow">L'équipe municipale</span>
+      <span class="eyebrow">L’équipe municipale</span>
       <h2 id="elus-title" class="section-title">Le maire &amp; les élus</h2>
       <p class="lead ma-lead">
-        Issue du suffrage des Saint-Mariens, l'équipe municipale conduit l'action de la commune
+        Issue du suffrage des Saint-Mariens, l’équipe municipale conduit l’action de la commune
         et représente {commune.nom} au sein de la {commune.intercommunalite}.
       </p>
     </div>
@@ -73,7 +73,7 @@ const services = [
         <span class="elu-card__role">Maire de {commune.nom}</span>
         <p class="elu-card__name">[Nom du maire — à confirmer]</p>
         <p class="elu-card__deleg">
-          Préside le conseil municipal, dirige l'administration communale et représente la
+          Préside le conseil municipal, dirige l’administration communale et représente la
           commune dans les actes officiels.
         </p>
       </article>
@@ -114,10 +114,10 @@ const services = [
     <div class="note-card note-card--gueules ma-note">
       <h3>Information à vérifier</h3>
       <p>
-        La composition de l'équipe municipale sera mise à jour à l'issue des élections
+        La composition de l’équipe municipale sera mise à jour à l’issue des élections
         municipales de mars 2026. Les noms et délégations ci-dessus sont des emplacements
-        provisoires&nbsp;: <strong>ne les considérez pas comme officiels</strong> tant qu'ils
-        n'ont pas été confirmés par la mairie.
+        provisoires&nbsp;: <strong>ne les considérez pas comme officiels</strong> tant qu’ils
+        n’ont pas été confirmés par la mairie.
       </p>
     </div>
   </section>
@@ -139,7 +139,7 @@ const services = [
           <p>
             Pour une commune de la strate de {commune.nom}, le conseil compte
             <strong>27 sièges</strong>. Ses séances sont <strong>publiques</strong>&nbsp;: chacun
-            peut y assister depuis l'espace réservé au public. L'ordre du jour est affiché en
+            peut y assister depuis l’espace réservé au public. L’ordre du jour est affiché en
             mairie et publié avant chaque séance.
           </p>
           <p>
@@ -185,7 +185,7 @@ const services = [
       <h2 id="services-title" class="section-title">Les services municipaux</h2>
       <p class="lead ma-lead">
         Les agents de la commune accueillent et accompagnent les habitants au quotidien.
-        Voici les principaux services et leur domaine d'intervention.
+        Voici les principaux services et leur domaine d’intervention.
       </p>
     </div>
 
@@ -208,7 +208,7 @@ const services = [
   <section class="section--tight" id="recrutement" aria-labelledby="recrutement-title">
     <div class="ma-head">
       <span class="eyebrow">Travailler à la mairie</span>
-      <h2 id="recrutement-title" class="section-title">Recrutement &amp; offres d'emploi</h2>
+      <h2 id="recrutement-title" class="section-title">Recrutement &amp; offres d’emploi</h2>
       <p class="lead ma-lead">
         La commune recrute régulièrement des agents titulaires et contractuels, ainsi que des
         saisonniers et des apprentis. Les offres en cours sont publiées ci-dessous.
@@ -222,9 +222,9 @@ const services = [
         </span>
         <p class="recrut-empty__title">Aucune offre en cours</p>
         <p class="recrut-empty__text">
-          Aucun poste n'est ouvert au recrutement pour le moment. Vous pouvez néanmoins
+          Aucun poste n’est ouvert au recrutement pour le moment. Vous pouvez néanmoins
           adresser une candidature spontanée&nbsp;; elle sera conservée et étudiée à
-          l'ouverture d'un poste correspondant à votre profil.
+          l’ouverture d’un poste correspondant à votre profil.
         </p>
         <a class="link-more link-more--gold" href="/contact/">Envoyer une candidature spontanée →</a>
       </div>
@@ -259,14 +259,14 @@ const services = [
             équipements, patrimoine).
           </p>
           <p>
-            Le budget primitif est complété en cours d'année par d'éventuelles décisions
+            Le budget primitif est complété en cours d’année par d’éventuelles décisions
             modificatives, puis arrêté par le <strong>compte administratif</strong>, qui rend
             compte des dépenses réellement engagées. Ces documents financiers sont
             <strong>publics</strong> et consultables en mairie.
           </p>
           <p>
             Conformément à la réglementation, les principales données budgétaires sont mises à
-            disposition des habitants dans un souci de transparence de l'action publique.
+            disposition des habitants dans un souci de transparence de l’action publique.
           </p>
         </div>
         <a class="btn btn--ghost" href="/contact/">Consulter les documents budgétaires</a>
@@ -298,8 +298,8 @@ const services = [
         <h2 id="contact-cta-title" class="ma-contact__title">Une question pour la mairie&nbsp;?</h2>
         <p class="ma-contact__text">
           {mairie.adresse} · {mairie.cp} {mairie.ville}. Accueil ouvert
-          {mairie.horaires[0].h.toLowerCase()} du lundi au vendredi. Retrouvez l'ensemble des
-          horaires, le plan d'accès et le formulaire en ligne sur la page contact.
+          {mairie.horaires[0].h.toLowerCase()} du lundi au vendredi. Retrouvez l’ensemble des
+          horaires, le plan d’accès et le formulaire en ligne sur la page contact.
         </p>
       </div>
       <div class="ma-contact__actions">

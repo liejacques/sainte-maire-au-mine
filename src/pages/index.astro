@@ -11,9 +11,9 @@ import { photos } from "../data/photos";
 const actusCotes = autresActus.slice(0, 2);
 const agendaHome = evenements.slice(0, 4);
 const description =
-  "Site officiel de la Ville de Sainte-Marie-aux-Mines (Haut-Rhin), commune centre du Val d'Argent. Démarches en ligne, actualités, agenda, patrimoine minier et démocratie locale.";
+  "Site officiel de la Ville de Sainte-Marie-aux-Mines (Haut-Rhin), commune centre du Val d’Argent. Démarches en ligne, actualités, agenda, patrimoine minier et démocratie locale.";
 ---
-<Base title="Ville de Sainte-Marie-aux-Mines — Au cœur du Val d'Argent" description={description}>
+<Base title="Ville de Sainte-Marie-aux-Mines — Au cœur du Val d’Argent" description={description}>
   <main id="contenu">
 
     <!-- ============ HERO ============ -->
@@ -26,8 +26,8 @@ const description =
               <MinerTools size={20} />
               Site officiel de la commune
             </span>
-            <h1 id="hero-title" class="hero-title metal-text">Mille ans d'argent<br />au cœur des Vosges</h1>
-            <p class="hero-lede">Sainte-Marie-aux-Mines, commune centre du Val d'Argent. Vos démarches, votre quotidien, votre patrimoine — réunis en un seul endroit.</p>
+            <h1 id="hero-title" class="hero-title metal-text">Mille ans d’argent<br />au cœur des Vosges</h1>
+            <p class="hero-lede">Sainte-Marie-aux-Mines, commune centre du Val d’Argent. Vos démarches, votre quotidien, votre patrimoine — réunis en un seul endroit.</p>
 
             <form class="search-bar hero-search" role="search" aria-label="Rechercher une démarche" action="/recherche/" method="get">
               <label for="hero-search" class="visually-hidden">Rechercher une démarche ou un service</label>
@@ -50,7 +50,7 @@ const description =
             <span class="photo-block__title">Galerie de la mine Saint-Jean</span>
             <div class="hero-badge">
               <div class="hero-badge__n">592 kg</div>
-              <div class="hero-badge__l">d'argent · extrait en 1581</div>
+              <div class="hero-badge__l">d’argent · extrait en 1581</div>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@ const description =
               <time datetime={aLaUne.iso} class="meta-date">{aLaUne.date}</time>
               <h3 class="news-featured__title">{aLaUne.titre}</h3>
               <p class="news-featured__excerpt">{aLaUne.resume}</p>
-              <a class="link-more" href={`/actualites/${aLaUne.slug}/`}>Lire l'article →</a>
+              <a class="link-more" href={`/actualites/${aLaUne.slug}/`}>Lire l’article →</a>
             </div>
           </article>
 
@@ -130,13 +130,13 @@ const description =
         <div class="agenda__intro">
           <span class="eyebrow">Temps forts</span>
           <h2 id="agenda-title" class="section-title">Agenda</h2>
-          <p class="agenda__lede">Rendez-vous habitants et grands événements du Val d'Argent.</p>
+          <p class="agenda__lede">Rendez-vous habitants et grands événements du Val d’Argent.</p>
           <div class="agenda__legend">
             {legendeAgenda.map((l) => (
               <span class="agenda__legend-item"><span class="agenda__dot" style={`background:${accentByType[l.type]}`}></span>{l.label}</span>
             ))}
           </div>
-          <a class="link-more link-more--gold" href="/agenda/">Tout l'agenda →</a>
+          <a class="link-more link-more--gold" href="/agenda/">Tout l’agenda →</a>
         </div>
         <div class="agenda__list">
           {agendaHome.map((e) => (
@@ -168,11 +168,11 @@ const description =
             <MinerTools size={20} />
             Découvrir Sainte-Marie-aux-Mines
           </span>
-          <h2 id="decouvrir-title" class="decouvrir__title">La ville qui <span class="metal-text" style="font-style:italic">est l'argent</span> et la roche</h2>
-          <p class="decouvrir__text">Mille ans d'exploitation, 1&nbsp;100 mines, 300&nbsp;km de galeries. Une ville née sur deux rives de la Lièpvrette — lorraine et alsacienne — réunies en 1790. Goethe collectionnait nos minéraux ; Charles Quint reçut notre argent.</p>
+          <h2 id="decouvrir-title" class="decouvrir__title">La ville née de <span class="metal-text" style="font-style:italic">l’argent</span> et de la roche</h2>
+          <p class="decouvrir__text">Mille ans d’exploitation, 1&nbsp;100 mines, 300&nbsp;km de galeries. Une ville née sur deux rives de la Lièpvrette — lorraine et alsacienne — réunies en 1790. Goethe collectionnait nos minéraux ; Charles Quint reçut notre argent.</p>
           <div class="decouvrir__cta">
             <a class="btn btn--primary" href="/decouvrir/#tourisme">Mine-musée Tellure</a>
-            <a class="btn btn--ghost-dark" href="/decouvrir/#dualite">Pays d'art &amp; d'histoire</a>
+            <a class="btn btn--ghost-dark" href="/decouvrir/#dualite">Pays d’art &amp; d’histoire</a>
           </div>
         </div>
         <div class="decouvrir__col">
@@ -187,7 +187,7 @@ const description =
           <div class="photo-block photo-block--photo decouvrir__photo">
             <img class="photo-block__img" src={photos.argentTetraedrite.src} alt={photos.argentTetraedrite.alt} width={photos.argentTetraedrite.w} height={photos.argentTetraedrite.h} loading="lazy" />
             <span class="photo-credit">© {photos.argentTetraedrite.auteur} · {photos.argentTetraedrite.licence}</span>
-            <span class="photo-block__title">Tétraédrite — minerai d'argent natif</span>
+            <span class="photo-block__title">Tétraédrite — minerai d’argent natif</span>
           </div>
         </div>
       </div>
@@ -259,7 +259,7 @@ const description =
         <div class="newsletter__inner">
           <div class="newsletter__txt">
             <span class="eyebrow">Rester informé</span>
-            <h2 id="news-title" class="newsletter__title">La lettre du Val d'Argent</h2>
+            <h2 id="news-title" class="newsletter__title">La lettre du Val d’Argent</h2>
             <p class="newsletter__lede">Actualités, agenda et alertes de la commune, une fois par mois dans votre boîte mail.</p>
           </div>
           <form
@@ -268,16 +268,16 @@ const description =
             data-sujet="Inscription newsletter — Sainte-Marie-aux-Mines"
             data-mairie-email={mairie.email}
           >
-            <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d'écran). -->
+            <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d’écran). -->
             <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
             <div class="newsletter__row">
               <label for="nl-email" class="visually-hidden">Votre adresse e-mail</label>
               <input id="nl-email" name="email" type="email" required placeholder="Votre adresse e-mail" class="input" />
-              <button type="submit" class="btn btn--primary">S'inscrire</button>
+              <button type="submit" class="btn btn--primary">S’inscrire</button>
             </div>
             <label class="consent">
               <input type="checkbox" name="consentement" required />
-              <span>J'accepte de recevoir la lettre d'information et que mon adresse soit traitée à cette seule fin. <a href="/confidentialite/">Politique de confidentialité</a>.</span>
+              <span>J’accepte de recevoir la lettre d’information et que mon adresse soit traitée à cette seule fin. <a href="/confidentialite/">Politique de confidentialité</a>.</span>
             </label>
             <p class="form-status" id="nl-status" role="status" hidden></p>
           </form>
@@ -301,7 +301,7 @@ const description =
         : etat === "ok"
           ? "Merci ! Un e-mail de confirmation vous a été envoyé."
           : etat === "mailto"
-            ? "Votre messagerie va s'ouvrir pour confirmer l'inscription."
+            ? "Votre messagerie va s’ouvrir pour confirmer l’inscription."
             : "Une erreur est survenue. Réessayez plus tard.";
   });
 </script>

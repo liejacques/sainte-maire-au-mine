@@ -3,7 +3,7 @@ import InnerPage from "../../layouts/InnerPage.astro";
 import { evenements, accentByType } from "../../data/agenda";
 
 export function getStaticPaths() {
-  // Les événements pointant vers une page vitrine dédiée (champ `lien`) n'ont
+  // Les événements pointant vers une page vitrine dédiée (champ `lien`) n’ont
   // pas de fiche agenda générique (évite une page en double).
   return evenements
     .filter((e) => !e.lien)
@@ -35,7 +35,7 @@ const fil = [
       <div class="prose">
         {e.contenu.map((p) => <p>{p}</p>)}
       </div>
-      <a class="link-more link-more--gold event__back" href="/agenda/">← Tout l'agenda</a>
+      <a class="link-more link-more--gold event__back" href="/agenda/">← Tout l’agenda</a>
     </div>
 
     <aside class="event__aside" aria-label="Informations pratiques">

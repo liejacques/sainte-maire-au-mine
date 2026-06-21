@@ -4,7 +4,7 @@ import { commune } from "../data/commune";
 import Blason from "./Blason.astro";
 
 interface Props {
-  /** id de rubrique active (ex. "demarches") pour surligner l'onglet. */
+  /** id de rubrique active (ex. "demarches") pour surligner l’onglet. */
   active?: string;
 }
 const { active } = Astro.props;
@@ -70,7 +70,7 @@ const { active } = Astro.props;
       ))}
     </nav>
 
-    <!-- Tiroir mobile : <details> natif (aucun JS requis pour l'ouverture). -->
+    <!-- Tiroir mobile : <details> natif (aucun JS requis pour l’ouverture). -->
     <details class="mobile-menu">
       <summary class="burger" aria-label="Ouvrir le menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>

@@ -4,7 +4,7 @@
 
 type Etat = "chargement" | "ok" | "mailto" | "erreur";
 
-// Clé Web3Forms injectée au build via variable d'environnement (jamais en dur).
+// Clé Web3Forms injectée au build via variable d’environnement (jamais en dur).
 const ACCESS_KEY = (import.meta.env.PUBLIC_WEB3FORMS_KEY ?? "").trim();
 
 // Champs techniques exclus du corps du mailto de repli.
@@ -32,7 +32,7 @@ export function initPublicForm(formId: string, onDone: (etat: Etat) => void): vo
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // Validation HTML native d'abord (consentement requis, champs obligatoires…).
+    // Validation HTML native d’abord (consentement requis, champs obligatoires…).
     if (!form.checkValidity()) {
       form.reportValidity();
       return;

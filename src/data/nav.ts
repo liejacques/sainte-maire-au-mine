@@ -6,7 +6,7 @@ export interface NavLink {
   href: string;
 }
 export interface NavItem {
-  /** Clé de rubrique (sert au surlignage de l'onglet actif). */
+  /** Clé de rubrique (sert au surlignage de l’onglet actif). */
   id: string;
   label: string;
   href: string;
@@ -34,7 +34,7 @@ export const mainNav: NavItem[] = [
     children: [
       { label: "État civil", href: "/mes-demarches/#etat-civil" },
       { label: "Urbanisme & autorisations", href: "/mes-demarches/#urbanisme" },
-      { label: "Cartes & papiers d'identité", href: "/mes-demarches/#identite" },
+      { label: "Cartes & papiers d’identité", href: "/mes-demarches/#identite" },
       { label: "Élections", href: "/mes-demarches/#elections" },
       { label: "Toutes les démarches", href: "/mes-demarches/" },
     ],
@@ -70,7 +70,7 @@ export const mainNav: NavItem[] = [
     children: [
       { label: "Patrimoine & mines", href: "/decouvrir/#patrimoine" },
       { label: "Mineral & Gem", href: "/decouvrir/mineral-gem/" },
-      { label: "Pays d'art et d'histoire", href: "/decouvrir/#dualite" },
+      { label: "Pays d’art et d’histoire", href: "/decouvrir/#dualite" },
       { label: "Agenda culturel", href: "/agenda/" },
       { label: "Tourisme", href: "/decouvrir/#tourisme" },
       { label: "Actualités", href: "/actualites/" },
@@ -82,7 +82,7 @@ export const mainNav: NavItem[] = [
     href: "/economie/",
     children: [
       { label: "Commerces", href: "/economie/#commerces" },
-      { label: "Entreprises & zones d'activité", href: "/economie/#entreprises" },
+      { label: "Entreprises & zones d’activité", href: "/economie/#entreprises" },
       { label: "Marchés publics", href: "/marches-publics/" },
       { label: "Emploi", href: "/economie/#emploi" },
       { label: "Marché hebdomadaire", href: "/economie/#marche" },

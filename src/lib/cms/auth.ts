@@ -1,5 +1,5 @@
 // Authentification & rôles (mock côté navigateur).
-// ⚠️ Démo : l'authentification réelle se fera via Supabase Auth (voir docs).
+// ⚠️ Démo : l’authentification réelle se fera via Supabase Auth (voir docs).
 // Ici, une simple session locale + une matrice de permissions par rôle.
 import type { Role } from "./types";
 

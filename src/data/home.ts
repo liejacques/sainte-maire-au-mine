@@ -1,5 +1,5 @@
-// Données propres à la page d'accueil : tuiles de démarches, blocs démocratie
-// locale, chiffres-clés « Découvrir ». Les icônes sont le contenu interne d'un
+// Données propres à la page d’accueil : tuiles de démarches, blocs démocratie
+// locale, chiffres-clés « Découvrir ». Les icônes sont le contenu interne d’un
 // <svg> 24×24 à trait (stroke), rendu via set:html.
 
 export interface Tile {

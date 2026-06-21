@@ -3,21 +3,21 @@ import InnerPage from "../../layouts/InnerPage.astro";
 import { evenements, accentByType, legendeAgenda } from "../../data/agenda";
 
 const description =
-  "Tous les rendez-vous de Sainte-Marie-aux-Mines et du Val d'Argent : événements habitants, temps forts touristiques, vie municipale. Dates, lieux et détails de chaque rendez-vous.";
+  "Tous les rendez-vous de Sainte-Marie-aux-Mines et du Val d’Argent : événements habitants, temps forts touristiques, vie municipale. Dates, lieux et détails de chaque rendez-vous.";
 const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
 ---
 <InnerPage
-  title="Agenda du Val d'Argent"
+  title="Agenda du Val d’Argent"
   description={description}
   active="decouvrir"
   eyebrow="Temps forts"
   breadcrumb={fil}
-  lede="Rendez-vous habitants et grands événements du Val d'Argent : séances publiques, fêtes de quartier, temps forts touristiques et patrimoine minier. Retrouvez ici toutes les dates à venir."
+  lede="Rendez-vous habitants et grands événements du Val d’Argent : séances publiques, fêtes de quartier, temps forts touristiques et patrimoine minier. Retrouvez ici toutes les dates à venir."
 >
   <section class="agenda-page" aria-labelledby="agenda-liste-title">
     <div class="agenda-page__head">
       <h2 id="agenda-liste-title" class="section-title">Tous les rendez-vous à venir</h2>
-      <ul class="agenda-legend" aria-label="Légende des types d'événements">
+      <ul class="agenda-legend" aria-label="Légende des types d’événements">
         {legendeAgenda.map((l) => (
           <li class="agenda-legend__item">
             <span class="agenda-legend__dot" style={`background:${accentByType[l.type]}`} aria-hidden="true"></span>
@@ -61,7 +61,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
       margin-bottom: 26px;
     }
 
-    /* Légende — pastilles colorées DOUBLÉES de texte (jamais l'info par la couleur seule). */
+    /* Légende — pastilles colorées DOUBLÉES de texte (jamais l’info par la couleur seule). */
     .agenda-legend {
       display: flex;
       flex-wrap: wrap;
@@ -89,7 +89,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
       gap: 12px;
     }
 
-    /* Lignes d'événement — reprise du motif .agenda-row de la page d'accueil. */
+    /* Lignes d’événement — reprise du motif .agenda-row de la page d’accueil. */
     .agenda-row {
       display: flex;
       align-items: center;

@@ -2,14 +2,14 @@
 import InnerPage from "../../layouts/InnerPage.astro";
 
 const description =
-  "Économie & emploi à Sainte-Marie-aux-Mines : commerces du centre, entreprises et zones d'activité du Val d'Argent, emploi et France Services, marché hebdomadaire du samedi. Une économie portée par le tourisme minier et Mineral & Gem.";
+  "Économie & emploi à Sainte-Marie-aux-Mines : commerces du centre, entreprises et zones d’activité du Val d’Argent, emploi et France Services, marché hebdomadaire du samedi. Une économie portée par le tourisme minier et Mineral & Gem.";
 
 const fil = [{ label: "Accueil", href: "/" }, { label: "Économie" }];
 
 // Repères locaux (chiffres de cadrage plausibles, à confirmer avant publication).
 const reperes = [
   { value: "180+", label: "commerces & artisans", tone: "argent" },
-  { value: "4", label: "zones d'activité au Val d'Argent", tone: "or" },
+  { value: "4", label: "zones d’activité au Val d’Argent", tone: "or" },
   { value: "30 000", label: "visiteurs · Mineral & Gem", tone: "argent" },
   { value: "1 sam.", label: "marché chaque semaine", tone: "or" },
 ];
@@ -18,7 +18,7 @@ const reperes = [
 const familles = [
   {
     titre: "Bouche & alimentation",
-    desc: "Boulangeries, boucheries-charcuteries, primeurs, caves et épiceries fines au fil de la Grand'Rue et de la rue Wilson.",
+    desc: "Boulangeries, boucheries-charcuteries, primeurs, caves et épiceries fines au fil de la Grand’Rue et de la rue Wilson.",
     icon: `<path d="M4 11h16l-1.2 8.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 11z"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/>`,
   },
   {
@@ -41,8 +41,8 @@ const familles = [
 // Zones & filières économiques.
 const filieres = [
   {
-    titre: "Zones d'activité",
-    desc: "Les espaces d'activité du Val d'Argent accueillent artisanat, PME industrielles et logistique, à proximité de la RD 459.",
+    titre: "Zones d’activité",
+    desc: "Les espaces d’activité du Val d’Argent accueillent artisanat, PME industrielles et logistique, à proximité de la RD 459.",
   },
   {
     titre: "Industrie & savoir-faire",
@@ -50,11 +50,11 @@ const filieres = [
   },
   {
     titre: "Tourisme & patrimoine",
-    desc: "La mine-musée Tellure, le sentier minier et le label Pays d'art et d'histoire structurent une filière touristique en croissance.",
+    desc: "La mine-musée Tellure, le sentier minier et le label Pays d’art et d’histoire structurent une filière touristique en croissance.",
   },
   {
-    titre: "Artisanat d'art",
-    desc: "Tailleurs de pierre, lapidaires et créateurs trouvent dans la tradition minéralogique un terreau pour l'artisanat d'art.",
+    titre: "Artisanat d’art",
+    desc: "Tailleurs de pierre, lapidaires et créateurs trouvent dans la tradition minéralogique un terreau pour l’artisanat d’art.",
   },
 ];
 
@@ -63,7 +63,7 @@ const marche = [
   { dt: "Jour", dd: "Tous les samedis matin" },
   { dt: "Horaires", dd: "8h – 12h30" },
   { dt: "Lieu", dd: "Centre-ville · place du Prensureux & abords" },
-  { dt: "Étals", dd: "Maraîchers, fromagers, producteurs fermiers du Val d'Argent" },
+  { dt: "Étals", dd: "Maraîchers, fromagers, producteurs fermiers du Val d’Argent" },
 ];
 ---
 <InnerPage
@@ -72,10 +72,10 @@ const marche = [
   active="economie"
   eyebrow="Économie & emploi"
   breadcrumb={fil}
-  lede="Commerces de centre-ville, entreprises et zones d'activité du Val d'Argent, emploi de proximité et marché hebdomadaire : la vie économique d'une vallée façonnée par mille ans d'exploitation minière et par le tourisme."
+  lede="Commerces de centre-ville, entreprises et zones d’activité du Val d’Argent, emploi de proximité et marché hebdomadaire : la vie économique d’une vallée façonnée par mille ans d’exploitation minière et par le tourisme."
 >
   <!-- ============ REPÈRES ============ -->
-  <section class="eco-reperes" aria-label="L'économie en chiffres">
+  <section class="eco-reperes" aria-label="L’économie en chiffres">
     <div class="eco-reperes__grid">
       {reperes.map((r) => (
         <div class="eco-repere">
@@ -85,7 +85,7 @@ const marche = [
       ))}
     </div>
     <p class="eco-reperes__note">
-      Ordres de grandeur indicatifs à l'échelle du Val d'Argent — chiffres à confirmer avant publication.
+      Ordres de grandeur indicatifs à l’échelle du Val d’Argent — chiffres à confirmer avant publication.
     </p>
   </section>
 
@@ -101,7 +101,7 @@ const marche = [
     <div class="prose">
       <p>
         Le commerce de proximité reste le cœur battant de Sainte-Marie-aux-Mines. De la
-        <strong>Grand'Rue</strong> à la <strong>rue Wilson</strong>, boutiques, artisans et services
+        <strong>Grand’Rue</strong> à la <strong>rue Wilson</strong>, boutiques, artisans et services
         de bouche animent un centre-bourg ramassé entre les deux rives de la Lièpvrette. La municipalité
         soutient cette dynamique : signalétique, animations commerciales et stationnement de courte durée
         pour faciliter les achats du quotidien.
@@ -130,27 +130,27 @@ const marche = [
 
   <hr class="vein" />
 
-  <!-- ============ ENTREPRISES & ZONES D'ACTIVITÉ ============ -->
+  <!-- ============ ENTREPRISES & ZONES D’ACTIVITÉ ============ -->
   <section class="eco-section" id="entreprises" aria-labelledby="entreprises-title">
     <div class="section-head">
       <div>
-        <span class="eyebrow">Val d'Argent</span>
-        <h2 id="entreprises-title" class="section-title">Entreprises &amp; zones d'activité</h2>
+        <span class="eyebrow">Val d’Argent</span>
+        <h2 id="entreprises-title" class="section-title">Entreprises &amp; zones d’activité</h2>
       </div>
       <a class="link-more link-more--gold" href="/marches-publics/">Marchés publics →</a>
     </div>
     <div class="eco-split">
       <div class="prose eco-split__text">
         <p>
-          Au sein de la <strong>Communauté de communes du Val d'Argent</strong>, Sainte-Marie-aux-Mines
-          concentre l'essentiel de l'activité économique de la vallée. Le tissu local mêle artisanat,
-          PME industrielles et services, héritiers d'un long passé manufacturier — du textile au travail
+          Au sein de la <strong>Communauté de communes du Val d’Argent</strong>, Sainte-Marie-aux-Mines
+          concentre l’essentiel de l’activité économique de la vallée. Le tissu local mêle artisanat,
+          PME industrielles et services, héritiers d’un long passé manufacturier — du textile au travail
           de la pierre et du métal.
         </p>
         <p>
-          L'implantation d'entreprises s'appuie sur les <strong>zones d'activité</strong> de la vallée,
-          desservies par la RD 459 vers la plaine d'Alsace et le col du Bonhomme. Les démarches
-          d'implantation et les terrains disponibles relèvent de l'intercommunalité, avec l'appui de la
+          L’implantation d’entreprises s’appuie sur les <strong>zones d’activité</strong> de la vallée,
+          desservies par la RD 459 vers la plaine d’Alsace et le col du Bonhomme. Les démarches
+          d’implantation et les terrains disponibles relèvent de l’intercommunalité, avec l’appui de la
           commune.
         </p>
       </div>
@@ -160,8 +160,8 @@ const marche = [
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 13v.01M9 17v.01"/></svg>
           Photo économie
         </span>
-        <span class="photo-block__title">Atelier &amp; zone d'activité du Val d'Argent</span>
-        <span class="photo-block__alt">alt&nbsp;: Bâtiment d'activité contemporain en lisière de la vallée boisée</span>
+        <span class="photo-block__title">Atelier &amp; zone d’activité du Val d’Argent</span>
+        <span class="photo-block__alt">alt&nbsp;: Bâtiment d’activité contemporain en lisière de la vallée boisée</span>
       </div>
     </div>
     <div class="eco-grid eco-grid--2">
@@ -175,8 +175,8 @@ const marche = [
     <div class="note-card note-card--gueules eco-note">
       <h3>Tourisme minier, moteur économique</h3>
       <p class="eco-note__txt">
-        Mille ans d'exploitation ont laissé un patrimoine unique. La mine-musée <strong>Tellure</strong>
-        et le tourisme minier génèrent emplois saisonniers, retombées pour l'hôtellerie-restauration et
+        Mille ans d’exploitation ont laissé un patrimoine unique. La mine-musée <strong>Tellure</strong>
+        et le tourisme minier génèrent emplois saisonniers, retombées pour l’hôtellerie-restauration et
         notoriété pour le territoire. Deux fois par an, la bourse internationale
         <strong>Mineral &amp; Gem</strong> transforme la ville en capitale mondiale de la minéralogie et
         remplit commerces, hébergements et tables de la vallée.
@@ -196,8 +196,8 @@ const marche = [
     </div>
     <div class="prose">
       <p>
-        Recherche d'emploi, formation, création d'entreprise : plusieurs relais accompagnent les habitants
-        du Val d'Argent. La commune oriente vers les structures compétentes et relaie les offres locales.
+        Recherche d’emploi, formation, création d’entreprise : plusieurs relais accompagnent les habitants
+        du Val d’Argent. La commune oriente vers les structures compétentes et relaie les offres locales.
       </p>
     </div>
     <div class="eco-grid eco-grid--2">
@@ -207,8 +207,8 @@ const marche = [
         </span>
         <span class="eco-link-card__title">France Services</span>
         <span class="eco-link-card__desc">
-          Un point d'accueil unique pour vos démarches d'emploi, retraite, prestations sociales et numériques.
-          Aide à la rédaction de CV et à l'usage des services en ligne.
+          Un point d’accueil unique pour vos démarches d’emploi, retraite, prestations sociales et numériques.
+          Aide à la rédaction de CV et à l’usage des services en ligne.
         </span>
         <span class="link-more eco-link-card__more">Prendre contact →</span>
       </a>
@@ -218,7 +218,7 @@ const marche = [
         </span>
         <span class="eco-link-card__title">Offres &amp; recrutement de la mairie</span>
         <span class="eco-link-card__desc">
-          La commune et l'intercommunalité recrutent régulièrement (agents, saisonniers, apprentissage).
+          La commune et l’intercommunalité recrutent régulièrement (agents, saisonniers, apprentissage).
           Consultez les offres et les modalités de candidature.
         </span>
         <span class="link-more eco-link-card__more">Voir les démarches →</span>
@@ -227,7 +227,7 @@ const marche = [
     <div class="note-card eco-note">
       <h3>Bon à savoir</h3>
       <p class="eco-note__txt">
-        France Services est un guichet partagé entre l'État et les opérateurs (emploi, assurance maladie,
+        France Services est un guichet partagé entre l’État et les opérateurs (emploi, assurance maladie,
         retraite, allocations, impôts…). Un conseiller formé vous reçoit sans rendez-vous pour la plupart
         des démarches du quotidien.
       </p>
@@ -253,7 +253,7 @@ const marche = [
         </p>
         <p>
           Le marché complète une offre alimentaire de proximité solide et soutient les circuits courts
-          chers au Val d'Argent. Les emplacements sont gérés par la mairie&nbsp;:
+          chers au Val d’Argent. Les emplacements sont gérés par la mairie&nbsp;:
           <a href="/contact/">contactez le service marchés</a> pour devenir exposant.
         </p>
       </div>

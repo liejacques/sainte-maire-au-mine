@@ -1,4 +1,4 @@
-// Application d'administration (SPA vanilla, schema-driven).
+// Application d’administration (SPA vanilla, schema-driven).
 // Rendu à partir de collections.ts + store.ts. Persistance localStorage (démo),
 // prête à être branchée sur Supabase (remplacer store.ts).
 import { collections, byKey, PAGES_EDITABLES, type Collection, type Field } from "./collections";
@@ -85,7 +85,7 @@ function renderShell(content: string, activeKey: string) {
             <a class="ad-nav__link ${activeKey === "dashboard" ? "is-active" : ""}" href="#/dashboard">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 13h8V3H3Z M13 21h8V3h-8Z M3 21h8v-6H3Z"/></svg> Tableau de bord</a>
             <a class="ad-nav__link ${activeKey === "accueil" ? "is-active" : ""}" href="#/accueil">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8 M5 9v11h14V9"/></svg> Page d'accueil</a>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8 M5 9v11h14V9"/></svg> Page d’accueil</a>
           </div>
           ${navHtml}
         </nav>
@@ -136,13 +136,13 @@ function viewDashboard() {
   const shortcuts = [
     { l: "Nouvelle actualité", h: "#/c/news/new" },
     { l: "Ajouter un document", h: "#/c/documents/new" },
-    { l: "Modifier l'accueil", h: "#/accueil" },
+    { l: "Modifier l’accueil", h: "#/accueil" },
     { l: "Voir les réservations", h: "#/c/room_bookings" },
     { l: "Créer une newsletter", h: "#/c/newsletters/new" },
   ];
   const recent = store.list<any>("audit_logs").slice(0, 6);
   renderShell(`
-    <div class="ad-head"><h1>Bonjour, ${esc((session?.nom || "").split(" ")[0] || "")}</h1><p>Vue d'ensemble de votre site.</p></div>
+    <div class="ad-head"><h1>Bonjour, ${esc((session?.nom || "").split(" ")[0] || "")}</h1><p>Vue d’ensemble de votre site.</p></div>
     <div class="stat-grid">
       ${stats.map((s) => `<a class="stat" href="${s.h}"><span class="stat__n">${s.n}</span><span class="stat__l">${esc(s.l)}</span></a>`).join("")}
     </div>
@@ -430,15 +430,15 @@ function viewAccueil() {
   const h = store.getHome();
   const f = (name: string, label: string, val: string, ta = false) => `<div class="field"><label for="h_${name}">${esc(label)}</label>${ta ? `<textarea id="h_${name}" data-h="${name}" rows="3">${esc(val)}</textarea>` : `<input id="h_${name}" data-h="${name}" value="${esc(val)}"/>`}</div>`;
   renderShell(`
-    <div class="ad-head"><h1>Page d'accueil</h1><p>Modifiez les textes et images de l'accueil. La mise en page ne change pas.</p></div>
+    <div class="ad-head"><h1>Page d’accueil</h1><p>Modifiez les textes et images de l’accueil. La mise en page ne change pas.</p></div>
     <form class="ad-form" id="homeForm">
-      <fieldset class="form-sec"><legend>Bandeau d'accueil (héros)</legend>
+      <fieldset class="form-sec"><legend>Bandeau d’accueil (héros)</legend>
         ${f("heroEyebrow", "Surtitre", h.heroEyebrow)}
         ${f("heroTitre", "Titre", h.heroTitre)}
         ${f("heroTitreEm", "Titre (suite, en doré italique)", h.heroTitreEm)}
-        ${f("heroLede", "Texte d'introduction", h.heroLede, true)}
+        ${f("heroLede", "Texte d’introduction", h.heroLede, true)}
       </fieldset>
-      <fieldset class="form-sec"><legend>Boutons d'accès</legend>
+      <fieldset class="form-sec"><legend>Boutons d’accès</legend>
         ${f("ctaResident", "Bouton « habitant »", h.ctaResident)}
         ${f("ctaVisiteur", "Bouton « visiteur »", h.ctaVisiteur)}
       </fieldset>
@@ -480,7 +480,7 @@ function viewPageEdit(idx: number) {
       <fieldset class="form-sec"><legend>Contenu</legend>
         <div class="field"><label>Titre affiché</label><input id="p_titre" value="${esc(data.titre)}"/></div>
         <div class="field"><label>Introduction</label><textarea id="p_intro" rows="3">${esc(data.introduction)}</textarea></div>
-        <div class="field"><label>Blocs de contenu</label><textarea id="p_blocs" rows="10">${esc(data.blocs)}</textarea><small class="field-help">Texte libre (markdown léger). N'affecte pas la mise en page.</small></div>
+        <div class="field"><label>Blocs de contenu</label><textarea id="p_blocs" rows="10">${esc(data.blocs)}</textarea><small class="field-help">Texte libre (markdown léger). N’affecte pas la mise en page.</small></div>
       </fieldset>
       <div class="form-actions"><button class="ad-btn ad-btn--primary" type="submit">Enregistrer</button></div>
       <p class="form-msg" id="pageMsg"></p>

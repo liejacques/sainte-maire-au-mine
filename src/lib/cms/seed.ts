@@ -1,5 +1,5 @@
 // Données initiales (seed) du CMS — dérivées du contenu réel du site pour que
-// l'espace /admin démarre avec de vraies actualités, événements, etc.
+// l’espace /admin démarre avec de vraies actualités, événements, etc.
 // Remplaçable par Supabase : ces tableaux deviendront des SELECT.
 import { articles } from "../../data/actualites";
 import { evenements } from "../../data/agenda";
@@ -59,14 +59,14 @@ export const seedDirectory: DirectoryItem[] = associations.familles
 
 export const seedDocuments: DocItem[] = [
   { titre: "Compte rendu du conseil municipal", type: "Procès-verbal", date: "2026-05-22T00:00:00.000Z", description: "Séance du 22 mai 2026.", tags: ["conseil"], statut: "publie" as const },
-  { titre: "Budget primitif 2026", type: "Budget", date: "2026-04-10T00:00:00.000Z", description: "Budget voté pour l'exercice 2026.", tags: ["finances"], statut: "publie" as const },
-  { titre: "DICRIM — risques majeurs", type: "DICRIM", date: "2026-01-15T00:00:00.000Z", description: "Document d'information communal sur les risques majeurs.", tags: ["sécurité"], statut: "brouillon" as const },
+  { titre: "Budget primitif 2026", type: "Budget", date: "2026-04-10T00:00:00.000Z", description: "Budget voté pour l’exercice 2026.", tags: ["finances"], statut: "publie" as const },
+  { titre: "DICRIM — risques majeurs", type: "DICRIM", date: "2026-01-15T00:00:00.000Z", description: "Document d’information communal sur les risques majeurs.", tags: ["sécurité"], statut: "brouillon" as const },
 ].map((d, i) => ({ ...stamp(i + 1), fichier: "", ...d }));
 
 const salleOpts = ["Salle des fêtes", "Salle polyvalente", "Foyer communal"];
 export const seedBookings: RoomBooking[] = [
-  { salle: salleOpts[0], date: "2026-07-05T00:00:00.000Z", heureDebut: "14:00", heureFin: "23:00", nom: "Association sportive du Val d'Argent", email: "contact@example.com", telephone: "06 00 00 00 00", motif: "Repas associatif", nombrePersonnes: 120, message: "", statut: "en_attente" as const, commentaireInterne: "" },
-  { salle: salleOpts[2], date: "2026-06-28T00:00:00.000Z", heureDebut: "09:00", heureFin: "12:00", nom: "Marie Dupont", email: "marie@example.com", telephone: "06 11 11 11 11", motif: "Réunion de quartier", nombrePersonnes: 25, message: "Besoin d'un vidéoprojecteur.", statut: "acceptee" as const, commentaireInterne: "Salle libre, OK." },
+  { salle: salleOpts[0], date: "2026-07-05T00:00:00.000Z", heureDebut: "14:00", heureFin: "23:00", nom: "Association sportive du Val d’Argent", email: "contact@example.com", telephone: "06 00 00 00 00", motif: "Repas associatif", nombrePersonnes: 120, message: "", statut: "en_attente" as const, commentaireInterne: "" },
+  { salle: salleOpts[2], date: "2026-06-28T00:00:00.000Z", heureDebut: "09:00", heureFin: "12:00", nom: "Marie Dupont", email: "marie@example.com", telephone: "06 11 11 11 11", motif: "Réunion de quartier", nombrePersonnes: 25, message: "Besoin d’un vidéoprojecteur.", statut: "acceptee" as const, commentaireInterne: "Salle libre, OK." },
 ].map((b, i) => ({ ...stamp(i + 1), ...b }));
 
 export const seedSubscribers: Subscriber[] = [
@@ -74,7 +74,7 @@ export const seedSubscribers: Subscriber[] = [
 ].map((email, i) => ({ ...stamp(i + 1), email, consentement: true, actif: true }));
 
 export const seedNewsletters: Newsletter[] = [
-  { ...stamp(1), sujet: "La lettre du Val d'Argent — juin 2026", contenu: "Les temps forts de l'été à Sainte-Marie-aux-Mines.", actualitesIncluses: [], statut: "brouillon", envoyeLe: "" },
+  { ...stamp(1), sujet: "La lettre du Val d’Argent — juin 2026", contenu: "Les temps forts de l’été à Sainte-Marie-aux-Mines.", actualitesIncluses: [], statut: "brouillon", envoyeLe: "" },
 ];
 
 export const seedClassifieds: Classified[] = [
@@ -94,11 +94,11 @@ export const seedMedia: MediaItem[] = [];
 
 export const seedHome: HomeContent = {
   heroEyebrow: "Site officiel de la commune",
-  heroTitre: "Mille ans d'argent",
+  heroTitre: "Mille ans d’argent",
   heroTitreEm: "au cœur des Vosges.",
-  heroLede: "Sainte-Marie-aux-Mines, commune centre du Val d'Argent. Vos démarches, votre quotidien, votre patrimoine — réunis en un seul endroit.",
+  heroLede: "Sainte-Marie-aux-Mines, commune centre du Val d’Argent. Vos démarches, votre quotidien, votre patrimoine — réunis en un seul endroit.",
   ctaResident: "Mes démarches",
-  ctaVisiteur: "Découvrir le Val d'Argent",
+  ctaVisiteur: "Découvrir le Val d’Argent",
   heroImage: "(façades Renaissance)",
   imageSecondaire: "(galerie de mine)",
 };

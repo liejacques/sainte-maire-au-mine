@@ -1,5 +1,5 @@
 ---
-// Fil d'Ariane. Le dernier élément (sans href) est la page courante.
+// Fil d’Ariane. Le dernier élément (sans href) est la page courante.
 interface Crumb {
   label: string;
   href?: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 const { items, variant = "dark" } = Astro.props;
 ---
-<nav class={`breadcrumb${variant === "light" ? " breadcrumb--light" : ""}`} aria-label="Fil d'Ariane">
+<nav class={`breadcrumb${variant === "light" ? " breadcrumb--light" : ""}`} aria-label="Fil d’Ariane">
   <ol>
     {items.map((c, i) => (
       <>

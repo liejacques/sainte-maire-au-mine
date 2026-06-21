@@ -19,7 +19,7 @@ export interface Photo {
 const COMMONS = "https://commons.wikimedia.org/wiki/File:";
 
 export const photos = {
-  // ---- Mines & minéraux : le cœur d'identité « mille ans d'argent » -------
+  // ---- Mines & minéraux : le cœur d’identité « mille ans d’argent » -------
   galerieSaintJean: {
     src: "/images/galerie-saint-jean.webp",
     alt: "Galerie souterraine de la mine Saint-Jean Engelsbourg, parois de roche taillées et éclairées",
@@ -36,14 +36,14 @@ export const photos = {
   },
   argentTetraedrite: {
     src: "/images/argent-tetraedrite.webp",
-    alt: "Échantillon de tétraédrite argentifère, minerai d'argent gris métallique sur sa gangue",
+    alt: "Échantillon de tétraédrite argentifère, minerai d’argent gris métallique sur sa gangue",
     titre: "Tétraédrite argentifère",
     auteur: "Ji-Elle", licence: "CC BY-SA 3.0", w: 1500, h: 1302,
     source: COMMONS + "Tétraédrite_argentifère-Musée_d'histoire_naturelle_et_d'ethnographie_de_Colmar.jpg",
   },
   pointerolle: {
     src: "/images/pointerolle.webp",
-    alt: "Pointerolle de mineur, pointe d'acier fichée dans la roche d'une galerie",
+    alt: "Pointerolle de mineur, pointe d’acier fichée dans la roche d’une galerie",
     titre: "Pointerolle de mineur",
     auteur: "Ji-Elle", licence: "CC BY-SA 4.0", w: 1500, h: 1125,
     source: COMMONS + "Pointerolle-Mine_Saint-Jean_Engelsbourg.jpg",
@@ -59,8 +59,8 @@ export const photos = {
   },
   echery: {
     src: "/images/echery-vallee.webp",
-    alt: "Le hameau d'Échery et ses maisons anciennes au fond de la vallée de la Lièpvrette",
-    titre: "Le hameau d'Échery",
+    alt: "Le hameau d’Échery et ses maisons anciennes au fond de la vallée de la Lièpvrette",
+    titre: "Le hameau d’Échery",
     auteur: "Michel G", licence: "CC BY 3.0", w: 1500, h: 1125,
     source: COMMONS + "Echery_-_panoramio.jpg",
   },
@@ -86,13 +86,13 @@ export const photos = {
   },
   egliseSaintLouis: {
     src: "/images/eglise-saint-louis.webp",
-    alt: "Façade de l'église Saint-Louis de Sainte-Marie-aux-Mines",
+    alt: "Façade de l’église Saint-Louis de Sainte-Marie-aux-Mines",
     titre: "Église Saint-Louis",
     auteur: "olive.titus", licence: "CC BY 2.0", w: 1500, h: 1125,
   },
   egliseSainteMadeleine: {
     src: "/images/eglise-sainte-madeleine.webp",
-    alt: "L'église Sainte-Madeleine à Sainte-Marie-aux-Mines",
+    alt: "L’église Sainte-Madeleine à Sainte-Marie-aux-Mines",
     titre: "Église Sainte-Madeleine",
     auteur: "Rauenstein", licence: "CC BY-SA 3.0", w: 1500, h: 2090,
   },
@@ -110,8 +110,8 @@ export const photos = {
   },
   foretVosgienne: {
     src: "/images/foret-vosgienne.webp",
-    alt: "Forêt du Val d'Argent près de Sainte-Marie-aux-Mines",
-    titre: "Forêt du Val d'Argent",
+    alt: "Forêt du Val d’Argent près de Sainte-Marie-aux-Mines",
+    titre: "Forêt du Val d’Argent",
     auteur: "Rémih", licence: "CC BY-SA 4.0", w: 1500, h: 1125,
   },
   patrimoine110: {

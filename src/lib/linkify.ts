@@ -3,8 +3,8 @@
 //   « Service Technique — 03 89 27 94 92 »
 //     → « Service Technique — <a href="tel:+33389279492">03 89 27 94 92</a> »
 //
-// La sortie est destinée à `set:html` : on échappe d'abord le HTML pour écarter
-// toute injection, puis on insère les liens. À n'utiliser que sur du contenu
+// La sortie est destinée à `set:html` : on échappe d’abord le HTML pour écarter
+// toute injection, puis on insère les liens. À n’utiliser que sur du contenu
 // interne (jamais sur une saisie utilisateur).
 
 const EMAIL = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;

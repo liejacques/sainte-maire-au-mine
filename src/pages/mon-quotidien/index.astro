@@ -9,7 +9,7 @@ const fil = [
   { label: "Mon quotidien" },
 ];
 
-// Sommaire d'ancres (navigation interne de la page).
+// Sommaire d’ancres (navigation interne de la page).
 const sommaire = [
   { id: "ecoles", label: "Écoles & périscolaire" },
   { id: "petite-enfance", label: "Petite enfance" },
@@ -38,29 +38,29 @@ const ecoles = [
   },
 ];
 
-// Périscolaire : temps d'accueil autour de l'école.
+// Périscolaire : temps d’accueil autour de l’école.
 const periscolaire = [
-  { label: "Accueil du matin", desc: "Avant la classe, dès l'ouverture des portes." },
+  { label: "Accueil du matin", desc: "Avant la classe, dès l’ouverture des portes." },
   { label: "Restauration scolaire", desc: "Repas équilibrés préparés pour les écoles de la commune." },
-  { label: "Garderie du soir", desc: "Accueil après la classe jusqu'en début de soirée." },
+  { label: "Garderie du soir", desc: "Accueil après la classe jusqu’en début de soirée." },
   { label: "Accueil de loisirs", desc: "Mercredis et vacances scolaires, activités encadrées." },
 ];
 
-// Petite enfance : modes d'accueil des tout-petits.
+// Petite enfance : modes d’accueil des tout-petits.
 const petiteEnfance = [
   {
     label: "Multi-accueil",
-    desc: "Structure collective proposant accueil régulier ou occasionnel pour les enfants jusqu'à leur entrée à l'école.",
+    desc: "Structure collective proposant accueil régulier ou occasionnel pour les enfants jusqu’à leur entrée à l’école.",
     icon: '<path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/><path d="M5 21a7 7 0 0 1 14 0"/>',
   },
   {
     label: "Relais petite enfance",
-    desc: "Information et accompagnement des familles et des assistant(e)s maternel(le)s : recherche de mode de garde, démarches, temps d'éveil.",
+    desc: "Information et accompagnement des familles et des assistant(e)s maternel(le)s : recherche de mode de garde, démarches, temps d’éveil.",
     icon: '<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>',
   },
   {
     label: "Assistant(e)s maternel(le)s",
-    desc: "Accueil individuel au domicile d'un(e) professionnel(le) agréé(e). La liste est tenue à jour par les services départementaux.",
+    desc: "Accueil individuel au domicile d’un(e) professionnel(le) agréé(e). La liste est tenue à jour par les services départementaux.",
     icon: '<path d="M3 9l2-2 2 2M5 7v6a4 4 0 0 0 8 0M13 5a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM16 8v4a4 4 0 0 1-4 4"/>',
   },
 ];
@@ -69,7 +69,7 @@ const petiteEnfance = [
 const sante = [
   {
     label: "Médecins & cabinets",
-    desc: "Médecins généralistes, infirmiers et professionnels paramédicaux installés sur la commune et le Val d'Argent.",
+    desc: "Médecins généralistes, infirmiers et professionnels paramédicaux installés sur la commune et le Val d’Argent.",
     icon: '<path d="M9 3v6H3v6h6v6h6v-6h6V9h-6V3z"/>',
   },
   {
@@ -107,17 +107,17 @@ const social = [
 const seniors = [
   {
     label: "Maintien à domicile",
-    desc: "Information sur le portage de repas, l'aide à domicile et l'adaptation du logement pour bien vieillir chez soi.",
+    desc: "Information sur le portage de repas, l’aide à domicile et l’adaptation du logement pour bien vieillir chez soi.",
     icon: '<path d="M3 11l9-7 9 7M5 9v11h14V9M12 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>',
   },
   {
     label: "Lien social & animations",
-    desc: "Sorties, rencontres et ateliers proposés tout au long de l'année pour rompre l'isolement.",
+    desc: "Sorties, rencontres et ateliers proposés tout au long de l’année pour rompre l’isolement.",
     icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM19 8v6M16 11h6"/>',
   },
   {
     label: "Registre canicule & grand froid",
-    desc: "Inscription des personnes âgées ou fragiles pour bénéficier d'un suivi attentif lors des épisodes climatiques.",
+    desc: "Inscription des personnes âgées ou fragiles pour bénéficier d’un suivi attentif lors des épisodes climatiques.",
     icon: '<path d="M12 2v20M4 6l16 12M20 6 4 18M2 12h20"/>',
   },
 ];
@@ -129,11 +129,11 @@ const seniors = [
   active="quotidien"
   eyebrow="Au quotidien"
   breadcrumb={fil}
-  lede="Écoles, petite enfance, santé, action sociale et seniors : les services de la commune accompagnent chaque étape de la vie des habitants du Val d'Argent."
+  lede="Écoles, petite enfance, santé, action sociale et seniors : les services de la commune accompagnent chaque étape de la vie des habitants du Val d’Argent."
 >
   <div class="quotidien">
 
-    <!-- Sommaire d'ancres -->
+    <!-- Sommaire d’ancres -->
     <nav class="toc" aria-label="Sommaire de la page">
       <span class="toc__label">Sur cette page</span>
       <ul class="toc__list">
@@ -148,7 +148,7 @@ const seniors = [
       <div class="block__head">
         <span class="eyebrow">Enfance & école</span>
         <h2 id="ecoles-title" class="section-title">Écoles &amp; périscolaire</h2>
-        <p class="lead">La commune gère les écoles publiques maternelles et élémentaires, ainsi que les temps d'accueil qui entourent la journée de classe.</p>
+        <p class="lead">La commune gère les écoles publiques maternelles et élémentaires, ainsi que les temps d’accueil qui entourent la journée de classe.</p>
       </div>
 
       <div class="cards cards--3">
@@ -177,7 +177,7 @@ const seniors = [
         </div>
         <aside class="note-card note-card--gueules split__aside">
           <h3>Inscription scolaire</h3>
-          <p class="prose">L'inscription à l'école maternelle ou élémentaire, ainsi qu'à la restauration et au périscolaire, se fait directement en ligne.</p>
+          <p class="prose">L’inscription à l’école maternelle ou élémentaire, ainsi qu’à la restauration et au périscolaire, se fait directement en ligne.</p>
           <p><a class="btn btn--primary btn--block" href="/mes-demarches/#scolaire">Inscrire mon enfant →</a></p>
           <p class="aside__hint">Pensez à préparer le livret de famille et un justificatif de domicile récent.</p>
         </aside>
@@ -191,7 +191,7 @@ const seniors = [
       <div class="block__head">
         <span class="eyebrow">De la naissance à la maternelle</span>
         <h2 id="petite-enfance-title" class="section-title">Petite enfance</h2>
-        <p class="lead">Plusieurs modes d'accueil, collectifs ou individuels, accompagnent les familles avant l'entrée à l'école.</p>
+        <p class="lead">Plusieurs modes d’accueil, collectifs ou individuels, accompagnent les familles avant l’entrée à l’école.</p>
       </div>
 
       <div class="cards cards--3">
@@ -232,7 +232,7 @@ const seniors = [
 
       <div class="note-card note-card--gueules">
         <h3>Urgences</h3>
-        <p class="prose">En cas d'urgence vitale, composez le <strong>15</strong> (SAMU) ou le <strong>112</strong> (numéro d'urgence européen). Pour une urgence médicale non vitale, le <strong>116 117</strong> met en relation avec un médecin de garde.</p>
+        <p class="prose">En cas d’urgence vitale, composez le <strong>15</strong> (SAMU) ou le <strong>112</strong> (numéro d’urgence européen). Pour une urgence médicale non vitale, le <strong>116 117</strong> met en relation avec un médecin de garde.</p>
       </div>
     </section>
 
@@ -243,7 +243,7 @@ const seniors = [
       <div class="block__head">
         <span class="eyebrow">Solidarité</span>
         <h2 id="social-title" class="section-title">Action sociale &amp; CCAS</h2>
-        <p class="lead">Le Centre communal d'action sociale (CCAS) accompagne les habitants confrontés à une difficulté et facilite l'accès aux droits.</p>
+        <p class="lead">Le Centre communal d’action sociale (CCAS) accompagne les habitants confrontés à une difficulté et facilite l’accès aux droits.</p>
       </div>
 
       <div class="cards cards--3">
@@ -258,7 +258,7 @@ const seniors = [
 
       <div class="note-card">
         <h3>Rencontrer le CCAS</h3>
-        <p class="prose">Les échanges avec le CCAS sont confidentiels et gratuits. Les aides sont instruites au cas par cas, sous conditions. Pour prendre rendez-vous ou obtenir les coordonnées et horaires d'accueil, <a href="/contact/">contactez la mairie</a>.</p>
+        <p class="prose">Les échanges avec le CCAS sont confidentiels et gratuits. Les aides sont instruites au cas par cas, sous conditions. Pour prendre rendez-vous ou obtenir les coordonnées et horaires d’accueil, <a href="/contact/">contactez la mairie</a>.</p>
       </div>
     </section>
 
@@ -267,7 +267,7 @@ const seniors = [
     <!-- ============ SENIORS ============ -->
     <section class="block" id="seniors" aria-labelledby="seniors-title">
       <div class="block__head">
-        <span class="eyebrow">Bien vieillir au Val d'Argent</span>
+        <span class="eyebrow">Bien vieillir au Val d’Argent</span>
         <h2 id="seniors-title" class="section-title">Seniors</h2>
         <p class="lead">Maintien à domicile, lien social et vigilance lors des épisodes climatiques : plusieurs dispositifs accompagnent nos aînés.</p>
       </div>
@@ -285,8 +285,8 @@ const seniors = [
       <div class="split">
         <aside class="note-card note-card--gueules split__aside">
           <h3>Registre des personnes fragiles</h3>
-          <p class="prose">L'inscription est volontaire, gratuite et confidentielle. Elle permet aux services communaux de prendre des nouvelles des personnes isolées en cas de canicule ou de grand froid.</p>
-          <p><a class="btn btn--ghost" href="/contact/">S'inscrire ou inscrire un proche →</a></p>
+          <p class="prose">L’inscription est volontaire, gratuite et confidentielle. Elle permet aux services communaux de prendre des nouvelles des personnes isolées en cas de canicule ou de grand froid.</p>
+          <p><a class="btn btn--ghost" href="/contact/">S’inscrire ou inscrire un proche →</a></p>
         </aside>
         <div class="split__main">
           <h3 class="sub-title">Un proche à accompagner&nbsp;?</h3>
@@ -296,8 +296,8 @@ const seniors = [
     </section>
 
     <!-- ============ AIDE ============ -->
-    <section class="help" aria-label="Besoin d'aide">
-      <p>Vous ne trouvez pas l'information recherchée&nbsp;? Les services de la commune vous orientent.</p>
+    <section class="help" aria-label="Besoin d’aide">
+      <p>Vous ne trouvez pas l’information recherchée&nbsp;? Les services de la commune vous orientent.</p>
       <a class="btn btn--primary" href="/contact/">Contacter la mairie</a>
     </section>
 
@@ -306,7 +306,7 @@ const seniors = [
   <style>
     .quotidien { display: flex; flex-direction: column; gap: 8px; }
 
-    /* ---- Sommaire d'ancres ---- */
+    /* ---- Sommaire d’ancres ---- */
     .toc {
       display: flex;
       flex-wrap: wrap;
@@ -381,7 +381,7 @@ const seniors = [
     .note-card .prose { max-width: none; }
     .note-card p + p { margin-top: 14px; }
 
-    /* ---- Bloc d'aide final ---- */
+    /* ---- Bloc d’aide final ---- */
     .help {
       display: flex;
       flex-wrap: wrap;

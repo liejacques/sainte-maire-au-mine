@@ -37,7 +37,7 @@ for (const t of themesDemarches) {
   >
     <label for="md-search" class="visually-hidden">Rechercher une démarche</label>
     <span class="search-bar__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-    <input id="md-search" name="q" type="search" placeholder="Ex. carte d'identité, permis de construire…" autocomplete="off" />
+    <input id="md-search" name="q" type="search" placeholder="Ex. carte d’identité, permis de construire…" autocomplete="off" />
     <button type="submit">Rechercher</button>
   </form>
 
@@ -97,10 +97,10 @@ for (const t of themesDemarches) {
         ou choisissez « Toutes les démarches ».
       </p>
 
-      <!-- Encadré d'aide France Services -->
+      <!-- Encadré d’aide France Services -->
       <div class="md-help is-dark">
         <div class="md-help__txt">
-          <h2 class="md-help__title">Besoin d'aide pour une démarche ?</h2>
+          <h2 class="md-help__title">Besoin d’aide pour une démarche ?</h2>
           <p class="md-help__lede">France Services vous accompagne gratuitement, en mairie, du lundi au vendredi.</p>
         </div>
         <a class="btn btn--primary" href="/contact/">Prendre rendez-vous</a>
@@ -162,7 +162,7 @@ for (const t of themesDemarches) {
     });
     search?.addEventListener("input", apply);
 
-    // À l'ouverture : préremplir depuis ?q= et activer le thème depuis #hash.
+    // À l’ouverture : préremplir depuis ?q= et activer le thème depuis #hash.
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q && search) search.value = q;
@@ -293,7 +293,7 @@ for (const t of themesDemarches) {
     }
     .md-empty[hidden] { display: none; }
 
-    /* ---- Encadré d'aide France Services ---- */
+    /* ---- Encadré d’aide France Services ---- */
     .md-help {
       display: flex;
       align-items: center;

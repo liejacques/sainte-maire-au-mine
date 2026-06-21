@@ -2,33 +2,33 @@
 import InnerPage from "../../layouts/InnerPage.astro";
 import { mairie, commune } from "../../data/commune";
 
-const fil = [{ label: "Accueil", href: "/" }, { label: "Déclaration d'accessibilité" }];
+const fil = [{ label: "Accueil", href: "/" }, { label: "Déclaration d’accessibilité" }];
 const description =
-  "Déclaration d'accessibilité RGAA du site de la Ville de Sainte-Marie-aux-Mines : état de conformité, résultats des tests, contenus non accessibles et voies de recours.";
+  "Déclaration d’accessibilité RGAA du site de la Ville de Sainte-Marie-aux-Mines : état de conformité, résultats des tests, contenus non accessibles et voies de recours.";
 ---
 <InnerPage
-  title="Déclaration d'accessibilité"
+  title="Déclaration d’accessibilité"
   description={description}
   eyebrow="Conformité RGAA"
   breadcrumb={fil}
-  lede="La Ville de Sainte-Marie-aux-Mines s'engage à rendre son site internet accessible, conformément à l'article 47 de la loi n° 2005-102 du 11 février 2005."
+  lede="La Ville de Sainte-Marie-aux-Mines s’engage à rendre son site internet accessible, conformément à l’article 47 de la loi n° 2005-102 du 11 février 2005."
 >
   <article class="prose">
     <p>
-      Cette déclaration d'accessibilité s'applique au site officiel de la Ville de
+      Cette déclaration d’accessibilité s’applique au site officiel de la Ville de
       {commune.nom}.
     </p>
 
     <h2>État de conformité</h2>
     <p>
       Le site <strong>est partiellement conforme</strong> au Référentiel général
-      d'amélioration de l'accessibilité (RGAA), version 4.1, en raison des
+      d’amélioration de l’accessibilité (RGAA), version 4.1, en raison des
       non-conformités et des dérogations énumérées ci-dessous.
     </p>
 
     <h2>Résultats des tests</h2>
     <p>
-      Cette déclaration s'appuie sur une <strong>auto-évaluation</strong> (contrôles
+      Cette déclaration s’appuie sur une <strong>auto-évaluation</strong> (contrôles
       automatisés et vérifications manuelles) et non sur un audit RGAA certifié. Un
       audit formel reste à mener pour établir le taux de conformité officiel.
     </p>
@@ -37,15 +37,15 @@ const description =
       <li>Méthode&nbsp;: auto-évaluation (audit RGAA 4.1 complet à mener avant publication définitive)</li>
     </ul>
 
-    <h2>Mesures d'accessibilité en place</h2>
+    <h2>Mesures d’accessibilité en place</h2>
     <ul>
       <li>Un seul titre <code>&lt;h1&gt;</code> par page et hiérarchie de titres sans saut (vérifié automatiquement).</li>
       <li>Alternative textuelle pertinente sur toutes les images&nbsp;; crédits (auteur · licence) conservés.</li>
-      <li>Lien d'évitement, navigation clavier complète, focus visibles (renforcés en mode contraste).</li>
-      <li>Sélecteur de taille du texte (mise à l'échelle en rem) et mode de contraste renforcé, mémorisés.</li>
-      <li>Animations respectant <code>prefers-reduced-motion</code> (tout est figé si l'utilisateur le demande).</li>
+      <li>Lien d’évitement, navigation clavier complète, focus visibles (renforcés en mode contraste).</li>
+      <li>Sélecteur de taille du texte (mise à l’échelle en rem) et mode de contraste renforcé, mémorisés.</li>
+      <li>Animations respectant <code>prefers-reduced-motion</code> (tout est figé si l’utilisateur le demande).</li>
       <li>Formulaires (contact, signalement, newsletter) étiquetés, avec annonce des états (envoi, succès, erreur).</li>
-      <li>Recherche interne annonçant le nombre de résultats aux technologies d'assistance.</li>
+      <li>Recherche interne annonçant le nombre de résultats aux technologies d’assistance.</li>
       <li>Polices auto-hébergées&nbsp;; aucune dépendance tierce bloquante au chargement.</li>
     </ul>
 
@@ -55,19 +55,19 @@ const description =
     <h3>Non-conformités et réserves connues</h3>
     <ul>
       <li>
-        <strong>Carte d'accès interactive</strong> (accueil et page contact)&nbsp;: la
-        manipulation fine d'une carte reste difficile avec certaines technologies
-        d'assistance. Une alternative est systématiquement proposée&nbsp;: l'adresse en
+        <strong>Carte d’accès interactive</strong> (accueil et page contact)&nbsp;: la
+        manipulation fine d’une carte reste difficile avec certaines technologies
+        d’assistance. Une alternative est systématiquement proposée&nbsp;: l’adresse en
         toutes lettres et un lien «&nbsp;plan et itinéraire en plein écran&nbsp;»
         (OpenStreetMap, ouverture dans un nouvel onglet annoncée).
       </li>
       <li>
         <strong>Espace de gestion</strong> (<code>/admin</code>)&nbsp;: outil interne
         réservé à la commune, nécessitant JavaScript, non indexé et non destiné au
-        public&nbsp;; il n'entre pas dans le périmètre de cette déclaration.
+        public&nbsp;; il n’entre pas dans le périmètre de cette déclaration.
       </li>
       <li>
-        Le <strong>taux de conformité officiel</strong> n'a pas encore été établi par un
+        Le <strong>taux de conformité officiel</strong> n’a pas encore été établi par un
         audit RGAA formel (voir «&nbsp;Résultats des tests&nbsp;»).
       </li>
     </ul>
@@ -75,11 +75,11 @@ const description =
     <h3>Dérogations pour charge disproportionnée</h3>
     <p>Néant à ce stade. <strong>[À COMPLÉTER après audit]</strong></p>
 
-    <h3>Contenus non soumis à l'obligation d'accessibilité</h3>
+    <h3>Contenus non soumis à l’obligation d’accessibilité</h3>
     <p>
       Les contenus de tiers qui ne sont ni financés ni développés par la commune,
-      et sur lesquels elle n'a pas de contrôle, ne sont pas soumis à l'obligation
-      d'accessibilité (par exemple des services en ligne externes). Les contenus
+      et sur lesquels elle n’a pas de contrôle, ne sont pas soumis à l’obligation
+      d’accessibilité (par exemple des services en ligne externes). Les contenus
       archivés relèvent également de cette catégorie.
     </p>
 
@@ -100,29 +100,29 @@ const description =
     <p>
       Les vérifications de restitution des contenus ont été réalisées sur la base
       de la combinaison fournie par la base de référence du RGAA, avec les versions
-      suivantes&nbsp;: <strong>[À COMPLÉTER&nbsp;: navigateurs et lecteurs d'écran testés]</strong>.
+      suivantes&nbsp;: <strong>[À COMPLÉTER&nbsp;: navigateurs et lecteurs d’écran testés]</strong>.
     </p>
 
-    <h3>Outils pour évaluer l'accessibilité</h3>
+    <h3>Outils pour évaluer l’accessibilité</h3>
     <ul>
       <li>Validateur W3C (HTML)</li>
-      <li>Outils d'analyse de contraste</li>
-      <li>Scripts d'audit internes du projet (liens internes, unicité du h1, alternatives d'images)</li>
+      <li>Outils d’analyse de contraste</li>
+      <li>Scripts d’audit internes du projet (liens internes, unicité du h1, alternatives d’images)</li>
     </ul>
 
-    <h3>Pages du site ayant fait l'objet de la vérification</h3>
+    <h3>Pages du site ayant fait l’objet de la vérification</h3>
     <ul>
-      <li>Page d'accueil</li>
+      <li>Page d’accueil</li>
       <li>Mes démarches (liste filtrable) et fiche de démarche</li>
       <li>Découvrir &amp; sortir, dont la page Mineral &amp; Gem</li>
       <li>Contact, Signalement et Recherche</li>
     </ul>
 
-    <h2>Retour d'information et contact</h2>
+    <h2>Retour d’information et contact</h2>
     <p>
-      Si vous n'arrivez pas à accéder à un contenu ou à un service, vous pouvez
-      contacter la mairie afin d'être orienté vers une alternative accessible ou
-      d'obtenir le contenu sous une autre forme.
+      Si vous n’arrivez pas à accéder à un contenu ou à un service, vous pouvez
+      contacter la mairie afin d’être orienté vers une alternative accessible ou
+      d’obtenir le contenu sous une autre forme.
     </p>
     <div class="note-card note-card--gueules">
       <h3>Contacter la mairie</h3>
@@ -138,8 +138,8 @@ const description =
     <h2>Voies de recours</h2>
     <p>
       Cette procédure est à utiliser dans le cas suivant&nbsp;: vous avez signalé au
-      responsable du site un défaut d'accessibilité qui vous empêche d'accéder à un
-      contenu ou à l'un des services et vous n'avez pas obtenu de réponse
+      responsable du site un défaut d’accessibilité qui vous empêche d’accéder à un
+      contenu ou à l’un des services et vous n’avez pas obtenu de réponse
       satisfaisante.
     </p>
     <ul>
@@ -161,9 +161,9 @@ const description =
 
     <p class="prose-note">
       <em>
-        Cette déclaration suit le modèle officiel de déclaration d'accessibilité.
+        Cette déclaration suit le modèle officiel de déclaration d’accessibilité.
         Les éléments marqués <strong>[À COMPLÉTER]</strong> seront renseignés à la
-        suite de l'audit RGAA, avant publication définitive.
+        suite de l’audit RGAA, avant publication définitive.
       </em>
     </p>
   </article>

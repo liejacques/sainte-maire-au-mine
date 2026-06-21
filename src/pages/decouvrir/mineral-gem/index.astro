@@ -7,12 +7,12 @@ import MinerTools from "../../../components/MinerTools.astro";
 import { mineralGem as mg } from "../../../data/mineral-gem";
 import { photos } from "../../../data/photos";
 
-const description = `Mineral & Gem à Sainte-Marie-aux-Mines (${mg.dates}) : ${mg.rang}. ${mg.edition}, thème « ${mg.theme} ». ${mg.exposants}, ${mg.surface}. Présentation de l'événement.`;
+const description = `Mineral & Gem à Sainte-Marie-aux-Mines (${mg.dates}) : ${mg.rang}. ${mg.edition}, thème « ${mg.theme} ». ${mg.exposants}, ${mg.surface}. Présentation de l’événement.`;
 
 const stats = [
   { n: "2ᵉ", l: "salon minéralogique mondial" },
   { n: "1 000+", l: "exposants internationaux" },
-  { n: "≈ 52 000 m²", l: "de surface d'exposition" },
+  { n: "≈ 52 000 m²", l: "de surface d’exposition" },
   { n: `depuis ${mg.depuis}`, l: "un rendez-vous historique" },
 ];
 ---
@@ -29,7 +29,7 @@ const stats = [
       <div class="partition" style="left:64%"></div>
       <div class="wrap mg-hero__grid">
         <div class="mg-hero__text">
-          <nav class="mg-crumb" aria-label="Fil d'Ariane">
+          <nav class="mg-crumb" aria-label="Fil d’Ariane">
             <ol>
               <li><a href="/">Accueil</a></li>
               <li aria-hidden="true">›</li>
@@ -119,7 +119,7 @@ const stats = [
         <div class="mg-section-head mg-reveal">
           <span class="eyebrow eyebrow--gold">La ville aux deux rives</span>
           <h2 id="mg-worlds-title" class="mg-h2">Deux mondes, un seul salon</h2>
-          <p class="mg-lede">Comme la ville née de deux rives de la Lièpvrette, le salon se partage en deux univers que sépare une même ligne d'argent.</p>
+          <p class="mg-lede">Comme la ville née de deux rives de la Lièpvrette, le salon se partage en deux univers que sépare une même ligne d’argent.</p>
         </div>
         <div class="mg-split">
           <div class="mg-world mg-reveal">
@@ -150,8 +150,8 @@ const stats = [
           <span class="eyebrow eyebrow--gold mg-reveal">Exposition prestige</span>
           <h2 id="mg-prestige-title" class="mg-h2 mg-reveal">«&nbsp;{mg.theme}&nbsp;»</h2>
           <p class="mg-prestige__text mg-reveal">{mg.themeDesc}</p>
-          <p class="mg-prestige__text mg-reveal">Chaque année, un thème nouveau réunit des pièces d'exception venues de collections publiques et privées du monde entier — l'occasion de voir réunies des œuvres que l'on ne croise jamais ensemble.</p>
-          <p class="mg-prestige__note mg-reveal">Le thème change à chaque édition : il fait l'identité de l'année.</p>
+          <p class="mg-prestige__text mg-reveal">Chaque année, un thème nouveau réunit des pièces d’exception venues de collections publiques et privées du monde entier — l’occasion de voir réunies des œuvres que l’on ne croise jamais ensemble.</p>
+          <p class="mg-prestige__note mg-reveal">Le thème change à chaque édition : il fait l’identité de l’année.</p>
         </div>
       </div>
     </section>
@@ -192,7 +192,7 @@ const stats = [
     <section class="mg-info" aria-labelledby="mg-info-title">
       <div class="wrap mg-info__grid">
         <div class="mg-section-head mg-reveal">
-          <span class="eyebrow eyebrow--gold">S'y rendre</span>
+          <span class="eyebrow eyebrow--gold">S’y rendre</span>
           <h2 id="mg-info-title" class="mg-h2">Quand &amp; où</h2>
         </div>
         <dl class="mg-info__dl mg-reveal">
@@ -214,7 +214,7 @@ const stats = [
           </div>
           <div class="mg-info__row">
             <dt>Accessibilité</dt>
-            <dd>Informations d'accès et de mobilité réduite auprès de l'organisateur (voir le site officiel).</dd>
+            <dd>Informations d’accès et de mobilité réduite auprès de l’organisateur (voir le site officiel).</dd>
           </div>
         </dl>
       </div>
@@ -229,9 +229,9 @@ const stats = [
           Un événement, une ville
         </span>
         <h2 id="mg-outro-title" class="mg-outro__title metal-text mg-reveal">Vivez Mineral &amp; Gem</h2>
-        <p class="mg-outro__lede mg-reveal">Cinq jours où Sainte-Marie-aux-Mines devient la capitale mondiale du minéral. Le programme détaillé et toutes les informations pratiques sont sur le site officiel de l'événement.</p>
+        <p class="mg-outro__lede mg-reveal">Cinq jours où Sainte-Marie-aux-Mines devient la capitale mondiale du minéral. Le programme détaillé et toutes les informations pratiques sont sur le site officiel de l’événement.</p>
         <a class="mg-outro__link mg-reveal" href={mg.siteOfficielUrl} target="_blank" rel="noopener noreferrer">
-          Site officiel de l'événement
+          Site officiel de l’événement
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
           <span class="visually-hidden"> (nouvel onglet)</span>
         </a>

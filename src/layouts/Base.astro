@@ -25,16 +25,16 @@ import SiteScripts from "../components/SiteScripts.astro";
 interface Props {
   title: string;
   description: string;
-  /** Identifiant de la rubrique active (surligne l'onglet de navigation). */
+  /** Identifiant de la rubrique active (surligne l’onglet de navigation). */
   active?: string;
-  /** URL (absolue ou relative au site) de l'image Open Graph. */
+  /** URL (absolue ou relative au site) de l’image Open Graph. */
   ogImage?: string;
 }
 
 const { title, description, active, ogImage } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-// Image Open Graph : visuel par défaut de la commune (1200×630) si la page n'en
-// fournit pas — sans quoi les partages Facebook/WhatsApp/LinkedIn n'ont aucun
+// Image Open Graph : visuel par défaut de la commune (1200×630) si la page n’en
+// fournit pas — sans quoi les partages Facebook/WhatsApp/LinkedIn n’ont aucun
 // visuel. Toujours surchargeable par page via la prop `ogImage`.
 const usingDefaultOg = !ogImage;
 const ogImageUrl = new URL(ogImage ?? "/og-default.jpg", Astro.site).href;

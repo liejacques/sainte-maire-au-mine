@@ -1,20 +1,20 @@
 ---
 // Seul script client du site (amélioration progressive, non bloquant) :
-//   1. sélecteur d'accessibilité — taille du texte (×1 / ×1.15 / ×1.3) et
-//      contraste renforcé, mémorisés d'une page à l'autre (localStorage) ;
+//   1. sélecteur d’accessibilité — taille du texte (×1 / ×1.15 / ×1.3) et
+//      contraste renforcé, mémorisés d’une page à l’autre (localStorage) ;
 //   2. confort du tiroir mobile — fermeture à la touche Échap, verrou de
-//      défilement de l'arrière-plan, fermeture au clic sur un lien.
+//      défilement de l’arrière-plan, fermeture au clic sur un lien.
 // Sans JavaScript, la page reste entièrement lisible et navigable.
 ---
 <script>
-  // ---- 1) Sélecteur d'accessibilité --------------------------------
+  // ---- 1) Sélecteur d’accessibilité --------------------------------
   const SIZE_KEY = "smam-text-size";
   const CONTRAST_KEY = "smam-contrast";
 
   const sizeButtons = Array.from(document.querySelectorAll("[data-text-size]"));
   const contrastButtons = Array.from(document.querySelectorAll("[data-contrast-toggle]"));
 
-  // Mise à l'échelle standard (rem) : on pose une variable CSS sur :root, que la
+  // Mise à l’échelle standard (rem) : on pose une variable CSS sur :root, que la
   // font-size de <html> applique via calc(). Tout le texte (exprimé en rem) suit.
   // Remplace `style.zoom`, non standard et longtemps absent de Firefox.
   const applySize = (size: string) => {

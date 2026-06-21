@@ -3,7 +3,7 @@ import InnerPage from "../../layouts/InnerPage.astro";
 import { filtresActualites, aLaUne, autresActus } from "../../data/actualites";
 
 const description =
-  "Toutes les actualités de la Ville de Sainte-Marie-aux-Mines : vie locale, culture, travaux, enfance et école. Suivez les nouvelles de la commune du Val d'Argent.";
+  "Toutes les actualités de la Ville de Sainte-Marie-aux-Mines : vie locale, culture, travaux, enfance et école. Suivez les nouvelles de la commune du Val d’Argent.";
 const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
 ---
 <InnerPage
@@ -42,7 +42,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
       <time datetime={aLaUne.iso} class="meta-date">{aLaUne.date}</time>
       <h2 class="actus-featured__title">{aLaUne.titre}</h2>
       <p class="actus-featured__excerpt">{aLaUne.resume}</p>
-      <span class="link-more">Lire l'article →</span>
+      <span class="link-more">Lire l’article →</span>
     </div>
   </a>
 
@@ -60,7 +60,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
             <time datetime={n.iso} class="meta-date">{n.date}</time>
             <h2 class="actus-card__title">{n.titre}</h2>
             <p class="actus-card__excerpt">{n.resume}</p>
-            <span class="link-more">Lire l'article →</span>
+            <span class="link-more">Lire l’article →</span>
           </div>
         </a>
       </article>
@@ -83,7 +83,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
       carte.hidden = !ok;
       if (ok) visibles++;
     });
-    // L'« à la une » ne s'affiche que pour « Tout ».
+    // L'« à la une » ne s’affiche que pour « Tout ».
     if (une) une.hidden = actif !== "all";
     if (vide) vide.hidden = !(visibles === 0 && (!une || une.hidden));
   }

@@ -1,6 +1,6 @@
 ---
 // Recherche plein-texte du site, propulsée par Pagefind (index statique généré
-// au build : `pagefind --site dist`). Les fichiers /pagefind/* n'existent que
+// au build : `pagefind --site dist`). Les fichiers /pagefind/* n’existent que
 // dans le site construit (npm run build / preview), pas en `astro dev`.
 import InnerPage from "../../layouts/InnerPage.astro";
 
@@ -16,8 +16,8 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Recherche" }];
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
   <div id="search" class="pf"></div>
   <p id="pf-fallback" class="pf-fallback">
-    Le moteur de recherche s'active sur le site publié. En développement local,
-    lancez <code>npm run build &amp;&amp; npm run preview</code> pour l'essayer.
+    Le moteur de recherche s’active sur le site publié. En développement local,
+    lancez <code>npm run build &amp;&amp; npm run preview</code> pour l’essayer.
   </p>
 
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
@@ -49,8 +49,8 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Recherche" }];
         }
       }
 
-      // A11y : Pagefind n'annonce pas le nombre de résultats. On pose un
-      // aria-live sur le compteur dès qu'il apparaît (annonce aux lecteurs d'écran).
+      // A11y : Pagefind n’annonce pas le nombre de résultats. On pose un
+      // aria-live sur le compteur dès qu’il apparaît (annonce aux lecteurs d’écran).
       var searchEl = document.getElementById("search");
       if (searchEl && "MutationObserver" in window) {
         var obs = new MutationObserver(function () {

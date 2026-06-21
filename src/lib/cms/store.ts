@@ -1,5 +1,5 @@
 // Store CMS — persistance locale (localStorage) côté navigateur.
-// Couche d'accès unique : pour brancher Supabase plus tard, il suffit de
+// Couche d’accès unique : pour brancher Supabase plus tard, il suffit de
 // remplacer le corps de ces fonctions par des appels supabase.from(...).
 import * as seed from "./seed";
 import type { AuditLog, HomeContent } from "./types";
@@ -84,7 +84,7 @@ export function duplicate<T extends { id: string; titre?: string }>(key: string,
   return create<any>(key, { ...rest, titre: rest.titre ? rest.titre + " (copie)" : rest.titre, statut: "brouillon" });
 }
 
-// --- Singleton : contenu de l'accueil ---
+// --- Singleton : contenu de l’accueil ---
 export function getHome(): HomeContent {
   try {
     const raw = localStorage.getItem(NS + "home");
@@ -95,7 +95,7 @@ export function getHome(): HomeContent {
 }
 export function setHome(v: HomeContent): void {
   try { localStorage.setItem(NS + "home", JSON.stringify(v)); } catch (e) { /* */ }
-  audit("Modification", "accueil", "Page d'accueil", "", "");
+  audit("Modification", "accueil", "Page d’accueil", "", "");
 }
 
 // --- Audit ---
@@ -117,7 +117,7 @@ function audit(action: string, typeContenu: string, cible: string, ancien: strin
   write("audit_logs", items.slice(0, 300));
 }
 
-/** Réinitialise tout le CMS aux données d'origine. */
+/** Réinitialise tout le CMS aux données d’origine. */
 export function reinitialiser(): void {
   Object.keys(SEEDS).forEach((k) => { try { localStorage.removeItem(NS + k); } catch (e) {} });
   try { localStorage.removeItem(NS + "home"); } catch (e) {}

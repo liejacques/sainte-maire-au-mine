@@ -1,4 +1,4 @@
-// Types du CMS — partagés par l'espace /admin et (pour le seed) le site public.
+// Types du CMS — partagés par l’espace /admin et (pour le seed) le site public.
 // Conçus pour être repris tels quels par Supabase (1 interface = 1 table).
 
 export type Statut = "brouillon" | "programme" | "publie" | "archive";
@@ -18,7 +18,7 @@ export interface News extends BaseItem {
   contenu: string; // markdown léger
   image: string; // URL média
   galerie: string[];
-  datePublication: string; // ISO — date d'effet (publication programmée à 00:00)
+  datePublication: string; // ISO — date d’effet (publication programmée à 00:00)
   statut: Statut;
   miseEnAvant: boolean;
 }
@@ -150,7 +150,7 @@ export interface User extends BaseItem {
   actif: boolean;
 }
 
-/** Journal d'audit (table: audit_logs) */
+/** Journal d’audit (table: audit_logs) */
 export interface AuditLog extends BaseItem {
   utilisateur: string;
   action: string; // créé, modifié, publié, supprimé…
@@ -160,7 +160,7 @@ export interface AuditLog extends BaseItem {
   nouveauStatut: string;
 }
 
-/** Contenu éditable de la page d'accueil (table: pages, clé "accueil") */
+/** Contenu éditable de la page d’accueil (table: pages, clé "accueil") */
 export interface HomeContent {
   heroEyebrow: string;
   heroTitre: string;

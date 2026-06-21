@@ -36,7 +36,7 @@ const types = [
       data-sujet="Signalement domaine public — Sainte-Marie-aux-Mines"
       data-mairie-email={mairie.email}
     >
-      <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d'écran). -->
+      <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d’écran). -->
       <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
 
       <div class="field">
@@ -78,7 +78,7 @@ const types = [
       <label class="consent">
         <input type="checkbox" name="consentement" required />
         <span>
-          J'accepte que ce signalement et mes éventuelles coordonnées soient traités par
+          J’accepte que ce signalement et mes éventuelles coordonnées soient traités par
           la mairie pour traiter ma demande, conformément à la
           <a href="/confidentialite/">politique de confidentialité</a>. *
         </span>
@@ -107,7 +107,7 @@ const types = [
         : etat === "ok"
           ? "Merci ! Votre signalement a bien été transmis aux services techniques."
           : etat === "mailto"
-            ? "Votre messagerie va s'ouvrir pour finaliser l'envoi du signalement."
+            ? "Votre messagerie va s’ouvrir pour finaliser l’envoi du signalement."
             : "Une erreur est survenue. Réessayez plus tard ou appelez la mairie.";
     try { status.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (_) {}
   });
@@ -136,7 +136,7 @@ const types = [
   .signal__alt { margin-top: 18px; font: 400 0.9375rem/1.6 var(--sans); color: var(--texte-2); }
   .signal__alt a { color: var(--gueules); font-weight: 600; }
 
-  /* Retour visuel d'état (doublé du texte annoncé via role=status). */
+  /* Retour visuel d’état (doublé du texte annoncé via role=status). */
   .form-status[data-etat="ok"] { color: var(--vert-fonce); }
   .form-status[data-etat="erreur"] { color: var(--gueules); }
 
