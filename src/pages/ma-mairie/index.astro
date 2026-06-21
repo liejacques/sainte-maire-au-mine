@@ -1,0 +1,505 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { mairie, commune } from "../../data/commune";
+
+const description =
+  "Ma mairie à Sainte-Marie-aux-Mines : le maire et les élus, le conseil municipal, les services municipaux (état civil, urbanisme, technique, scolaire, CCAS), le recrutement et le budget de la commune.";
+const fil = [{ label: "Accueil", href: "/" }, { label: "Ma mairie" }];
+
+// Services municipaux — descriptions génériques, vérifiables, sans donnée inventée.
+const services = [
+  {
+    nom: "État civil & formalités",
+    desc: "Naissances, mariages, décès, reconnaissances, recensement citoyen, attestations d'accueil et légalisation de signature.",
+    href: "/demarches/#etat-civil",
+    icon: `<path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/>`,
+  },
+  {
+    nom: "Urbanisme & cadre de vie",
+    desc: "Permis de construire, déclarations préalables, certificats d'urbanisme, consultation du PLU et autorisations de voirie.",
+    href: "/demarches/#urbanisme",
+    icon: `<path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/>`,
+  },
+  {
+    nom: "Services techniques",
+    desc: "Voirie, espaces verts, propreté urbaine, bâtiments communaux et gestion du domaine public. Pour un désordre constaté, utilisez le signalement en ligne.",
+    href: "/contact/",
+    icon: `<path d="M14.7 6.3a4 4 0 0 0-5.4 5.3L3 18v3h3l6.4-6.4a4 4 0 0 0 5.3-5.4l-2.6 2.6-2.3-.6-.6-2.3 2.5-2.6z"/>`,
+  },
+  {
+    nom: "Affaires scolaires & jeunesse",
+    desc: "Inscriptions scolaires, restauration et accueils périscolaires, conseil municipal des jeunes et soutien aux projets éducatifs.",
+    href: "/demarches/#scolaire",
+    icon: `<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/>`,
+  },
+  {
+    nom: "CCAS & solidarités",
+    desc: "Centre communal d'action sociale : accompagnement social, aide aux personnes âgées, domiciliation, demande de logement et soutien aux familles.",
+    href: "/contact/",
+    icon: `<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>`,
+  },
+  {
+    nom: "Accueil & coordonnées",
+    desc: "Un seul guichet pour vous orienter vers le bon service, prendre rendez-vous ou déposer une demande. Horaires et plan d'accès en bas de page.",
+    href: "/contact/",
+    icon: `<path d="M21 16.5v3a2 2 0 0 1-2.2 2 19 19 0 0 1-8.3-3 19 19 0 0 1-6-6 19 19 0 0 1-3-8.3A2 2 0 0 1 3.5 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.5 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/>`,
+  },
+];
+---
+<InnerPage
+  title="Ma mairie"
+  description={description}
+  active="mairie"
+  eyebrow="Vie municipale"
+  mark={true}
+  breadcrumb={fil}
+  lede="Le maire, les élus et l'ensemble des services de la Ville de Sainte-Marie-aux-Mines à votre service. Conseil municipal, état civil, urbanisme, action sociale, recrutement et finances : retrouvez ici qui fait quoi et comment nous joindre."
+>
+
+  <!-- ============ LE MAIRE & LES ÉLUS ============ -->
+  <section class="section--tight" id="elus" aria-labelledby="elus-title">
+    <div class="ma-head">
+      <span class="eyebrow">L'équipe municipale</span>
+      <h2 id="elus-title" class="section-title">Le maire &amp; les élus</h2>
+      <p class="lead ma-lead">
+        Issue du suffrage des Saint-Mariens, l'équipe municipale conduit l'action de la commune
+        et représente {commune.nom} au sein de la {commune.intercommunalite}.
+      </p>
+    </div>
+
+    <!-- Élus à vérifier avant publication (municipales de mars 2026) -->
+    <div class="elus-grid">
+      <article class="elu-card elu-card--maire">
+        <span class="elu-card__role">Maire de {commune.nom}</span>
+        <p class="elu-card__name">[Nom du maire — à confirmer]</p>
+        <p class="elu-card__deleg">
+          Préside le conseil municipal, dirige l'administration communale et représente la
+          commune dans les actes officiels.
+        </p>
+      </article>
+
+      <article class="elu-card">
+        <span class="elu-card__role">1<sup>er</sup>·ère adjoint·e</span>
+        <p class="elu-card__name">[Adjoint·e 1 — à confirmer]</p>
+        <p class="elu-card__deleg">[Délégation — à confirmer]</p>
+      </article>
+
+      <article class="elu-card">
+        <span class="elu-card__role">Adjoint·e</span>
+        <p class="elu-card__name">[Adjoint·e 2 — à confirmer]</p>
+        <p class="elu-card__deleg">[Délégation — à confirmer]</p>
+      </article>
+
+      <article class="elu-card">
+        <span class="elu-card__role">Adjoint·e</span>
+        <p class="elu-card__name">[Adjoint·e 3 — à confirmer]</p>
+        <p class="elu-card__deleg">[Délégation — à confirmer]</p>
+      </article>
+
+      <article class="elu-card">
+        <span class="elu-card__role">Adjoint·e</span>
+        <p class="elu-card__name">[Adjoint·e 4 — à confirmer]</p>
+        <p class="elu-card__deleg">[Délégation — à confirmer]</p>
+      </article>
+
+      <article class="elu-card elu-card--more">
+        <span class="elu-card__role">Conseillers municipaux</span>
+        <p class="elu-card__name">[Liste des conseiller·ère·s — à confirmer]</p>
+        <p class="elu-card__deleg">
+          Majorité et opposition réunies au sein du conseil municipal de la commune.
+        </p>
+      </article>
+    </div>
+
+    <div class="note-card note-card--gueules ma-note">
+      <h3>Information à vérifier</h3>
+      <p>
+        La composition de l'équipe municipale sera mise à jour à l'issue des élections
+        municipales de mars 2026. Les noms et délégations ci-dessus sont des emplacements
+        provisoires&nbsp;: <strong>ne les considérez pas comme officiels</strong> tant qu'ils
+        n'ont pas été confirmés par la mairie.
+      </p>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ LE CONSEIL MUNICIPAL ============ -->
+  <section class="section--tight" id="conseil" aria-labelledby="conseil-title">
+    <div class="conseil-grid">
+      <div>
+        <span class="eyebrow">Démocratie locale</span>
+        <h2 id="conseil-title" class="section-title">Le conseil municipal</h2>
+        <div class="prose ma-prose">
+          <p>
+            Le conseil municipal règle, par ses délibérations, les affaires de la commune&nbsp;:
+            budget, grands projets, urbanisme, subventions aux associations, fonctionnement des
+            services. Il élit le maire et les adjoints en son sein.
+          </p>
+          <p>
+            Pour une commune de la strate de {commune.nom}, le conseil compte
+            <strong>27 sièges</strong>. Ses séances sont <strong>publiques</strong>&nbsp;: chacun
+            peut y assister depuis l'espace réservé au public. L'ordre du jour est affiché en
+            mairie et publié avant chaque séance.
+          </p>
+          <p>
+            Les <strong>comptes rendus et délibérations</strong> sont consultables en mairie et
+            mis en ligne après chaque séance.
+          </p>
+        </div>
+        <div class="ma-cta">
+          <a class="btn btn--primary" href="/agenda/">Prochaine séance publique</a>
+          <a class="btn btn--ghost" href="/contact/">Demander un compte rendu</a>
+        </div>
+      </div>
+
+      <aside class="conseil-aside">
+        <div class="info-card">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18"/><path d="M3 10h18"/><path d="M5 6l7-3 7 3"/><path d="M4 10v11M20 10v11M9 10v11M15 10v11"/></svg>
+            Le conseil en bref
+          </h3>
+          <dl>
+            <div><dt>Sièges</dt><dd>27 conseiller·ère·s</dd></div>
+            <div><dt>Séances</dt><dd>Publiques</dd></div>
+            <div><dt>Présidence</dt><dd>Le maire</dd></div>
+            <div><dt>Convocation</dt><dd>Ordre du jour affiché</dd></div>
+          </dl>
+        </div>
+        <div class="photo-block conseil-photo">
+          <span class="photo-block__strata"></span>
+          <span class="photo-block__kicker">Photo</span>
+          <span class="photo-block__title">Salle du conseil, hôtel de ville</span>
+          <span class="photo-block__alt">alt&nbsp;: Salle du conseil municipal, tables en fer à cheval et blason de la commune</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ LES SERVICES MUNICIPAUX ============ -->
+  <section class="section--tight" id="services" aria-labelledby="services-title">
+    <div class="ma-head">
+      <span class="eyebrow">À votre service</span>
+      <h2 id="services-title" class="section-title">Les services municipaux</h2>
+      <p class="lead ma-lead">
+        Les agents de la commune accueillent et accompagnent les habitants au quotidien.
+        Voici les principaux services et leur domaine d'intervention.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s) => (
+        <a class="card card-link service-card" href={s.href}>
+          <span class="tile-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={s.icon} />
+          </span>
+          <span class="service-card__name">{s.nom}</span>
+          <span class="service-card__desc">{s.desc}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ RECRUTEMENT ============ -->
+  <section class="section--tight" id="recrutement" aria-labelledby="recrutement-title">
+    <div class="ma-head">
+      <span class="eyebrow">Travailler à la mairie</span>
+      <h2 id="recrutement-title" class="section-title">Recrutement &amp; offres d'emploi</h2>
+      <p class="lead ma-lead">
+        La commune recrute régulièrement des agents titulaires et contractuels, ainsi que des
+        saisonniers et des apprentis. Les offres en cours sont publiées ci-dessous.
+      </p>
+    </div>
+
+    <div class="recrut-grid">
+      <div class="recrut-empty">
+        <span class="recrut-empty__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M2 13h20"/></svg>
+        </span>
+        <p class="recrut-empty__title">Aucune offre en cours</p>
+        <p class="recrut-empty__text">
+          Aucun poste n'est ouvert au recrutement pour le moment. Vous pouvez néanmoins
+          adresser une candidature spontanée&nbsp;; elle sera conservée et étudiée à
+          l'ouverture d'un poste correspondant à votre profil.
+        </p>
+        <a class="link-more link-more--gold" href="/contact/">Envoyer une candidature spontanée →</a>
+      </div>
+
+      <aside class="note-card recrut-note">
+        <h3>Comment postuler</h3>
+        <p>
+          Adressez votre lettre de motivation et votre CV au service des ressources humaines
+          de la {mairie.nom}, par courrier au {mairie.adresse}, {mairie.cp} {mairie.ville},
+          ou par e-mail à <a href={`mailto:${mairie.email}`}>{mairie.email}</a>.
+        </p>
+        <p class="recrut-note__tel">
+          Renseignements&nbsp;: <a href={`tel:${mairie.telE164}`}>{mairie.tel}</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ BUDGET & FINANCES ============ -->
+  <section class="section--tight" id="budget" aria-labelledby="budget-title">
+    <div class="budget-grid">
+      <div>
+        <span class="eyebrow">Transparence</span>
+        <h2 id="budget-title" class="section-title">Budget &amp; finances 2026</h2>
+        <div class="prose ma-prose">
+          <p>
+            Chaque année, le conseil municipal vote le budget de la commune. Il fixe les
+            recettes et les dépenses, en <strong>fonctionnement</strong> (services rendus aux
+            habitants, entretien, personnel) comme en <strong>investissement</strong> (travaux,
+            équipements, patrimoine).
+          </p>
+          <p>
+            Le budget primitif est complété en cours d'année par d'éventuelles décisions
+            modificatives, puis arrêté par le <strong>compte administratif</strong>, qui rend
+            compte des dépenses réellement engagées. Ces documents financiers sont
+            <strong>publics</strong> et consultables en mairie.
+          </p>
+          <p>
+            Conformément à la réglementation, les principales données budgétaires sont mises à
+            disposition des habitants dans un souci de transparence de l'action publique.
+          </p>
+        </div>
+        <a class="btn btn--ghost" href="/contact/">Consulter les documents budgétaires</a>
+      </div>
+
+      <aside class="budget-aside">
+        <div class="note-card">
+          <h3>Le budget, en pratique</h3>
+          <ul class="budget-list">
+            <li><strong>Fonctionnement</strong> — services du quotidien, écoles, voirie, personnel.</li>
+            <li><strong>Investissement</strong> — travaux, équipements et entretien du patrimoine.</li>
+            <li><strong>Vote</strong> — adopté en séance publique du conseil municipal.</li>
+            <li><strong>Contrôle</strong> — compte administratif et publicité des comptes.</li>
+          </ul>
+        </div>
+        <p class="budget-note">
+          Les montants détaillés du budget 2026 seront publiés après le vote du conseil
+          municipal. <span class="budget-note__flag">Chiffres à confirmer avant mise en ligne.</span>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ CTA CONTACT ============ -->
+  <section class="ma-contact is-dark strata" aria-labelledby="contact-cta-title">
+    <div class="ma-contact__inner">
+      <div>
+        <span class="eyebrow eyebrow--gold">Nous joindre</span>
+        <h2 id="contact-cta-title" class="ma-contact__title">Une question pour la mairie&nbsp;?</h2>
+        <p class="ma-contact__text">
+          {mairie.adresse} · {mairie.cp} {mairie.ville}. Accueil ouvert
+          {mairie.horaires[0].h.toLowerCase()} du lundi au vendredi. Retrouvez l'ensemble des
+          horaires, le plan d'accès et le formulaire en ligne sur la page contact.
+        </p>
+      </div>
+      <div class="ma-contact__actions">
+        <a class="btn btn--primary" href="/contact/">Contact &amp; horaires</a>
+        <a class="btn btn--ghost-dark" href={`tel:${mairie.telE164}`}>{mairie.tel}</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* ---- Têtes de section ---- */
+    .ma-head { margin-bottom: 26px; }
+    .ma-lead { margin-top: 12px; max-width: 64ch; }
+    .ma-prose { margin-top: 16px; }
+    .ma-note { margin-top: 26px; }
+    .section--tight:first-of-type { padding-top: 4px; }
+
+    /* ---- Élus ---- */
+    .elus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .elu-card {
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-top: 3px solid var(--or);
+      border-radius: var(--rayon-lg);
+      padding: 22px 24px;
+    }
+    .elu-card--maire { border-top-color: var(--gueules); grid-column: span 1; }
+    .elu-card--more { background: var(--parchemin); }
+    .elu-card__role {
+      display: inline-block;
+      font: 700 0.6875rem/1 var(--sans);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gueules);
+    }
+    .elu-card--maire .elu-card__role { color: var(--gueules); }
+    .elu-card__name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      color: var(--encre);
+      margin: 10px 0 8px;
+    }
+    .elu-card__deleg { font: 400 0.875rem/1.55 var(--sans); color: var(--texte-2); margin: 0; }
+
+    /* ---- Conseil ---- */
+    .conseil-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 44px;
+      align-items: start;
+    }
+    .ma-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .conseil-aside { display: flex; flex-direction: column; gap: 16px; }
+    .conseil-aside .info-card dl > div { justify-content: space-between; }
+    .conseil-photo { min-height: 170px; }
+
+    /* ---- Services ---- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 24px 22px;
+    }
+    .service-card__name { font: 600 1.0625rem/1.3 var(--serif); color: var(--encre); }
+    .service-card__desc { font: 400 0.875rem/1.55 var(--sans); color: var(--texte-2); }
+
+    /* ---- Recrutement ---- */
+    .recrut-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .recrut-empty {
+      background: var(--parchemin-2);
+      border: 1px dashed var(--bord-champ);
+      border-radius: var(--rayon-lg);
+      padding: 34px 30px;
+      text-align: center;
+    }
+    .recrut-empty__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--parchemin);
+      color: var(--texte-muet);
+      margin-bottom: 14px;
+    }
+    .recrut-empty__title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.3125rem;
+      color: var(--encre);
+      margin: 0 0 8px;
+    }
+    .recrut-empty__text {
+      font: 400 0.9375rem/1.6 var(--sans);
+      color: var(--texte-2);
+      max-width: 48ch;
+      margin: 0 auto 16px;
+    }
+    .recrut-note p { font: 400 0.90625rem/1.6 var(--sans); color: var(--texte); margin: 0; }
+    .recrut-note p + p { margin-top: 10px; }
+    .recrut-note a { color: var(--gueules); font-weight: 600; text-decoration: none; }
+    .recrut-note a:hover { text-decoration: underline; text-underline-offset: 2px; }
+    .recrut-note__tel { color: var(--texte-2); }
+
+    /* ---- Budget ---- */
+    .budget-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 44px;
+      align-items: start;
+    }
+    .budget-grid .btn { margin-top: 22px; }
+    .budget-aside { display: flex; flex-direction: column; gap: 16px; }
+    .budget-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font: 400 0.90625rem/1.5 var(--sans);
+      color: var(--texte);
+    }
+    .budget-list li { padding-left: 18px; position: relative; }
+    .budget-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--or);
+      border-radius: 50%;
+    }
+    .budget-list strong { color: var(--encre-2); }
+    .budget-note { font: 400 0.8125rem/1.5 var(--sans); color: var(--texte-muet); margin: 0; }
+    .budget-note__flag { display: block; margin-top: 4px; color: var(--gueules); font-weight: 600; }
+
+    /* ---- CTA contact (bandeau sombre) ---- */
+    .ma-contact {
+      position: relative;
+      overflow: hidden;
+      background: var(--sable-2);
+      border-radius: var(--rayon-lg);
+      margin-top: 56px;
+      padding: 40px var(--gouttiere);
+    }
+    .ma-contact__inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .ma-contact__title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 3.4vw, 1.875rem);
+      line-height: 1.12;
+      color: var(--clair-2);
+      margin: 10px 0 10px;
+    }
+    .ma-contact__text {
+      font: 400 0.9375rem/1.6 var(--sans);
+      color: var(--brume-2);
+      max-width: 56ch;
+      margin: 0;
+    }
+    .ma-contact__actions { display: flex; flex-wrap: wrap; gap: 12px; flex: none; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 900px) {
+      .elus-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .conseil-grid,
+      .budget-grid,
+      .recrut-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media (max-width: 560px) {
+      .elus-grid,
+      .services-grid { grid-template-columns: 1fr; }
+      .ma-contact__inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</InnerPage>

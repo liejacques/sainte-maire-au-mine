@@ -1,0 +1,43 @@
+---
+// Gabarit des pages internes : en-tête + bandeau sombre + <main> + pied de page.
+// Les pages déclinent simplement leur contenu dans le <slot>.
+import Base from "./Base.astro";
+import PageBanner from "../components/PageBanner.astro";
+
+interface Crumb { label: string; href?: string; }
+interface Props {
+  title: string;
+  description: string;
+  active?: string;
+  /** Titre H1 du bandeau (par défaut = title). */
+  bannerTitle?: string;
+  breadcrumb: Crumb[];
+  eyebrow?: string;
+  mark?: boolean;
+  lede?: string;
+  /** Classe du <main> (par défaut conteneur centré). */
+  mainClass?: string;
+  /** URL de l'image Open Graph (surcharge le visuel par défaut). */
+  ogImage?: string;
+}
+const {
+  title,
+  description,
+  active,
+  bannerTitle,
+  breadcrumb,
+  eyebrow,
+  mark,
+  lede,
+  mainClass = "page-main",
+  ogImage,
+} = Astro.props;
+---
+<Base title={title} description={description} active={active} ogImage={ogImage}>
+  <PageBanner title={bannerTitle ?? title} breadcrumb={breadcrumb} eyebrow={eyebrow} mark={mark} lede={lede}>
+    <slot name="banner" />
+  </PageBanner>
+  <main id="contenu" class={mainClass}>
+    <slot />
+  </main>
+</Base>

@@ -1,0 +1,355 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+
+const description =
+  "Économie & emploi à Sainte-Marie-aux-Mines : commerces du centre, entreprises et zones d'activité du Val d'Argent, emploi et France Services, marché hebdomadaire du samedi. Une économie portée par le tourisme minier et Mineral & Gem.";
+
+const fil = [{ label: "Accueil", href: "/" }, { label: "Économie" }];
+
+// Repères locaux (chiffres de cadrage plausibles, à confirmer avant publication).
+const reperes = [
+  { value: "180+", label: "commerces & artisans", tone: "argent" },
+  { value: "4", label: "zones d'activité au Val d'Argent", tone: "or" },
+  { value: "30 000", label: "visiteurs · Mineral & Gem", tone: "argent" },
+  { value: "1 sam.", label: "marché chaque semaine", tone: "or" },
+];
+
+// Familles de commerces du centre-ville.
+const familles = [
+  {
+    titre: "Bouche & alimentation",
+    desc: "Boulangeries, boucheries-charcuteries, primeurs, caves et épiceries fines au fil de la Grand'Rue et de la rue Wilson.",
+    icon: `<path d="M4 11h16l-1.2 8.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 11z"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/>`,
+  },
+  {
+    titre: "Mode, maison & déco",
+    desc: "Prêt-à-porter, décoration, fleuristes et un savoir-faire textile qui rappelle le passé manufacturier de la vallée.",
+    icon: `<path d="M16 3 12 6 8 3 3 7l3 3 1-1v11h10V12l1 1 3-3-5-4z"/>`,
+  },
+  {
+    titre: "Services & proximité",
+    desc: "Banques, assurances, coiffeurs, opticiens, agences immobilières et professions de santé au cœur de bourg.",
+    icon: `<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/>`,
+  },
+  {
+    titre: "Cafés, restaurants & hôtels",
+    desc: "Tables, bars à vins, salons de thé et hébergements qui accueillent visiteurs du tourisme minier et exposants.",
+    icon: `<path d="M4 3v6a3 3 0 0 0 6 0V3"/><path d="M7 9v12"/><path d="M17 3c-1.5 1-2 2.5-2 5s.5 3 2 4v9"/>`,
+  },
+];
+
+// Zones & filières économiques.
+const filieres = [
+  {
+    titre: "Zones d'activité",
+    desc: "Les espaces d'activité du Val d'Argent accueillent artisanat, PME industrielles et logistique, à proximité de la RD 459.",
+  },
+  {
+    titre: "Industrie & savoir-faire",
+    desc: "Héritière des manufactures textiles, la vallée conserve un tissu de petites industries, mécanique de précision et éco-matériaux.",
+  },
+  {
+    titre: "Tourisme & patrimoine",
+    desc: "La mine-musée Tellure, le sentier minier et le label Pays d'art et d'histoire structurent une filière touristique en croissance.",
+  },
+  {
+    titre: "Artisanat d'art",
+    desc: "Tailleurs de pierre, lapidaires et créateurs trouvent dans la tradition minéralogique un terreau pour l'artisanat d'art.",
+  },
+];
+
+// Coordonnées du marché.
+const marche = [
+  { dt: "Jour", dd: "Tous les samedis matin" },
+  { dt: "Horaires", dd: "8h – 12h30" },
+  { dt: "Lieu", dd: "Centre-ville · place du Prensureux & abords" },
+  { dt: "Étals", dd: "Maraîchers, fromagers, producteurs fermiers du Val d'Argent" },
+];
+---
+<InnerPage
+  title="Économie & emploi"
+  description={description}
+  active="economie"
+  eyebrow="Économie & emploi"
+  breadcrumb={fil}
+  lede="Commerces de centre-ville, entreprises et zones d'activité du Val d'Argent, emploi de proximité et marché hebdomadaire : la vie économique d'une vallée façonnée par mille ans d'exploitation minière et par le tourisme."
+>
+  <!-- ============ REPÈRES ============ -->
+  <section class="eco-reperes" aria-label="L'économie en chiffres">
+    <div class="eco-reperes__grid">
+      {reperes.map((r) => (
+        <div class="eco-repere">
+          <div class={`eco-repere__n eco-repere__n--${r.tone}`}>{r.value}</div>
+          <div class="eco-repere__l">{r.label}</div>
+        </div>
+      ))}
+    </div>
+    <p class="eco-reperes__note">
+      Ordres de grandeur indicatifs à l'échelle du Val d'Argent — chiffres à confirmer avant publication.
+    </p>
+  </section>
+
+  <!-- ============ COMMERCES ============ -->
+  <section class="eco-section" id="commerces" aria-labelledby="commerces-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Centre-ville</span>
+        <h2 id="commerces-title" class="section-title">Commerces du centre</h2>
+      </div>
+      <a class="link-more link-more--gold" href="/economie/#marche">Le marché du samedi →</a>
+    </div>
+    <div class="prose">
+      <p>
+        Le commerce de proximité reste le cœur battant de Sainte-Marie-aux-Mines. De la
+        <strong>Grand'Rue</strong> à la <strong>rue Wilson</strong>, boutiques, artisans et services
+        de bouche animent un centre-bourg ramassé entre les deux rives de la Lièpvrette. La municipalité
+        soutient cette dynamique : signalétique, animations commerciales et stationnement de courte durée
+        pour faciliter les achats du quotidien.
+      </p>
+    </div>
+    <div class="eco-grid eco-grid--4">
+      {familles.map((f) => (
+        <article class="card eco-tile">
+          <span class="tile-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={f.icon} />
+          </span>
+          <h3 class="eco-tile__title">{f.titre}</h3>
+          <p class="eco-tile__desc">{f.desc}</p>
+        </article>
+      ))}
+    </div>
+    <div class="note-card eco-note">
+      <h3>Commerçant ou porteur de projet ?</h3>
+      <p class="eco-note__txt">
+        Un local à reprendre, une vitrine à animer, une demande de terrasse ? Le service développement
+        économique de la commune vous oriente. <a href="/contact/">Contactez la mairie</a> pour être mis
+        en relation avec les bons interlocuteurs.
+      </p>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ ENTREPRISES & ZONES D'ACTIVITÉ ============ -->
+  <section class="eco-section" id="entreprises" aria-labelledby="entreprises-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Val d'Argent</span>
+        <h2 id="entreprises-title" class="section-title">Entreprises &amp; zones d'activité</h2>
+      </div>
+      <a class="link-more link-more--gold" href="/marches-publics/">Marchés publics →</a>
+    </div>
+    <div class="eco-split">
+      <div class="prose eco-split__text">
+        <p>
+          Au sein de la <strong>Communauté de communes du Val d'Argent</strong>, Sainte-Marie-aux-Mines
+          concentre l'essentiel de l'activité économique de la vallée. Le tissu local mêle artisanat,
+          PME industrielles et services, héritiers d'un long passé manufacturier — du textile au travail
+          de la pierre et du métal.
+        </p>
+        <p>
+          L'implantation d'entreprises s'appuie sur les <strong>zones d'activité</strong> de la vallée,
+          desservies par la RD 459 vers la plaine d'Alsace et le col du Bonhomme. Les démarches
+          d'implantation et les terrains disponibles relèvent de l'intercommunalité, avec l'appui de la
+          commune.
+        </p>
+      </div>
+      <div class="photo-block eco-photo">
+        <span class="photo-block__strata"></span>
+        <span class="photo-block__kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 13v.01M9 17v.01"/></svg>
+          Photo économie
+        </span>
+        <span class="photo-block__title">Atelier &amp; zone d'activité du Val d'Argent</span>
+        <span class="photo-block__alt">alt&nbsp;: Bâtiment d'activité contemporain en lisière de la vallée boisée</span>
+      </div>
+    </div>
+    <div class="eco-grid eco-grid--2">
+      {filieres.map((f) => (
+        <article class="card eco-filiere">
+          <h3 class="eco-filiere__title">{f.titre}</h3>
+          <p class="eco-filiere__desc">{f.desc}</p>
+        </article>
+      ))}
+    </div>
+    <div class="note-card note-card--gueules eco-note">
+      <h3>Tourisme minier, moteur économique</h3>
+      <p class="eco-note__txt">
+        Mille ans d'exploitation ont laissé un patrimoine unique. La mine-musée <strong>Tellure</strong>
+        et le tourisme minier génèrent emplois saisonniers, retombées pour l'hôtellerie-restauration et
+        notoriété pour le territoire. Deux fois par an, la bourse internationale
+        <strong>Mineral &amp; Gem</strong> transforme la ville en capitale mondiale de la minéralogie et
+        remplit commerces, hébergements et tables de la vallée.
+      </p>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ EMPLOI ============ -->
+  <section class="eco-section" id="emploi" aria-labelledby="emploi-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Travailler ici</span>
+        <h2 id="emploi-title" class="section-title">Emploi &amp; accompagnement</h2>
+      </div>
+    </div>
+    <div class="prose">
+      <p>
+        Recherche d'emploi, formation, création d'entreprise : plusieurs relais accompagnent les habitants
+        du Val d'Argent. La commune oriente vers les structures compétentes et relaie les offres locales.
+      </p>
+    </div>
+    <div class="eco-grid eco-grid--2">
+      <a class="card card-link eco-link-card" href="/contact/">
+        <span class="tile-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 14h8M8 17h5"/></svg>
+        </span>
+        <span class="eco-link-card__title">France Services</span>
+        <span class="eco-link-card__desc">
+          Un point d'accueil unique pour vos démarches d'emploi, retraite, prestations sociales et numériques.
+          Aide à la rédaction de CV et à l'usage des services en ligne.
+        </span>
+        <span class="link-more eco-link-card__more">Prendre contact →</span>
+      </a>
+      <a class="card card-link eco-link-card" href="/mes-demarches/">
+        <span class="tile-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v4"/><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <span class="eco-link-card__title">Offres &amp; recrutement de la mairie</span>
+        <span class="eco-link-card__desc">
+          La commune et l'intercommunalité recrutent régulièrement (agents, saisonniers, apprentissage).
+          Consultez les offres et les modalités de candidature.
+        </span>
+        <span class="link-more eco-link-card__more">Voir les démarches →</span>
+      </a>
+    </div>
+    <div class="note-card eco-note">
+      <h3>Bon à savoir</h3>
+      <p class="eco-note__txt">
+        France Services est un guichet partagé entre l'État et les opérateurs (emploi, assurance maladie,
+        retraite, allocations, impôts…). Un conseiller formé vous reçoit sans rendez-vous pour la plupart
+        des démarches du quotidien.
+      </p>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ MARCHÉ HEBDOMADAIRE ============ -->
+  <section class="eco-section" id="marche" aria-labelledby="marche-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Chaque samedi</span>
+        <h2 id="marche-title" class="section-title">Marché hebdomadaire</h2>
+      </div>
+    </div>
+    <div class="eco-split">
+      <div class="prose eco-split__text">
+        <p>
+          Rendez-vous incontournable, le <strong>marché du samedi matin</strong> rassemble maraîchers,
+          producteurs fermiers, fromagers et artisans de la vallée au cœur du centre-ville. On y retrouve
+          les saveurs de la montagne vosgienne et un moment de vie sociale au pied des maisons à colombages.
+        </p>
+        <p>
+          Le marché complète une offre alimentaire de proximité solide et soutient les circuits courts
+          chers au Val d'Argent. Les emplacements sont gérés par la mairie&nbsp;:
+          <a href="/contact/">contactez le service marchés</a> pour devenir exposant.
+        </p>
+      </div>
+      <div class="card eco-marche-card">
+        <h3 class="eco-marche-card__title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9 5 4h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>
+          Infos pratiques
+        </h3>
+        <dl class="eco-marche-card__dl">
+          {marche.map((m) => (
+            <div><dt>{m.dt}</dt><dd>{m.dd}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+</InnerPage>
+
+<style>
+  /* ---- REPÈRES ---- */
+  .eco-reperes { margin-bottom: 8px; }
+  .eco-reperes__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .eco-repere {
+    background: var(--nuit);
+    border: 1px solid var(--bord-nuit);
+    border-radius: var(--rayon-lg);
+    padding: 22px 20px;
+  }
+  .eco-repere__n { font-family: var(--serif); font-weight: 600; font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1; }
+  .eco-repere__n--argent { color: var(--argent); }
+  .eco-repere__n--or { color: var(--or); }
+  .eco-repere__l { font: 500 0.8125rem/1.35 var(--sans); color: var(--brume-muet); margin-top: 8px; }
+  .eco-reperes__note { font: 400 0.78125rem/1.5 var(--sans); color: var(--texte-muet); margin: 14px 0 0; }
+
+  /* ---- SECTIONS ---- */
+  .eco-section { padding-block: 40px; scroll-margin-top: var(--header-offset); }
+  .eco-section .prose { max-width: 74ch; }
+
+  /* ---- GRILLES ---- */
+  .eco-grid { display: grid; gap: 18px; margin-top: 26px; }
+  .eco-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .eco-grid--2 { grid-template-columns: repeat(2, 1fr); }
+
+  .eco-tile { display: flex; flex-direction: column; gap: 12px; padding: 22px 20px; }
+  .eco-tile__title { font-family: var(--serif); font-weight: 600; font-size: 1.125rem; line-height: 1.2; color: var(--encre); margin: 0; }
+  .eco-tile__desc { font: 400 0.875rem/1.55 var(--sans); color: var(--texte-2); margin: 0; }
+
+  .eco-filiere { padding: 20px 22px; }
+  .eco-filiere__title { font-family: var(--serif); font-weight: 600; font-size: 1.125rem; line-height: 1.2; color: var(--encre); margin: 0 0 8px; }
+  .eco-filiere__desc { font: 400 0.90625rem/1.6 var(--sans); color: var(--texte-2); margin: 0; }
+
+  /* ---- SPLIT TEXTE + VISUEL ---- */
+  .eco-split { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: start; margin-top: 22px; }
+  .eco-split__text { max-width: none; }
+  .eco-photo { min-height: 220px; }
+
+  /* ---- LIENS EMPLOI ---- */
+  .eco-link-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; }
+  .eco-link-card__title { font-family: var(--serif); font-weight: 600; font-size: 1.1875rem; line-height: 1.2; color: var(--encre); }
+  .eco-link-card__desc { font: 400 0.90625rem/1.6 var(--sans); color: var(--texte-2); flex: 1; }
+  .eco-link-card__more { min-height: 0; margin-top: 2px; }
+
+  /* ---- NOTE-CARD ---- */
+  .eco-note { margin-top: 26px; }
+  .eco-note__txt { font: 400 0.90625rem/1.65 var(--sans); color: var(--texte); margin: 0; }
+  .eco-note__txt a { color: var(--gueules); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---- CARTE MARCHÉ ---- */
+  .eco-marche-card { padding: 22px 24px; align-self: start; }
+  .eco-marche-card__title {
+    display: flex; align-items: center; gap: 9px;
+    font: 700 0.8125rem/1 var(--sans);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--gueules);
+    margin: 0 0 4px;
+  }
+  .eco-marche-card__dl { margin: 0; }
+  .eco-marche-card__dl > div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-top: 1px solid var(--bord-fin); }
+  .eco-marche-card__dl > div:first-of-type { border-top: 0; }
+  .eco-marche-card__dl dt { font: 600 0.84375rem/1.4 var(--sans); color: var(--texte-muet); flex: none; }
+  .eco-marche-card__dl dd { margin: 0; font: 500 0.875rem/1.4 var(--sans); color: var(--encre-2); text-align: right; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .eco-reperes__grid { grid-template-columns: 1fr 1fr; }
+    .eco-grid--4 { grid-template-columns: 1fr 1fr; }
+    .eco-split { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 560px) {
+    .eco-reperes__grid { grid-template-columns: 1fr 1fr; }
+    .eco-grid--4, .eco-grid--2 { grid-template-columns: 1fr; }
+    .eco-marche-card__dl > div { flex-direction: column; gap: 2px; }
+    .eco-marche-card__dl dd { text-align: left; }
+  }
+</style>

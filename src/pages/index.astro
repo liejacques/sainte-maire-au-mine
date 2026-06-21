@@ -1,0 +1,503 @@
+---
+import Base from "../layouts/Base.astro";
+import MinerTools from "../components/MinerTools.astro";
+import AccessMap from "../components/AccessMap.astro";
+import { mairie } from "../data/commune";
+import { demarchesRapides, heroChips, democratie, chiffresDecouvrir } from "../data/home";
+import { aLaUne, autresActus } from "../data/actualites";
+import { evenements, accentByType, legendeAgenda } from "../data/agenda";
+import { photos } from "../data/photos";
+
+const actusCotes = autresActus.slice(0, 2);
+const agendaHome = evenements.slice(0, 4);
+const description =
+  "Site officiel de la Ville de Sainte-Marie-aux-Mines (Haut-Rhin), commune centre du Val d'Argent. Démarches en ligne, actualités, agenda, patrimoine minier et démocratie locale.";
+---
+<Base title="Ville de Sainte-Marie-aux-Mines — Au cœur du Val d'Argent" description={description}>
+  <main id="contenu">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero strata is-dark" aria-labelledby="hero-title">
+      <div class="partition" style="left:60%"></div>
+      <div class="hero-inner wrap">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <span class="eyebrow eyebrow--gold eyebrow--mark">
+              <MinerTools size={20} />
+              Site officiel de la commune
+            </span>
+            <h1 id="hero-title" class="hero-title metal-text">Mille ans d'argent<br />au cœur des Vosges</h1>
+            <p class="hero-lede">Sainte-Marie-aux-Mines, commune centre du Val d'Argent. Vos démarches, votre quotidien, votre patrimoine — réunis en un seul endroit.</p>
+
+            <form class="search-bar hero-search" role="search" aria-label="Rechercher une démarche" action="/recherche/" method="get">
+              <label for="hero-search" class="visually-hidden">Rechercher une démarche ou un service</label>
+              <span class="search-bar__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+              <input id="hero-search" name="q" type="search" placeholder="Rechercher une démarche, un service…" />
+              <button type="submit">Rechercher</button>
+            </form>
+
+            <div class="hero-chips">
+              <span class="hero-chips__label">Fréquent&nbsp;:</span>
+              {heroChips.map((c) => (
+                <a class="chip" href={c.href}>{c.label}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="hero-photo photo-block photo-block--photo">
+            <img class="photo-block__img" src={photos.galerieSaintJean.src} alt={photos.galerieSaintJean.alt} width={photos.galerieSaintJean.w} height={photos.galerieSaintJean.h} fetchpriority="high" />
+            <span class="photo-credit">© {photos.galerieSaintJean.auteur} · {photos.galerieSaintJean.licence}</span>
+            <span class="photo-block__title">Galerie de la mine Saint-Jean</span>
+            <div class="hero-badge">
+              <div class="hero-badge__n">592 kg</div>
+              <div class="hero-badge__l">d'argent · extrait en 1581</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DÉMARCHES EN 1 CLIC ============ -->
+    <section class="section bg-parchemin" id="demarches" aria-labelledby="demarches-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Services en ligne</span>
+            <h2 id="demarches-title" class="section-title">Vos démarches en un clic</h2>
+          </div>
+        </div>
+        <div class="quick-grid">
+          {demarchesRapides.map((d) => (
+            <a class="quick-tile card card-link" href={d.href}>
+              <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={d.icon} /></span>
+              <span class="quick-tile__label">{d.label}</span>
+              <span class="quick-tile__desc">{d.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <hr class="vein" />
+
+    <!-- ============ ACTUALITÉS ============ -->
+    <section class="section bg-parchemin-2" aria-labelledby="actus-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">La ville bouge</span>
+            <h2 id="actus-title" class="section-title">Actualités</h2>
+          </div>
+          <a class="link-more link-more--gold" href="/actualites/">Toutes les actualités →</a>
+        </div>
+        <div class="news-grid">
+          <article class="news-featured card">
+            <div class="news-featured__photo photo-block photo-block--photo">
+              <img class="photo-block__img" src={aLaUne.image.src} alt={aLaUne.image.alt} width={aLaUne.image.w} height={aLaUne.image.h} loading="lazy" />
+              <span class="photo-credit">© {aLaUne.image.auteur} · {aLaUne.image.licence}</span>
+              <span class={`tag tag--${aLaUne.tag} news-featured__tag`}>{aLaUne.categorie}</span>
+            </div>
+            <div class="news-featured__body">
+              <time datetime={aLaUne.iso} class="meta-date">{aLaUne.date}</time>
+              <h3 class="news-featured__title">{aLaUne.titre}</h3>
+              <p class="news-featured__excerpt">{aLaUne.resume}</p>
+              <a class="link-more" href={`/actualites/${aLaUne.slug}/`}>Lire l'article →</a>
+            </div>
+          </article>
+
+          {actusCotes.map((n) => (
+            <article class="news-card card">
+              <div class="news-card__photo photo-block photo-block--photo">
+                <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />
+                <span class="photo-credit">© {n.image.auteur} · {n.image.licence}</span>
+                <span class={`tag tag--${n.tag} news-card__tag`}>{n.categorie}</span>
+              </div>
+              <div class="news-card__body">
+                <time datetime={n.iso} class="meta-date">{n.date}</time>
+                <h3 class="news-card__title">{n.titre}</h3>
+                <p class="news-card__excerpt">{n.resume}</p>
+                <a class="link-more" href={`/actualites/${n.slug}/`}>Lire →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AGENDA ============ -->
+    <section class="section bg-parchemin" aria-labelledby="agenda-title">
+      <div class="wrap agenda">
+        <div class="agenda__intro">
+          <span class="eyebrow">Temps forts</span>
+          <h2 id="agenda-title" class="section-title">Agenda</h2>
+          <p class="agenda__lede">Rendez-vous habitants et grands événements du Val d'Argent.</p>
+          <div class="agenda__legend">
+            {legendeAgenda.map((l) => (
+              <span class="agenda__legend-item"><span class="agenda__dot" style={`background:${accentByType[l.type]}`}></span>{l.label}</span>
+            ))}
+          </div>
+          <a class="link-more link-more--gold" href="/agenda/">Tout l'agenda →</a>
+        </div>
+        <div class="agenda__list">
+          {agendaHome.map((e) => (
+            <a class="agenda-row" href={`/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+              <div class="agenda-row__date">
+                <div class="agenda-row__day">{e.day}</div>
+                <div class="agenda-row__month">{e.month}</div>
+              </div>
+              <div class="agenda-row__body">
+                <div class="agenda-row__meta">
+                  <span class="agenda-row__type" style={`background:${accentByType[e.type]}`}>{e.typeLabel}</span>
+                  <span class="agenda-row__place">{e.lieu}</span>
+                </div>
+                <h3 class="agenda-row__title">{e.titre}</h3>
+              </div>
+              <svg class="agenda-row__chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gueules)" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DÉCOUVRIR (identité immersive) ============ -->
+    <section class="section decouvrir strata is-dark" aria-labelledby="decouvrir-title">
+      <div class="partition" style="left:50%"></div>
+      <div class="wrap decouvrir__grid">
+        <div class="decouvrir__col">
+          <span class="eyebrow eyebrow--gold eyebrow--mark">
+            <MinerTools size={20} />
+            Découvrir Sainte-Marie-aux-Mines
+          </span>
+          <h2 id="decouvrir-title" class="decouvrir__title">La ville qui <span class="metal-text" style="font-style:italic">est l'argent</span> et la roche</h2>
+          <p class="decouvrir__text">Mille ans d'exploitation, 1&nbsp;100 mines, 300&nbsp;km de galeries. Une ville née sur deux rives de la Lièpvrette — lorraine et alsacienne — réunies en 1790. Goethe collectionnait nos minéraux ; Charles Quint reçut notre argent.</p>
+          <div class="decouvrir__cta">
+            <a class="btn btn--primary" href="/decouvrir/#tourisme">Mine-musée Tellure</a>
+            <a class="btn btn--ghost-dark" href="/decouvrir/#dualite">Pays d'art &amp; d'histoire</a>
+          </div>
+        </div>
+        <div class="decouvrir__col">
+          <div class="ident-grid">
+            {chiffresDecouvrir.map((s) => (
+              <div class="ident-stat">
+                <div class={`ident-stat__n ident-stat__n--${s.tone}`}>{s.value}</div>
+                <div class="ident-stat__l">{s.label}</div>
+              </div>
+            ))}
+          </div>
+          <div class="photo-block photo-block--photo decouvrir__photo">
+            <img class="photo-block__img" src={photos.argentTetraedrite.src} alt={photos.argentTetraedrite.alt} width={photos.argentTetraedrite.w} height={photos.argentTetraedrite.h} loading="lazy" />
+            <span class="photo-credit">© {photos.argentTetraedrite.auteur} · {photos.argentTetraedrite.licence}</span>
+            <span class="photo-block__title">Tétraédrite — minerai d'argent natif</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES PRATIQUES ============ -->
+    <section class="section bg-parchemin-2" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <span class="eyebrow">En un coup d'œil</span>
+        <h2 id="services-title" class="section-title" style="margin-bottom:28px">Services pratiques</h2>
+        <div class="services-grid">
+          <div class="services-cards">
+            <div class="info-card">
+              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horaires de la mairie</h3>
+              <dl>
+                {mairie.horaires.map((h) => (
+                  <div><dt>{h.jour}</dt><dd style={h.ferme ? "color:var(--texte-faible);font-weight:400" : ""}>{h.h}</dd></div>
+                ))}
+              </dl>
+            </div>
+            <div class="info-card">
+              <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 16.5v3a2 2 0 0 1-2.2 2 19 19 0 0 1-8.3-3 19 19 0 0 1-6-6 19 19 0 0 1-3-8.3A2 2 0 0 1 3.5 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.5 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>Coordonnées</h3>
+              <address>
+                {mairie.adresse}<br />{mairie.cp} {mairie.ville}<br />
+                <a href={`tel:${mairie.telE164}`}>{mairie.tel}</a><br />
+                <a href={`mailto:${mairie.email}`}>{mairie.email}</a>
+              </address>
+            </div>
+            <a class="signal-card" href="/contact/">
+              <span class="signal-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+              <span class="signal-card__txt">
+                <span class="signal-card__t">Signaler un problème</span>
+                <span class="signal-card__d">Voirie, éclairage, propreté — domaine public</span>
+              </span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+          <AccessMap height={300} class="services-map" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DÉMOCRATIE LOCALE ============ -->
+    <section class="section bg-parchemin" aria-labelledby="demo-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Vie municipale</span>
+            <h2 id="demo-title" class="section-title">Démocratie locale &amp; transparence</h2>
+          </div>
+          <a class="link-more link-more--gold" href="/ma-mairie/#conseil">Le conseil municipal →</a>
+        </div>
+        <div class="quick-grid">
+          {democratie.map((g) => (
+            <a class="demo-tile" href={g.href}>
+              <span class="demo-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={g.icon} /></span>
+              <span class="demo-tile__label">{g.label}</span>
+              <span class="demo-tile__desc">{g.desc}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section class="section bg-parchemin" aria-labelledby="news-title">
+      <div class="wrap newsletter">
+        <div class="newsletter__accent" aria-hidden="true"></div>
+        <div class="newsletter__inner">
+          <div class="newsletter__txt">
+            <span class="eyebrow">Rester informé</span>
+            <h2 id="news-title" class="newsletter__title">La lettre du Val d'Argent</h2>
+            <p class="newsletter__lede">Actualités, agenda et alertes de la commune, une fois par mois dans votre boîte mail.</p>
+          </div>
+          <form
+            class="newsletter__form"
+            id="newsletter-home"
+            data-sujet="Inscription newsletter — Sainte-Marie-aux-Mines"
+            data-mairie-email={mairie.email}
+            data-configured="false"
+          >
+            <div class="newsletter__row">
+              <label for="nl-email" class="visually-hidden">Votre adresse e-mail</label>
+              <input id="nl-email" name="email" type="email" required placeholder="Votre adresse e-mail" class="input" />
+              <button type="submit" class="btn btn--primary">S'inscrire</button>
+            </div>
+            <label class="consent">
+              <input type="checkbox" name="consentement" required />
+              <span>J'accepte de recevoir la lettre d'information et que mon adresse soit traitée à cette seule fin. <a href="/confidentialite/">Politique de confidentialité</a>.</span>
+            </label>
+            <p class="form-status" id="nl-status" role="status" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Base>
+
+<script>
+  import { initPublicForm } from "../lib/forms-client";
+  const status = document.getElementById("nl-status");
+  initPublicForm("newsletter-home", (etat) => {
+    if (!status) return;
+    status.hidden = false;
+    status.textContent =
+      etat === "ok"
+        ? "Merci ! Un e-mail de confirmation vous a été envoyé."
+        : etat === "mailto"
+          ? "Votre messagerie va s'ouvrir pour confirmer l'inscription."
+          : "Une erreur est survenue. Réessayez plus tard.";
+  });
+</script>
+
+<style>
+  /* ---- HERO ---- */
+  .hero { position: relative; overflow: hidden; background: linear-gradient(115deg, #241f14, #16140d 72%); }
+  .hero-inner { position: relative; }
+  .hero-grid { display: flex; align-items: stretch; }
+  .hero-text { flex: 1; padding: 56px 44px 52px 0; }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.125rem, 5.4vw, 3.25rem);
+    line-height: 1.04;
+    margin: 20px 0 0;
+  }
+  .hero-lede { font-size: 1.0625rem; line-height: 1.5; color: var(--brume); max-width: 440px; margin: 18px 0 28px; }
+  .hero-search { max-width: 480px; }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; align-items: center; }
+  .hero-chips__label { font: 600 0.8125rem/2.75rem var(--sans); color: var(--brume-muet); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid rgba(199, 204, 209, 0.3);
+    border-radius: 3px;
+    color: var(--clair-3);
+    font: 500 0.875rem/1 var(--sans);
+    text-decoration: none;
+  }
+  .chip:hover { border-color: var(--or); color: var(--clair); }
+  .hero-photo {
+    width: 430px;
+    flex: none;
+    margin-left: auto;
+    min-height: 100%;
+    background: linear-gradient(160deg, #2a2820, #100f0a);
+    padding: 20px;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    background: var(--gueules);
+    color: #fff;
+    padding: 11px 16px;
+    border-radius: 2px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  }
+  .hero-badge__n { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; line-height: 1; }
+  .hero-badge__l { font: 500 0.65625rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.9; margin-top: 3px; }
+
+  /* ---- DÉMARCHES ---- */
+  .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .quick-tile { display: flex; flex-direction: column; gap: 14px; padding: 22px 20px; min-height: 130px; }
+  .quick-tile__label { font: 600 1rem/1.3 var(--sans); color: var(--encre-2); }
+  .quick-tile__desc { font: 400 0.8125rem/1.4 var(--sans); color: var(--texte-muet); margin-top: -6px; }
+
+  /* ---- ACTUALITÉS ---- */
+  .news-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 22px; }
+  .news-featured { display: flex; flex-direction: column; overflow: hidden; }
+  .news-featured__photo { height: 240px; min-height: 0; border-radius: 0; }
+  .news-featured__tag { position: absolute; top: 14px; left: 14px; }
+  .news-featured__body { padding: 22px; }
+  .news-featured__title { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; line-height: 1.15; color: var(--encre); margin: 10px 0 8px; }
+  .news-featured__excerpt { font: 400 0.9375rem/1.55 var(--sans); color: var(--texte-2); margin: 0 0 14px; }
+  .news-card { display: flex; flex-direction: column; overflow: hidden; }
+  .news-card__photo { height: 140px; min-height: 0; border-radius: 0; padding: 12px; }
+  .news-card__tag { position: absolute; top: 12px; left: 12px; }
+  .news-card__body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+  .news-card__title { font-family: var(--serif); font-weight: 600; font-size: 1.125rem; line-height: 1.2; color: var(--encre); margin: 8px 0; }
+  .news-card__excerpt { font: 400 0.84375rem/1.5 var(--sans); color: var(--texte-3); margin: 0 0 12px; flex: 1; }
+
+  /* ---- AGENDA ---- */
+  .agenda { display: flex; gap: 40px; align-items: flex-start; }
+  .agenda__intro { flex: 0 0 300px; }
+  .agenda__lede { font: 400 0.9375rem/1.55 var(--sans); color: var(--texte-2); margin: 14px 0 16px; }
+  .agenda__legend { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .agenda__legend-item { display: inline-flex; align-items: center; gap: 8px; font: 500 0.84375rem/1 var(--sans); color: var(--texte-2); }
+  .agenda__dot { width: 11px; height: 11px; border-radius: 2px; }
+  .agenda__list { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .agenda-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--parchemin-2);
+    border: 1px solid var(--bord-clair);
+    border-left: 4px solid var(--gueules);
+    border-radius: var(--rayon);
+    padding: 18px 22px;
+    text-decoration: none;
+    transition: box-shadow 0.15s;
+  }
+  .agenda-row:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); }
+  .agenda-row__date { flex: 0 0 64px; text-align: center; border-right: 1px solid var(--bord-clair); padding-right: 18px; }
+  .agenda-row__day { font-family: var(--serif); font-weight: 600; font-size: 1.75rem; line-height: 1; color: var(--encre); }
+  .agenda-row__month { font: 600 0.75rem/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gueules); margin-top: 4px; }
+  .agenda-row__body { flex: 1; }
+  .agenda-row__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .agenda-row__type { display: inline-flex; align-items: center; font: 600 0.6875rem/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: #fff; padding: 5px 9px; border-radius: 2px; }
+  .agenda-row__place { font: 500 0.8125rem/1 var(--sans); color: var(--texte-muet); }
+  .agenda-row__title { font-family: var(--serif); font-weight: 600; font-size: 1.1875rem; line-height: 1.2; color: var(--encre); margin: 8px 0 0; }
+  .agenda-row__chev { flex: none; }
+
+  /* ---- DÉCOUVRIR IMMERSIF ---- */
+  .decouvrir { position: relative; overflow: hidden; background: var(--nuit); padding-block: 64px; }
+  .decouvrir__grid { position: relative; display: flex; gap: 56px; align-items: flex-start; }
+  .decouvrir__col { flex: 1; }
+  .decouvrir__title { font-family: var(--serif); font-weight: 500; font-size: clamp(1.75rem, 4.4vw, 2.375rem); line-height: 1.08; color: var(--clair-2); margin: 14px 0 16px; }
+  .decouvrir__text { font-size: 1rem; line-height: 1.6; color: var(--brume-2); margin: 0 0 18px; max-width: 480px; }
+  .decouvrir__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ident-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+  .ident-stat { border: 1px solid var(--bord-nuit); border-radius: 3px; padding: 20px; }
+  .ident-stat__n { font-family: var(--serif); font-weight: 600; font-size: 2.125rem; line-height: 1; }
+  .ident-stat__n--argent { color: var(--argent); }
+  .ident-stat__n--or { color: var(--or); }
+  .ident-stat__l { font: 500 0.8125rem/1.3 var(--sans); color: var(--brume-muet); margin-top: 6px; }
+  .decouvrir__photo { height: 150px; min-height: 0; background: linear-gradient(155deg, #2b2920, #100f0a); }
+
+  /* ---- SERVICES ---- */
+  .services-grid { display: flex; gap: 22px; align-items: stretch; }
+  .services-cards { flex: 1.2; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .services-map { flex: 1; min-height: 300px; }
+  .signal-card {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--gueules);
+    border-radius: var(--rayon);
+    padding: 18px 22px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .signal-card:hover { background: var(--gueules-fonce); }
+  .signal-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.14); border-radius: 4px; flex: none; }
+  .signal-card__txt { flex: 1; }
+  .signal-card__t { display: block; font: 700 1rem/1.2 var(--sans); color: #fff; }
+  .signal-card__d { display: block; font: 400 0.84375rem/1.3 var(--sans); color: var(--gueules-clair); margin-top: 3px; }
+
+  /* ---- DÉMOCRATIE ---- */
+  .demo-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--parchemin-2);
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon);
+    padding: 22px;
+    text-decoration: none;
+    min-height: 120px;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+  .demo-tile:hover { border-color: var(--gueules); box-shadow: var(--ombre-carte); transform: translateY(-2px); }
+  .demo-tile__icon { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: var(--nuit); border-radius: var(--rayon); color: var(--argent); }
+  .demo-tile__label { font: 600 1rem/1.25 var(--sans); color: var(--encre-2); }
+  .demo-tile__desc { font: 400 0.8125rem/1.45 var(--sans); color: var(--texte-muet); }
+
+  /* ---- NEWSLETTER ---- */
+  .newsletter {
+    max-width: 920px;
+    background: var(--parchemin-2);
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon-lg);
+    padding: 40px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .newsletter__accent { position: absolute; top: 0; bottom: 0; right: 0; width: 4px; background: linear-gradient(180deg, var(--gueules), var(--or)); }
+  .newsletter__inner { display: flex; gap: 36px; align-items: center; }
+  .newsletter__txt { flex: 1; }
+  .newsletter__title { font-family: var(--serif); font-weight: 500; font-size: 1.75rem; line-height: 1.12; color: var(--encre); margin: 10px 0 8px; }
+  .newsletter__lede { font: 400 0.9375rem/1.55 var(--sans); color: var(--texte-2); margin: 0; }
+  .newsletter__form { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .newsletter__row { display: flex; gap: 8px; }
+  .newsletter__row .btn { white-space: nowrap; }
+  .newsletter .form-status[hidden] { display: none; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 980px) {
+    .hero .partition, .decouvrir .partition { display: none; }
+    .hero-grid { flex-direction: column; }
+    .hero-text { padding: 40px 0 36px; }
+    .hero-photo { width: 100%; min-height: 240px; margin-left: 0; }
+    .news-grid { grid-template-columns: 1fr 1fr; }
+    .agenda { flex-direction: column; gap: 28px; }
+    .agenda__intro { flex: none; }
+    .decouvrir__grid { flex-direction: column; gap: 36px; }
+    .services-grid { flex-direction: column; }
+    .newsletter__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 760px) {
+    .quick-grid { grid-template-columns: 1fr 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .services-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .newsletter { padding: 28px 22px; }
+    .newsletter__row { flex-direction: column; }
+  }
+</style>

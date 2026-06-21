@@ -1,0 +1,91 @@
+/* =========================================================================
+   Sainte-Marie-aux-Mines — Jetons de design (design tokens)
+   Palette ancrée dans le blason : sable des galeries, argent natif, gueules
+   de Ribeaupierre, or héraldique, vert vosgien. Les couleurs porteuses de
+   texte respectent les ratios RGAA (≥ 4.5:1). L'or ne sert que de décor ou
+   de texte SUR FOND SOMBRE — jamais de texte sur fond clair.
+   ========================================================================= */
+
+:root {
+  /* ---- Fonds sombres « galerie » ------------------------------------ */
+  --nuit:          #16140d; /* barre utilitaire, pied de page, sections immersives */
+  --sable:         #1b1810; /* en-tête, bandeaux de page, hero */
+  --sable-2:       #22201a; /* démocratie locale, bande de statistiques */
+  --sable-3:       #1f1c13; /* fond du blason, dégradés */
+  --carte-nuit:    #1a1813; /* cartes sur fond sombre */
+  --abime:         #100f0a; /* fin des dégradés rocheux */
+
+  /* ---- Fonds clairs « parchemin » ----------------------------------- */
+  --parchemin:     #f4f1ea; /* fond principal clair, chaud */
+  --parchemin-2:   #fffdf8; /* cartes & sections claires */
+  --blanc:         #ffffff; /* cartes pleines, champs de formulaire */
+  --gris-clair:    #f0f0f0;
+
+  /* ---- Bordures ----------------------------------------------------- */
+  --bord-clair:    #e3ddcd; /* bordures de cartes sur fond clair */
+  --bord-champ:    #d8d2c4; /* bordures de champs */
+  --bord-fin:      #ece6d8; /* filets internes (listes de définitions) */
+  --bord-nuit:     rgba(199, 204, 209, 0.18); /* bordures sur fond sombre */
+  --bord-nuit-2:   rgba(199, 204, 209, 0.12);
+
+  /* ---- Texte sur fond clair (porteur) ------------------------------- */
+  --encre:         #1b1810; /* titres */
+  --encre-2:       #221f17; /* texte fort */
+  --texte:         #3a352b; /* corps */
+  --texte-2:       #544e40; /* corps secondaire */
+  --texte-3:       #5c5648;
+  --texte-muet:    #6b6453; /* légendes, métadonnées */
+  --texte-faible:  #8a8475; /* désactivé, « Fermé » */
+
+  /* ---- Texte sur fond sombre ---------------------------------------- */
+  --clair:         #f4f1ea; /* titres clairs */
+  --clair-2:       #efece4;
+  --clair-3:       #e7e2d8;
+  --brume:         #cfcabb; /* corps sur fond sombre */
+  --brume-2:       #bdb7a8; /* corps secondaire sur fond sombre */
+  --brume-muet:    #9a9384; /* légendes sur fond sombre */
+  --brume-faible:  #7a745f;
+
+  /* ---- Accents porteurs --------------------------------------------- */
+  --gueules:       #8a2b20; /* LIENS, boutons, accents — gueules de Ribeaupierre */
+  --gueules-fonce: #73221a; /* survol des boutons pleins */
+  --gueules-clair: #f0d9d4; /* texte sur fond gueules */
+  --or:            #b0863c; /* DÉCOR + texte sur fond sombre uniquement (5.9:1 sur nuit) */
+  --or-clair:      #e9c98a;
+  --argent:        #c7ccd1; /* métal : nombres-clés, focus sur fond sombre, outils */
+  --argent-2:      #cdd2d6;
+  --vert:          #2e6b3e; /* nature / tourisme, second accent porteur */
+  --vert-fonce:    #235c30; /* texte vert sur fond pâle */
+  --vert-pale:     #eef5ef; /* fond des pastilles « en ligne » */
+  --vert-bord:     #b6d2bc;
+
+  /* ---- Badge RGAA (footer) ------------------------------------------ */
+  --rgaa-bg:       #5a4a1e;
+  --rgaa-txt:      #f0e2b8;
+
+  /* ---- Typographie -------------------------------------------------- */
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---- Mise en page ------------------------------------------------- */
+  --largeur: 1240px;     /* largeur de contenu maximale */
+  --gouttiere: 28px;     /* marge latérale */
+  --rayon: 4px;          /* rayon de coin standard */
+  --rayon-lg: 6px;
+  --header-offset: 7.5rem;
+
+  /* ---- Dégradés & textures signature -------------------------------- */
+  /* Argent natif : dégradé métallique pour les grands titres (clip texte). */
+  --metal: linear-gradient(100deg, #eef0f2, #9fa6ab 38%, #e4e7e9 56%, #838a8f);
+  /* Strate rocheuse : fines diagonales sur les fonds sombres. */
+  --strate: repeating-linear-gradient(122deg, transparent 0 32px, rgba(199, 204, 209, 0.035) 32px 33px);
+  /* Ligne de partage (la Lièpvrette) : filet vertical argenté. */
+  --partage: linear-gradient(180deg, transparent, rgba(199, 204, 209, 0.4), transparent);
+  /* Veine minérale : séparateur horizontal gueules/or. */
+  --veine: linear-gradient(90deg, transparent, rgba(138, 43, 32, 0.35) 30%, rgba(176, 134, 60, 0.45) 50%, rgba(138, 43, 32, 0.35) 70%, transparent);
+
+  /* ---- Ombres ------------------------------------------------------- */
+  --ombre-carte: 0 8px 22px rgba(0, 0, 0, 0.08);
+  --ombre-forte: 0 14px 34px rgba(0, 0, 0, 0.22);
+  --ombre-champ: 0 6px 20px rgba(0, 0, 0, 0.3);
+}

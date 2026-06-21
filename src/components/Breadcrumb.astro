@@ -1,0 +1,27 @@
+---
+// Fil d'Ariane. Le dernier élément (sans href) est la page courante.
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: Crumb[];
+  /** "dark" (par défaut, sur bandeau sombre) ou "light" (sur fond clair). */
+  variant?: "dark" | "light";
+}
+const { items, variant = "dark" } = Astro.props;
+---
+<nav class={`breadcrumb${variant === "light" ? " breadcrumb--light" : ""}`} aria-label="Fil d'Ariane">
+  <ol>
+    {items.map((c, i) => (
+      <>
+        {c.href ? (
+          <li><a href={c.href}>{c.label}</a></li>
+        ) : (
+          <li aria-current="page">{c.label}</li>
+        )}
+        {i < items.length - 1 && <li class="breadcrumb__sep" aria-hidden="true">›</li>}
+      </>
+    ))}
+  </ol>
+</nav>

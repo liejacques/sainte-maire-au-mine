@@ -1,0 +1,78 @@
+---
+// Seul script client du site (amélioration progressive, non bloquant) :
+//   1. sélecteur d'accessibilité — taille du texte (×1 / ×1.15 / ×1.3) et
+//      contraste renforcé, mémorisés d'une page à l'autre (localStorage) ;
+//   2. confort du tiroir mobile — fermeture à la touche Échap, verrou de
+//      défilement de l'arrière-plan, fermeture au clic sur un lien.
+// Sans JavaScript, la page reste entièrement lisible et navigable.
+---
+<script>
+  // ---- 1) Sélecteur d'accessibilité --------------------------------
+  const SIZE_KEY = "smam-text-size";
+  const CONTRAST_KEY = "smam-contrast";
+
+  const sizeButtons = Array.from(document.querySelectorAll("[data-text-size]"));
+  const contrastButtons = Array.from(document.querySelectorAll("[data-contrast-toggle]"));
+
+  // Mise à l'échelle standard (rem) : on pose une variable CSS sur :root, que la
+  // font-size de <html> applique via calc(). Tout le texte (exprimé en rem) suit.
+  // Remplace `style.zoom`, non standard et longtemps absent de Firefox.
+  const applySize = (size: string) => {
+    document.documentElement.style.setProperty("--smam-text-scale", String(size));
+    sizeButtons.forEach((b) => {
+      const pressed = b.getAttribute("data-text-size") === String(size);
+      b.setAttribute("aria-pressed", pressed ? "true" : "false");
+    });
+  };
+
+  const applyContrast = (on: boolean) => {
+    document.body.setAttribute("data-contrast", on ? "on" : "off");
+    contrastButtons.forEach((b) => b.setAttribute("aria-pressed", on ? "true" : "false"));
+  };
+
+  // État initial (mémorisé)
+  let savedSize = "1";
+  let savedContrast = false;
+  try {
+    savedSize = localStorage.getItem(SIZE_KEY) || "1";
+    savedContrast = localStorage.getItem(CONTRAST_KEY) === "on";
+  } catch (e) { /* stockage indisponible : valeurs par défaut */ }
+  if (savedSize !== "1") applySize(savedSize);
+  else applySize("1");
+  if (savedContrast) applyContrast(true);
+
+  sizeButtons.forEach((b) => {
+    b.addEventListener("click", () => {
+      const size = b.getAttribute("data-text-size") || "1";
+      applySize(size);
+      try { localStorage.setItem(SIZE_KEY, size); } catch (e) { /* */ }
+    });
+  });
+
+  contrastButtons.forEach((b) => {
+    b.addEventListener("click", () => {
+      const on = document.body.getAttribute("data-contrast") !== "on";
+      applyContrast(on);
+      try { localStorage.setItem(CONTRAST_KEY, on ? "on" : "off"); } catch (e) { /* */ }
+    });
+  });
+
+  // ---- 2) Confort du tiroir mobile ---------------------------------
+  const mobileMenus = Array.from(document.querySelectorAll<HTMLDetailsElement>("details.mobile-menu"));
+  const closeMobile = () => mobileMenus.forEach((m) => m.removeAttribute("open"));
+
+  mobileMenus.forEach((menu) => {
+    // Verrou de défilement quand le tiroir est ouvert.
+    menu.addEventListener("toggle", () => {
+      document.body.style.overflow = menu.open ? "hidden" : "";
+    });
+    // Fermeture au clic sur un lien du tiroir.
+    menu.querySelectorAll(".mobile-panel a").forEach((link) => {
+      link.addEventListener("click", () => menu.removeAttribute("open"));
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMobile();
+  });
+</script>

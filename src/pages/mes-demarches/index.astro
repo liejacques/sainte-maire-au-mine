@@ -1,0 +1,333 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { demarches, themesDemarches } from "../../data/demarches";
+
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Mes démarches" },
+];
+const description =
+  "Toutes vos démarches administratives à Sainte-Marie-aux-Mines, en ligne et en un seul endroit : état civil, identité, urbanisme, déchets, école, élections. Trouvez la vôtre par mot-clé ou par thème.";
+const lede =
+  "Toutes vos démarches administratives, en ligne et en un seul endroit. Trouvez la vôtre par mot-clé ou par thème.";
+
+// Comptage par thème pour les pastilles de la barre latérale.
+const counts: Record<string, number> = {};
+for (const t of themesDemarches) {
+  counts[t.id] = t.id === "all" ? demarches.length : demarches.filter((d) => d.theme === t.id).length;
+}
+---
+<InnerPage
+  title="Mes démarches"
+  description={description}
+  active="demarches"
+  eyebrow="Services en ligne"
+  mark={true}
+  breadcrumb={fil}
+  lede={lede}
+  mainClass="md-main"
+>
+  <form
+    slot="banner"
+    class="search-bar md-search"
+    role="search"
+    aria-label="Rechercher une démarche"
+    action="/mes-demarches/"
+    method="get"
+  >
+    <label for="md-search" class="visually-hidden">Rechercher une démarche</label>
+    <span class="search-bar__icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+    <input id="md-search" name="q" type="search" placeholder="Ex. carte d'identité, permis de construire…" autocomplete="off" />
+    <button type="submit">Rechercher</button>
+  </form>
+
+  <div class="md-grid">
+    <!-- Barre latérale : filtres par thème -->
+    <aside class="md-aside" aria-label="Filtrer par thème">
+      <h2 class="md-aside__title">Thèmes</h2>
+      <ul class="md-themes" role="list">
+        {themesDemarches.map((t) => (
+          <li>
+            <button
+              type="button"
+              class="md-theme"
+              data-theme-btn={t.id}
+              aria-current={t.id === "all" ? "true" : "false"}
+              id={"anchor" in t && t.anchor ? `theme-${t.anchor}` : undefined}
+            >
+              <span>{t.label}</span>
+              <span class="md-theme__count">{counts[t.id]}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </aside>
+
+    <!-- Cartes de démarches -->
+    <div class="md-results">
+      <div class="md-results__head">
+        <h2 class="md-results__title" id="md-active-label">Toutes les démarches</h2>
+        <span class="md-results__count" id="md-count">{demarches.length} démarches</span>
+      </div>
+
+      <div class="md-cards" id="md-cards">
+        {demarches.map((d) => (
+          <a
+            class="md-card"
+            href={d.href}
+            data-theme={d.theme}
+            data-search={`${d.label} ${d.desc}`.toLowerCase()}
+          >
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={d.icon} /></span>
+            <span class="md-card__body">
+              <span class="md-card__head">
+                <span class="md-card__label">{d.label}</span>
+                {d.online && <span class="badge-online"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>En ligne</span>}
+              </span>
+              <span class="md-card__desc">{d.desc}</span>
+              <span class="md-card__cta">{d.cta} →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Aucun résultat (révélé en JS uniquement) -->
+      <p class="md-empty" id="md-empty" hidden>
+        Aucune démarche ne correspond à votre recherche. Essayez un autre mot-clé
+        ou choisissez « Toutes les démarches ».
+      </p>
+
+      <!-- Encadré d'aide France Services -->
+      <div class="md-help is-dark">
+        <div class="md-help__txt">
+          <h2 class="md-help__title">Besoin d'aide pour une démarche ?</h2>
+          <p class="md-help__lede">France Services vous accompagne gratuitement, en mairie, du lundi au vendredi.</p>
+        </div>
+        <a class="btn btn--primary" href="/contact/">Prendre rendez-vous</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Amélioration progressive : sans JS, toutes les cartes restent visibles.
+    const cards = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("#md-cards .md-card")
+    );
+    const themeBtns = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-theme-btn]")
+    );
+    const search = document.getElementById("md-search") as HTMLInputElement | null;
+    const countEl = document.getElementById("md-count");
+    const labelEl = document.getElementById("md-active-label");
+    const emptyEl = document.getElementById("md-empty");
+
+    // id de thème -> libellé, et anchor -> id de thème
+    const labelById = new Map<string, string>();
+    const idByAnchor = new Map<string, string>();
+    themeBtns.forEach((btn) => {
+      const id = btn.dataset.themeBtn ?? "all";
+      const label = btn.querySelector("span")?.textContent?.trim() ?? "";
+      labelById.set(id, label);
+      const anchor = btn.id?.replace(/^theme-/, "");
+      if (btn.id && anchor) idByAnchor.set(anchor, id);
+    });
+
+    let activeTheme = "all";
+
+    function apply() {
+      const q = (search?.value ?? "").trim().toLowerCase();
+      let visible = 0;
+      cards.forEach((card) => {
+        const okTheme = activeTheme === "all" || card.dataset.theme === activeTheme;
+        const okSearch = !q || (card.dataset.search ?? "").includes(q);
+        const show = okTheme && okSearch;
+        card.hidden = !show;
+        if (show) visible++;
+      });
+      if (labelEl) labelEl.textContent = labelById.get(activeTheme) ?? "Toutes les démarches";
+      if (countEl) countEl.textContent = `${visible} démarche${visible > 1 ? "s" : ""}`;
+      if (emptyEl) emptyEl.hidden = visible !== 0;
+    }
+
+    function setTheme(id: string) {
+      activeTheme = id;
+      themeBtns.forEach((btn) =>
+        btn.setAttribute("aria-current", btn.dataset.themeBtn === id ? "true" : "false")
+      );
+      apply();
+    }
+
+    themeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => setTheme(btn.dataset.themeBtn ?? "all"));
+    });
+    search?.addEventListener("input", apply);
+
+    // À l'ouverture : préremplir depuis ?q= et activer le thème depuis #hash.
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q && search) search.value = q;
+
+    const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    const themeFromHash = hash && idByAnchor.get(hash);
+    if (themeFromHash) {
+      setTheme(themeFromHash);
+    } else if (q) {
+      apply();
+    }
+  </script>
+
+  <style>
+    /* ---- Grille générale ---- */
+    .md-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ---- Barre latérale des thèmes ---- */
+    .md-aside__title {
+      font: 700 0.75rem/1 var(--sans);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gueules);
+      margin: 0 0 14px;
+    }
+    .md-themes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .md-theme {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      min-height: 44px;
+      padding: 0 14px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-radius: 3px;
+      color: var(--texte);
+      font: 600 0.875rem/1.3 var(--sans);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .md-theme:hover { border-color: var(--gueules); color: var(--gueules); }
+    .md-theme__count { font: 500 0.75rem/1 var(--sans); color: var(--texte-muet); }
+    .md-theme[aria-current="true"] {
+      background: var(--gueules);
+      border-color: var(--gueules);
+      color: #fff;
+    }
+    .md-theme[aria-current="true"]:hover { color: #fff; }
+    .md-theme[aria-current="true"] .md-theme__count { color: var(--gueules-clair); }
+
+    /* ---- En-tête des résultats ---- */
+    .md-results__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .md-results__title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1.15;
+      color: var(--encre);
+      margin: 0;
+    }
+    .md-results__count {
+      font: 500 0.875rem/1 var(--sans);
+      color: var(--texte-muet);
+      white-space: nowrap;
+    }
+
+    /* ---- Grille de cartes ---- */
+    .md-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .md-card {
+      display: flex;
+      gap: 16px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-radius: var(--rayon-lg);
+      padding: 20px;
+      text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .md-card:hover {
+      border-color: var(--gueules);
+      box-shadow: var(--ombre-carte);
+      transform: translateY(-2px);
+    }
+    .md-card[hidden] { display: none; }
+    .md-card__body { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+    .md-card__head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 5px; }
+    .md-card__label { font: 600 1.03125rem/1.25 var(--sans); color: var(--encre); }
+    .md-card__desc { font: 400 0.84375rem/1.45 var(--sans); color: var(--texte-3); margin-bottom: 10px; }
+    .md-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: auto;
+      font: 600 0.84375rem/1 var(--sans);
+      color: var(--gueules);
+    }
+
+    /* ---- Aucun résultat ---- */
+    .md-empty {
+      margin: 8px 0 0;
+      padding: 22px 24px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-radius: var(--rayon-lg);
+      font: 400 0.9375rem/1.55 var(--sans);
+      color: var(--texte-2);
+    }
+    .md-empty[hidden] { display: none; }
+
+    /* ---- Encadré d'aide France Services ---- */
+    .md-help {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      background: var(--nuit);
+      border-radius: var(--rayon-lg);
+      padding: 24px 28px;
+    }
+    .md-help__txt { flex: 1; min-width: 240px; }
+    .md-help__title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.3125rem;
+      line-height: 1.15;
+      color: var(--clair-2);
+      margin: 0 0 6px;
+    }
+    .md-help__lede { font: 400 0.90625rem/1.5 var(--sans); color: var(--brume-2); margin: 0; }
+
+    /* ---- Barre de recherche dans le bandeau ---- */
+    .md-search { margin-top: 22px; }
+
+    /* ---- Responsive (calé sur le prototype) ---- */
+    @media (max-width: 880px) {
+      .md-grid { grid-template-columns: 1fr; gap: 28px; }
+      .md-themes { flex-direction: row; flex-wrap: wrap; }
+      .md-themes li { flex: 1 1 calc(50% - 6px); }
+      .md-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .md-themes li { flex: 1 1 100%; }
+      .md-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</InnerPage>

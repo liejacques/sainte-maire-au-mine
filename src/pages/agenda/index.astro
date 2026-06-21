@@ -1,0 +1,140 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { evenements, accentByType, legendeAgenda } from "../../data/agenda";
+
+const description =
+  "Tous les rendez-vous de Sainte-Marie-aux-Mines et du Val d'Argent : événements habitants, temps forts touristiques, vie municipale. Dates, lieux et détails de chaque rendez-vous.";
+const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
+---
+<InnerPage
+  title="Agenda du Val d'Argent"
+  description={description}
+  active="decouvrir"
+  eyebrow="Temps forts"
+  breadcrumb={fil}
+  lede="Rendez-vous habitants et grands événements du Val d'Argent : séances publiques, fêtes de quartier, temps forts touristiques et patrimoine minier. Retrouvez ici toutes les dates à venir."
+>
+  <section class="agenda-page" aria-labelledby="agenda-liste-title">
+    <div class="agenda-page__head">
+      <h2 id="agenda-liste-title" class="section-title">Tous les rendez-vous à venir</h2>
+      <ul class="agenda-legend" aria-label="Légende des types d'événements">
+        {legendeAgenda.map((l) => (
+          <li class="agenda-legend__item">
+            <span class="agenda-legend__dot" style={`background:${accentByType[l.type]}`} aria-hidden="true"></span>
+            {l.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <ul class="agenda-list" role="list">
+      {evenements.map((e) => (
+        <li>
+          <a class="agenda-row" href={`/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+            <div class="agenda-row__date">
+              <div class="agenda-row__day">{e.day}</div>
+              <div class="agenda-row__month">{e.month}</div>
+            </div>
+            <div class="agenda-row__body">
+              <div class="agenda-row__meta">
+                <span class="agenda-row__type" style={`background:${accentByType[e.type]}`}>{e.typeLabel}</span>
+                <span class="agenda-row__place">{e.lieu}</span>
+                {e.horaire && <span class="agenda-row__time">{e.horaire}</span>}
+              </div>
+              <h3 class="agenda-row__title">{e.titre}</h3>
+              <p class="agenda-row__excerpt">{e.resume}</p>
+            </div>
+            <svg class="agenda-row__chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gueules)" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <style>
+    .agenda-page__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    /* Légende — pastilles colorées DOUBLÉES de texte (jamais l'info par la couleur seule). */
+    .agenda-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .agenda-legend__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 500 0.84375rem/1 var(--sans);
+      color: var(--texte-2);
+    }
+    .agenda-legend__dot { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+
+    /* Liste */
+    .agenda-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Lignes d'événement — reprise du motif .agenda-row de la page d'accueil. */
+    .agenda-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-left: 4px solid var(--gueules);
+      border-radius: var(--rayon);
+      padding: 18px 22px;
+      text-decoration: none;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .agenda-row:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); transform: translateY(-1px); }
+    .agenda-row__date {
+      flex: 0 0 64px;
+      text-align: center;
+      border-right: 1px solid var(--bord-clair);
+      padding-right: 18px;
+    }
+    .agenda-row__day { font-family: var(--serif); font-weight: 600; font-size: 1.75rem; line-height: 1; color: var(--encre); }
+    .agenda-row__month { font: 600 0.75rem/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--gueules); margin-top: 4px; }
+    .agenda-row__body { flex: 1; min-width: 0; }
+    .agenda-row__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .agenda-row__type {
+      display: inline-flex;
+      align-items: center;
+      font: 600 0.6875rem/1 var(--sans);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 5px 9px;
+      border-radius: 2px;
+    }
+    .agenda-row__place { font: 500 0.8125rem/1 var(--sans); color: var(--texte-muet); }
+    .agenda-row__time { font: 500 0.8125rem/1 var(--sans); color: var(--texte-muet); }
+    .agenda-row__time::before { content: "·"; margin-right: 10px; color: var(--bord-champ); }
+    .agenda-row__title { font-family: var(--serif); font-weight: 600; font-size: 1.1875rem; line-height: 1.2; color: var(--encre); margin: 8px 0 0; }
+    .agenda-row__excerpt { font: 400 0.875rem/1.5 var(--sans); color: var(--texte-2); margin: 6px 0 0; }
+    .agenda-row__chev { flex: none; }
+
+    @media (max-width: 600px) {
+      .agenda-row { gap: 14px; padding: 16px 16px; align-items: flex-start; }
+      .agenda-row__date { flex-basis: 52px; padding-right: 14px; }
+      .agenda-row__day { font-size: 1.5rem; }
+      .agenda-row__chev { display: none; }
+    }
+  </style>
+</InnerPage>

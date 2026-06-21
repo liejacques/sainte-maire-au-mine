@@ -1,0 +1,98 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { evenements, accentByType } from "../../data/agenda";
+
+export function getStaticPaths() {
+  return evenements.map((e) => ({
+    params: { slug: e.slug },
+    props: { e },
+  }));
+}
+
+const { e } = Astro.props;
+const accent = accentByType[e.type];
+const description = e.resume;
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Agenda", href: "/agenda/" },
+  { label: e.titre },
+];
+---
+<InnerPage
+  title={e.titre}
+  description={description}
+  active="decouvrir"
+  bannerTitle={e.titre}
+  eyebrow={e.typeLabel}
+  breadcrumb={fil}
+>
+  <article class="event">
+    <div class="event__main">
+      <div class="prose">
+        {e.contenu.map((p) => <p>{p}</p>)}
+      </div>
+      <a class="link-more link-more--gold event__back" href="/agenda/">← Tout l'agenda</a>
+    </div>
+
+    <aside class="event__aside" aria-label="Informations pratiques">
+      <div class="info-card">
+        <h2>Informations pratiques</h2>
+        <dl>
+          <div>
+            <dt>Date</dt>
+            <dd><time datetime={e.iso}>{e.day} {e.month}</time></dd>
+          </div>
+          {e.horaire && (
+            <div>
+              <dt>Horaire</dt>
+              <dd>{e.horaire}</dd>
+            </div>
+          )}
+          <div>
+            <dt>Lieu</dt>
+            <dd>{e.lieu}</dd>
+          </div>
+          <div>
+            <dt>Type</dt>
+            <dd>
+              <span class="event__type" style={`background:${accent}`}>{e.typeLabel}</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </aside>
+  </article>
+
+  <style>
+    .event {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap: 44px;
+      align-items: start;
+    }
+    .event__back { margin-top: 28px; }
+
+    /* La fiche pratique reste visible au défilement sur grand écran. */
+    .event__aside { position: sticky; top: calc(var(--header-offset) + 12px); }
+
+    /* Définitions de la carte info : alignées en colonnes (libellé / valeur). */
+    .info-card dt { color: var(--texte-muet); font-weight: 600; }
+    .info-card dd { text-align: right; }
+
+    .event__type {
+      display: inline-flex;
+      align-items: center;
+      font: 600 0.6875rem/1 var(--sans);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 5px 9px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .event { grid-template-columns: 1fr; gap: 32px; }
+      .event__aside { position: static; }
+    }
+  </style>
+</InnerPage>

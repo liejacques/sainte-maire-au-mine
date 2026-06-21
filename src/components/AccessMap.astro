@@ -1,0 +1,166 @@
+---
+// Carte d'accès à la mairie — souveraine et conforme RGPD : Leaflet est
+// auto-hébergé (bundle depuis node_modules, aucun CDN), les tuiles viennent de
+// l'IGN/Géoplateforme (service public français), avec repli OpenStreetMap.
+// Aucun cookie tiers, donc aucun bandeau de consentement requis.
+//
+// Amélioration progressive : sans JavaScript, le plan stylisé de repli reste
+// affiché et l'information d'accès demeure disponible via le lien « plein écran »
+// et l'adresse en toutes lettres présente ailleurs sur la page.
+import { mairie } from "../data/commune";
+
+interface Props {
+  /** Hauteur de la carte en px (place réservée → aucun saut de mise en page). */
+  height?: number;
+  /** Classe additionnelle pour le positionnement dans la page. */
+  class?: string;
+}
+const { height = 300, class: extra = "" } = Astro.props;
+
+const { lat, lng } = mairie;
+const adresse = `${mairie.adresse}, ${mairie.cp} ${mairie.ville}`;
+// Lien souverain : plan plein écran + itinéraire, sans cookie tiers.
+const osmUrl = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}`;
+---
+<figure class:list={["access-map", extra]} style={`--access-map-h:${height}px`}>
+  <div
+    class="access-map__canvas"
+    data-access-map
+    data-lat={lat}
+    data-lng={lng}
+    data-label={mairie.nom}
+    data-address={adresse}
+    aria-label={`Carte d'accès — ${mairie.nom}`}
+  >
+    <!-- Repli sans JavaScript (remplacé par la carte si le script s'exécute). -->
+    <div class="map-placeholder access-map__fallback">
+      <span class="map-placeholder__grid"></span>
+      <span class="map-placeholder__river"></span>
+      <span class="map-placeholder__label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>
+        Plan d'accès
+      </span>
+      <span class="map-placeholder__sub">{mairie.nom} · {mairie.adresse}</span>
+    </div>
+  </div>
+  <figcaption class="access-map__caption">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+    <a class="access-map__link" href={osmUrl} target="_blank" rel="noopener noreferrer">
+      Voir le plan et l'itinéraire en plein écran
+      <span class="visually-hidden"> (OpenStreetMap, nouvel onglet)</span>
+    </a>
+  </figcaption>
+</figure>
+
+<style>
+  .access-map { margin: 0; display: flex; flex-direction: column; }
+  .access-map__canvas {
+    position: relative;
+    height: var(--access-map-h, 300px);
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon-lg);
+    overflow: hidden;
+    background: var(--gris-clair);
+  }
+  /* Le repli occupe tout le cadre (et perd ses propres bordure/rayon/min-height). */
+  .access-map__fallback { position: absolute; inset: 0; min-height: 0; border: 0; border-radius: 0; }
+  .access-map__caption {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font: 500 0.875rem/1.4 var(--sans);
+    color: var(--texte-2);
+  }
+  .access-map__caption > svg { flex: none; color: var(--gueules); }
+  .access-map__link { color: var(--gueules); font-weight: 600; text-decoration: none; }
+  .access-map__link:hover { text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<style is:global>
+  /* Réglages globaux nécessaires : Leaflet ajoute ses éléments à l'exécution,
+     hors de portée des styles scopés Astro. */
+  .access-map__canvas.leaflet-container {
+    font: inherit;
+    background: #e8eae6;
+    cursor: grab;
+  }
+  .access-map__canvas .leaflet-popup-content { font: 500 0.875rem/1.45 var(--sans); color: var(--texte); }
+  .access-map__canvas .leaflet-popup-content strong { color: var(--encre); }
+  .access-map__canvas .leaflet-control-attribution { font-size: 0.625rem; }
+  .access-map__pin-icon { background: none; border: 0; }
+</style>
+
+<script>
+  import L from "leaflet";
+  import "leaflet/dist/leaflet.css";
+
+  // Pictogramme du marqueur : SVG aux couleurs de la charte (gueules), pour ne
+  // pas dépendre des images PNG par défaut de Leaflet (cassées par les bundlers).
+  const pinSvg =
+    '<svg width="30" height="40" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">' +
+    '<path d="M12 0C5.4 0 0 5.3 0 11.9 0 20.6 12 32 12 32s12-11.4 12-20.1C24 5.3 18.6 0 12 0z" fill="var(--gueules, #8a2b20)" stroke="#fff" stroke-width="1.5"/>' +
+    '<circle cx="12" cy="11.5" r="4.4" fill="#fff"/></svg>';
+
+  const ENTITIES: Record<string, string> = {
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  };
+  const escapeHtml = (s: string) =>
+    String(s).replace(/[&<>"']/g, (c) => ENTITIES[c]);
+
+  document.querySelectorAll("[data-access-map]").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
+    const latRaw = el.dataset.lat;
+    const lngRaw = el.dataset.lng;
+    if (!latRaw || !lngRaw) return;
+    const lat = parseFloat(latRaw);
+    const lng = parseFloat(lngRaw);
+    if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+    const label = el.dataset.label || "";
+    const address = el.dataset.address || "";
+
+    el.innerHTML = ""; // retire le repli avant d'initialiser la carte
+
+    const map = L.map(el, {
+      center: [lat, lng],
+      zoom: 16,
+      scrollWheelZoom: false, // ne piège pas le défilement de la page
+    });
+
+    const ign = L.tileLayer(
+      "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/png&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}",
+      {
+        minZoom: 6,
+        maxZoom: 19,
+        attribution:
+          '© <a href="https://www.ign.fr/" target="_blank" rel="noopener">IGN-F/Géoplateforme</a>',
+      },
+    );
+
+    // Repli automatique vers OpenStreetMap si les tuiles IGN échouent.
+    let swapped = false;
+    ign.on("tileerror", () => {
+      if (swapped) return;
+      swapped = true;
+      map.removeLayer(ign);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">les contributeurs OpenStreetMap</a>',
+      }).addTo(map);
+    });
+    ign.addTo(map);
+
+    const icon = L.divIcon({
+      className: "access-map__pin-icon",
+      html: pinSvg,
+      iconSize: [30, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -36],
+    });
+
+    L.marker([lat, lng], { icon, title: label, keyboard: true })
+      .addTo(map)
+      .bindPopup(`<strong>${escapeHtml(label)}</strong><br>${escapeHtml(address)}`);
+  });
+</script>

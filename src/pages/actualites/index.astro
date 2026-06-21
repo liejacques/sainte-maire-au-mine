@@ -1,0 +1,225 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { filtresActualites, aLaUne, autresActus } from "../../data/actualites";
+
+const description =
+  "Toutes les actualités de la Ville de Sainte-Marie-aux-Mines : vie locale, culture, travaux, enfance et école. Suivez les nouvelles de la commune du Val d'Argent.";
+const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
+---
+<InnerPage
+  title="Actualités"
+  description={description}
+  active="decouvrir"
+  eyebrow="La ville bouge"
+  breadcrumb={fil}
+>
+  <!-- Puces de filtre -->
+  <div class="actus-filtres" role="group" aria-label="Filtrer les actualités">
+    {filtresActualites.map((f, i) => (
+      <button
+        type="button"
+        class="filtre-chip"
+        data-filtre={f.id}
+        aria-pressed={i === 0 ? "true" : "false"}
+      >
+        {f.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Article « à la une » -->
+  <a
+    class="actus-featured card card-link"
+    href={`/actualites/${aLaUne.slug}/`}
+    data-une
+  >
+    <div class="actus-featured__photo photo-block photo-block--photo">
+      <img class="photo-block__img" src={aLaUne.image.src} alt={aLaUne.image.alt} width={aLaUne.image.w} height={aLaUne.image.h} loading="lazy" />
+      <span class="photo-credit">© {aLaUne.image.auteur} · {aLaUne.image.licence}</span>
+      <span class={`tag tag--${aLaUne.tag} actus-featured__tag`}>{aLaUne.categorie}</span>
+    </div>
+    <div class="actus-featured__body">
+      <time datetime={aLaUne.iso} class="meta-date">{aLaUne.date}</time>
+      <h2 class="actus-featured__title">{aLaUne.titre}</h2>
+      <p class="actus-featured__excerpt">{aLaUne.resume}</p>
+      <span class="link-more">Lire l'article →</span>
+    </div>
+  </a>
+
+  <!-- Grille 3 colonnes -->
+  <div class="actus-grid">
+    {autresActus.map((n) => (
+      <article class="actus-card card" data-filtre={n.filtre}>
+        <a class="actus-card__link card-link" href={`/actualites/${n.slug}/`}>
+          <div class="actus-card__photo photo-block photo-block--photo">
+            <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />
+            <span class="photo-credit">© {n.image.auteur} · {n.image.licence}</span>
+            <span class={`tag tag--${n.tag} actus-card__tag`}>{n.categorie}</span>
+          </div>
+          <div class="actus-card__body">
+            <time datetime={n.iso} class="meta-date">{n.date}</time>
+            <h2 class="actus-card__title">{n.titre}</h2>
+            <p class="actus-card__excerpt">{n.resume}</p>
+            <span class="link-more">Lire l'article →</span>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <p class="actus-empty" hidden role="status">Aucune actualité dans cette catégorie pour le moment.</p>
+</InnerPage>
+
+<script>
+  const filtres = document.querySelectorAll<HTMLButtonElement>(".filtre-chip");
+  const cartes = document.querySelectorAll<HTMLElement>(".actus-card");
+  const une = document.querySelector<HTMLElement>("[data-une]");
+  const vide = document.querySelector<HTMLElement>(".actus-empty");
+
+  function appliquer(actif: string) {
+    let visibles = 0;
+    cartes.forEach((carte) => {
+      const ok = actif === "all" || carte.dataset.filtre === actif;
+      carte.hidden = !ok;
+      if (ok) visibles++;
+    });
+    // L'« à la une » ne s'affiche que pour « Tout ».
+    if (une) une.hidden = actif !== "all";
+    if (vide) vide.hidden = !(visibles === 0 && (!une || une.hidden));
+  }
+
+  filtres.forEach((bouton) => {
+    bouton.addEventListener("click", () => {
+      filtres.forEach((b) => b.setAttribute("aria-pressed", "false"));
+      bouton.setAttribute("aria-pressed", "true");
+      appliquer(bouton.dataset.filtre ?? "all");
+    });
+  });
+</script>
+
+<style>
+  /* ---- Puces de filtre ---- */
+  .actus-filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .filtre-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    background: var(--parchemin-2);
+    border: 1px solid var(--bord-champ);
+    border-radius: 22px;
+    color: var(--texte);
+    font: 600 0.84375rem/1 var(--sans);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .filtre-chip:hover {
+    border-color: var(--gueules);
+    color: var(--gueules);
+  }
+  .filtre-chip[aria-pressed="true"] {
+    background: var(--gueules);
+    border-color: var(--gueules);
+    color: #fff;
+  }
+
+  /* ---- Article « à la une » ---- */
+  .actus-featured {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  .actus-featured__photo {
+    width: 52%;
+    flex: none;
+    min-height: 300px;
+    border-radius: 0;
+    padding: 18px;
+  }
+  .actus-featured__tag { position: absolute; top: 16px; left: 16px; }
+  .actus-featured__body {
+    flex: 1;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .actus-featured__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.875rem;
+    line-height: 1.12;
+    color: var(--encre);
+    margin: 12px 0;
+  }
+  .actus-featured__excerpt {
+    font: 400 1rem/1.6 var(--sans);
+    color: var(--texte-2);
+    margin: 0 0 14px;
+    max-width: 460px;
+  }
+
+  /* ---- Grille 3 colonnes ---- */
+  .actus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .actus-card { overflow: hidden; }
+  .actus-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .actus-card__photo {
+    height: 150px;
+    min-height: 0;
+    border-radius: 0;
+    padding: 12px;
+  }
+  .actus-card__tag { position: absolute; top: 12px; left: 12px; }
+  .actus-card__body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .actus-card__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.1875rem;
+    line-height: 1.2;
+    color: var(--encre);
+    margin: 8px 0;
+  }
+  .actus-card__excerpt {
+    font: 400 0.875rem/1.55 var(--sans);
+    color: var(--texte-3);
+    margin: 0 0 12px;
+    flex: 1;
+  }
+
+  .actus-empty {
+    margin-top: 24px;
+    font: 400 1rem/1.5 var(--sans);
+    color: var(--texte-muet);
+  }
+  .actus-empty[hidden] { display: none; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 880px) {
+    .actus-featured { flex-direction: column; }
+    .actus-featured__photo { width: 100%; min-height: 240px; }
+    .actus-featured__body { padding: 28px; }
+    .actus-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .actus-grid { grid-template-columns: 1fr; }
+  }
+</style>

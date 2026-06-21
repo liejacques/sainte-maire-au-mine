@@ -1,0 +1,82 @@
+---
+// Gabarit de base partagé : <head>, polices auto-hébergées, en-tête, pied de
+// page. Aucune requête vers Google Fonts : les .woff2 (Spectral & Source Sans 3)
+// sont servis depuis le site (conformité RGPD/CNIL pour une collectivité).
+import "@fontsource/spectral/300.css";
+import "@fontsource/spectral/400.css";
+import "@fontsource/spectral/500.css";
+import "@fontsource/spectral/600.css";
+import "@fontsource/spectral/700.css";
+import "@fontsource/spectral/400-italic.css";
+import "@fontsource/spectral/500-italic.css";
+import "@fontsource/source-sans-3/400.css";
+import "@fontsource/source-sans-3/500.css";
+import "@fontsource/source-sans-3/600.css";
+import "@fontsource/source-sans-3/700.css";
+
+import "../styles/reset.css";
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteScripts from "../components/SiteScripts.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Identifiant de la rubrique active (surligne l'onglet de navigation). */
+  active?: string;
+  /** URL (absolue ou relative au site) de l'image Open Graph. */
+  ogImage?: string;
+}
+
+const { title, description, active, ogImage } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+// Image Open Graph : visuel par défaut de la commune (1200×630) si la page n'en
+// fournit pas — sans quoi les partages Facebook/WhatsApp/LinkedIn n'ont aucun
+// visuel. Toujours surchargeable par page via la prop `ogImage`.
+const usingDefaultOg = !ogImage;
+const ogImageUrl = new URL(ogImage ?? "/og-default.jpg", Astro.site).href;
+const fullTitle = title.includes("Sainte-Marie")
+  ? title
+  : `${title} · Ville de Sainte-Marie-aux-Mines`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/blason.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#16140d" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Ville de Sainte-Marie-aux-Mines" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImageUrl} />
+    {usingDefaultOg && (
+      <>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Panorama de Sainte-Marie-aux-Mines et blason de la commune" />
+      </>
+    )}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+    <SiteHeader active={active} />
+    <slot />
+    <SiteFooter />
+    <SiteScripts />
+  </body>
+</html>

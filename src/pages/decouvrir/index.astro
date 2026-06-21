@@ -1,0 +1,456 @@
+---
+import Base from "../../layouts/Base.astro";
+import MinerTools from "../../components/MinerTools.astro";
+import { associations } from "../../data/vie-locale";
+import { photos } from "../../data/photos";
+
+const description =
+  "Découvrir Sainte-Marie-aux-Mines et le Val d'Argent : mille ans d'exploitation de l'argent, la dualité lorraine et alsacienne, la mine-musée Tellure, Mineral & Gem, l'architecture Renaissance et le massif vosgien.";
+
+const stats = [
+  { value: "1 100", label: "mines recensées", tone: "argent" },
+  { value: "300 km", label: "de galeries", tone: "argent" },
+  { value: "592 kg", label: "bloc d'argent, 1581", tone: "or" },
+  { value: "42 000", label: "visiteurs Mineral & Gem", tone: "or" },
+];
+
+const tellure = [
+  "Descente en galerie réelle, casque et lampe fournis",
+  "Parcours scénographié sur 800 ans d'exploitation",
+  "Espace minéraux & boutique de la bourse",
+];
+
+const cards = [
+  {
+    tag: "Événement",
+    tagClass: "vert",
+    img: photos.argentTetraedrite,
+    title: "Mineral & Gem",
+    desc: "Chaque été, la 2ᵉ bourse minéralogique mondiale transforme la ville : 1 000 exposants, 42 000 visiteurs, et l'argent natif à l'honneur.",
+  },
+  {
+    tag: "Patrimoine",
+    tagClass: "gueules",
+    img: photos.pointerolle,
+    title: "Marteau & pointerolle",
+    desc: "L'outil du mineur — marteau et pointerolle croisés — figure au blason de la ville. À la pointe d'acier, on entaillait la roche pour suivre les filons d'argent.",
+  },
+  {
+    tag: "Patrimoine",
+    tagClass: "gueules",
+    img: photos.maisonReber40,
+    title: "Architecture Renaissance",
+    desc: "Façades à colombages, oriels sculptés et demeures de maîtres-mineurs racontent l'âge d'or de l'argent.",
+  },
+  {
+    tag: "Nature",
+    tagClass: "vert",
+    img: photos.foretVosgienne,
+    title: "Massif vosgien",
+    desc: "Vallée glaciaire boisée, sentiers de crête et sources : le Val d'Argent se parcourt aussi en pleine nature.",
+  },
+];
+---
+<Base title="Découvrir & sortir — Sainte-Marie-aux-Mines" description={description} active="decouvrir">
+  <main id="contenu">
+
+    <!-- ============ HERO IMMERSIF ============ -->
+    <section class="dv-hero strata is-dark" aria-labelledby="dv-hero-title">
+      <div class="partition" style="left:50%"></div>
+      <div class="wrap dv-hero__inner">
+        <nav class="dv-crumb" aria-label="Fil d'Ariane">
+          <ol>
+            <li><a href="/">Accueil</a></li>
+            <li aria-hidden="true">›</li>
+            <li aria-current="page">Découvrir &amp; sortir</li>
+          </ol>
+        </nav>
+        <span class="eyebrow eyebrow--gold eyebrow--mark dv-hero__eyebrow">
+          <MinerTools size={22} />
+          Pays d'art et d'histoire du Val d'Argent
+        </span>
+        <h1 id="dv-hero-title" class="dv-hero__title metal-text">Mille ans sous la montagne</h1>
+        <p class="dv-hero__lede">De l'argent natif des seigneurs de Ribeaupierre à la 2ᵉ bourse minéralogique du monde : Sainte-Marie-aux-Mines raconte une histoire que peu de villes peuvent prétendre vivre encore.</p>
+      </div>
+    </section>
+
+    <!-- ============ BANDE DE STATISTIQUES ============ -->
+    <div class="dv-stats is-dark">
+      <div class="wrap dv-stats__inner">
+        {stats.map((st) => (
+          <div class="dv-stat">
+            <span class={`dv-stat__n dv-stat__n--${st.tone}`}>{st.value}</span>
+            <span class="dv-stat__l">{st.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ============ LA DUALITÉ FONDATRICE ============ -->
+    <section id="dualite" class="dv-duo-section strata is-dark" aria-labelledby="duo-title">
+      <div class="wrap dv-duo-wrap">
+        <div class="dv-duo-head">
+          <span class="eyebrow eyebrow--gold">La dualité fondatrice</span>
+          <h2 id="duo-title" class="dv-h2 dv-h2--light">Une ville née de deux rives</h2>
+        </div>
+        <div class="dv-duo">
+          <div class="dv-rive dv-rive--lorraine">
+            <div class="photo-block photo-block--photo dv-rive__photo">
+              <img class="photo-block__img" src={photos.egliseSaintLouis.src} alt={photos.egliseSaintLouis.alt} width={photos.egliseSaintLouis.w} height={photos.egliseSaintLouis.h} loading="lazy" />
+              <span class="photo-credit">© {photos.egliseSaintLouis.auteur} · {photos.egliseSaintLouis.licence}</span>
+              <span class="photo-block__title">Église Saint-Louis, rive lorraine</span>
+            </div>
+            <h3 class="dv-rive__title dv-rive__title--or">Côté lorrain</h3>
+            <p class="dv-rive__text">Catholique et francophone, placé sous l'autorité des seigneurs de Ribeaupierre — dont les trois écussons de gueules figurent au blason. Le versant des mines historiques et de l'argent des origines.</p>
+          </div>
+
+          <div class="dv-line" aria-hidden="true">
+            <span class="dv-line__medal">1790</span>
+          </div>
+
+          <div class="dv-rive dv-rive--alsace">
+            <div class="photo-block photo-block--photo dv-rive__photo">
+              <img class="photo-block__img" src={photos.maisonReber32.src} alt={photos.maisonReber32.alt} width={photos.maisonReber32.w} height={photos.maisonReber32.h} loading="lazy" />
+              <span class="photo-credit">© {photos.maisonReber32.auteur} · {photos.maisonReber32.licence}</span>
+              <span class="photo-block__title">Maisons à oriels, rive alsacienne</span>
+            </div>
+            <h3 class="dv-rive__title dv-rive__title--argent">Côté alsacien</h3>
+            <p class="dv-rive__text">Luthérien et germanique, terre de refuge de la Réforme et berceau des Amish, fondés ici par Jacob Amann en 1693. Séparé du versant lorrain par la Lièpvrette pendant quatre siècles.</p>
+          </div>
+        </div>
+        <p class="dv-quote">« Deux paroisses, deux langues, deux cultures — une seule vallée d'argent, réunie à la Révolution. »</p>
+      </div>
+    </section>
+
+    <!-- ============ FEATURE TELLURE ============ -->
+    <section id="tourisme" class="dv-feat-section bg-parchemin" aria-labelledby="tellure-title">
+      <div class="wrap dv-feat">
+        <div class="photo-block photo-block--photo dv-feat__photo">
+          <img class="photo-block__img" src={photos.galerieSaintJean2.src} alt={photos.galerieSaintJean2.alt} width={photos.galerieSaintJean2.w} height={photos.galerieSaintJean2.h} loading="lazy" />
+          <span class="photo-credit">© {photos.galerieSaintJean2.auteur} · {photos.galerieSaintJean2.licence}</span>
+          <span class="photo-block__title">Galerie de la mine Saint-Jean, Val d'Argent</span>
+        </div>
+        <div class="dv-feat__body">
+          <span class="eyebrow">Site phare</span>
+          <h2 id="tellure-title" class="dv-h2">Mine-musée Tellure</h2>
+          <p class="dv-feat__text">Descendez à 100 mètres sous la montagne et remontez le temps jusqu'au XVIᵉ siècle. Parcours scénographié, descente en mine réelle, et un espace minéraux qui rend hommage à l'argent natif du Val.</p>
+          <ul class="dv-check">
+            {tellure.map((f) => (
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gueules)" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a class="btn btn--primary" href="/agenda/">Préparer ma visite →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RANGÉE DE CARTES ============ -->
+    <section id="patrimoine" class="dv-cards-section bg-parchemin" aria-labelledby="more-title">
+      <div class="wrap">
+        <div class="dv-cards-head">
+          <div>
+            <span class="eyebrow">À voir, à vivre</span>
+            <h2 id="more-title" class="dv-h2">Le Val d'Argent en grand</h2>
+          </div>
+          <a class="link-more link-more--gold" href="/agenda/">Voir l'agenda →</a>
+        </div>
+        <div class="dv-cards">
+          {cards.map((c) => (
+            <article class="dv-card card">
+              <div class="photo-block photo-block--photo dv-card__photo">
+                <img class="photo-block__img" src={c.img.src} alt={c.img.alt} width={c.img.w} height={c.img.h} loading="lazy" />
+                <span class="photo-credit">© {c.img.auteur} · {c.img.licence}</span>
+                <span class={`dv-card__tag dv-card__tag--${c.tagClass}`}>{c.tag}</span>
+              </div>
+              <div class="dv-card__body">
+                <h3 class="dv-card__title">{c.title}</h3>
+                <p class="dv-card__desc">{c.desc}</p>
+                <a class="link-more" href="/agenda/">En savoir plus →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASSOCIATIONS DU VAL D'ARGENT ============ -->
+    <section id="associations" class="dv-asso-section bg-parchemin-2" aria-labelledby="asso-title">
+      <div class="wrap">
+        <div class="dv-asso-head">
+          <span class="eyebrow">Vie locale</span>
+          <h2 id="asso-title" class="dv-h2">Associations du Val d'Argent</h2>
+          <p class="dv-asso__lede">{associations.intro}</p>
+        </div>
+        <div class="dv-asso-grid">
+          {associations.familles.map((f) => (
+            <div class="dv-asso-card">
+              <h3 class="dv-asso-card__title">{f.famille}</h3>
+              <ul class="dv-asso-card__list">
+                {f.exemples.map((ex) => (
+                  <li>{ex}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Base>
+
+<style>
+  /* ---- HERO ---- */
+  .dv-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--sable-3), var(--abime));
+    padding-block: 56px 60px;
+  }
+  .dv-hero__inner {
+    position: relative;
+    max-width: 1000px;
+    text-align: center;
+  }
+  .dv-crumb { margin-bottom: 20px; }
+  .dv-crumb ol {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font: 500 0.8125rem/1 var(--sans);
+    color: var(--brume-muet);
+  }
+  .dv-crumb a { color: var(--or); text-decoration: none; }
+  .dv-crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .dv-crumb [aria-current="page"] { color: var(--brume); }
+  .dv-hero__eyebrow { margin-bottom: 16px; }
+  .dv-hero__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.125rem, 6vw, 3.125rem);
+    line-height: 1.05;
+    margin: 0 0 16px;
+  }
+  .dv-hero__lede {
+    font: 400 1.0625rem/1.6 var(--sans);
+    color: var(--brume);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ---- BANDE DE STATISTIQUES ---- */
+  .dv-stats {
+    background: var(--sable-2);
+    border-top: 1px solid var(--bord-nuit-2);
+    border-bottom: 1px solid var(--bord-nuit-2);
+  }
+  .dv-stats__inner {
+    padding-block: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: space-between;
+  }
+  .dv-stat { display: flex; flex-direction: column; }
+  .dv-stat__n { font-family: var(--serif); font-weight: 600; font-size: 2rem; line-height: 1; }
+  .dv-stat__n--argent { color: var(--argent); }
+  .dv-stat__n--or { color: var(--or); }
+  .dv-stat__l { font: 500 0.8125rem/1.3 var(--sans); color: var(--brume-muet); margin-top: 6px; }
+
+  /* ---- TITRES DE SECTION ---- */
+  .dv-h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 4.4vw, 2.125rem);
+    line-height: 1.1;
+    color: var(--encre);
+    margin: 12px 0 0;
+  }
+  .dv-h2--light { color: var(--clair-2); }
+
+  /* ---- DUALITÉ ---- */
+  .dv-duo-section {
+    position: relative;
+    overflow: hidden;
+    background: var(--nuit);
+    padding-block: 60px;
+  }
+  .dv-duo-wrap { position: relative; max-width: 1100px; }
+  .dv-duo-head { text-align: center; margin-bottom: 36px; }
+  .dv-duo { display: flex; align-items: stretch; gap: 0; }
+  .dv-rive { flex: 1; }
+  .dv-rive--lorraine { padding: 6px 38px 6px 6px; }
+  .dv-rive--alsace { padding: 6px 6px 6px 38px; }
+  .dv-rive__photo {
+    height: 140px;
+    min-height: 0;
+    padding: 14px;
+    margin-bottom: 18px;
+    border-radius: 3px;
+  }
+  .dv-rive__photo--lorraine { background: linear-gradient(160deg, #2c2519, #15110a); }
+  .dv-rive__photo--alsace { background: linear-gradient(200deg, #1f2620, #0f130d); }
+  .dv-rive__photo--alsace .photo-block__kicker { color: var(--argent); }
+  .dv-rive__photo--lorraine .photo-block__kicker { color: var(--or); }
+  .dv-rive__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.4375rem;
+    margin: 0 0 8px;
+  }
+  .dv-rive__title--or { color: var(--or-clair); }
+  .dv-rive__title--argent { color: var(--argent-2); }
+  .dv-rive__text { font: 400 0.9375rem/1.65 var(--sans); color: var(--brume-2); margin: 0; }
+  .dv-line {
+    width: 2px;
+    background: linear-gradient(180deg, transparent, rgba(199, 204, 209, 0.55), transparent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+  .dv-line__medal {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px solid rgba(199, 204, 209, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sable-3);
+    box-shadow: 0 0 0 10px var(--nuit);
+    font-family: var(--serif);
+    font-size: 0.9375rem;
+    color: var(--argent);
+  }
+  .dv-quote {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--brume-muet);
+    margin: 34px auto 0;
+    max-width: 620px;
+  }
+
+  /* ---- FEATURE TELLURE ---- */
+  .dv-feat-section { padding: 0; }
+  .dv-feat { display: flex; align-items: stretch; padding-inline: 0; }
+  .dv-feat__photo {
+    width: 46%;
+    flex: none;
+    min-height: 400px;
+    padding: 22px;
+    border-radius: 0;
+    background: linear-gradient(155deg, #2b2920, #0d0c08);
+  }
+  .dv-feat__body { flex: 1; padding: 50px 48px; }
+  .dv-feat__text { font: 400 1rem/1.65 var(--sans); color: var(--texte); margin: 12px 0 18px; max-width: 480px; }
+  .dv-check { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .dv-check li { display: flex; align-items: center; gap: 10px; font: 500 0.9375rem/1.4 var(--sans); color: var(--texte); }
+  .dv-check svg { flex: none; }
+
+  /* ---- RANGÉE DE CARTES ---- */
+  .dv-cards-section { position: relative; overflow: hidden; padding-block: 58px; }
+  .dv-cards-section .wrap { position: relative; }
+  .dv-cards-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .dv-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+  .dv-card {
+    border-radius: 5px;
+    overflow: hidden;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+  .dv-card:hover { border-color: var(--gueules); box-shadow: var(--ombre-carte); transform: translateY(-2px); }
+  .dv-card__photo {
+    height: 170px;
+    min-height: 0;
+    padding: 14px;
+    border-radius: 0;
+  }
+  .dv-card__tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font: 600 0.65625rem/1 var(--sans);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 5px 9px;
+    border-radius: 2px;
+  }
+  .dv-card__tag--vert { background: var(--vert); }
+  .dv-card__tag--gueules { background: var(--gueules); }
+  .dv-card__body { padding: 20px; }
+  .dv-card__title { font-family: var(--serif); font-weight: 600; font-size: 1.3125rem; color: var(--encre); margin: 0 0 8px; }
+  .dv-card__desc { font: 400 0.875rem/1.55 var(--sans); color: var(--texte-muet); margin: 0 0 14px; }
+
+  /* ---- ASSOCIATIONS ---- */
+  .dv-asso-section { padding-block: 56px; }
+  .dv-asso-head { max-width: 720px; margin-bottom: 28px; }
+  .dv-asso__lede { font: 400 1rem/1.6 var(--sans); color: var(--texte-2); margin: 14px 0 0; }
+  .dv-asso-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .dv-asso-card {
+    background: var(--parchemin);
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon);
+    padding: 22px 24px;
+  }
+  .dv-asso-card__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.1875rem;
+    color: var(--encre);
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bord-fin);
+  }
+  .dv-asso-card__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .dv-asso-card__list li {
+    position: relative;
+    padding-left: 18px;
+    font: 400 0.9375rem/1.45 var(--sans);
+    color: var(--texte);
+  }
+  .dv-asso-card__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: var(--gueules);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1080px) {
+    .dv-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 880px) {
+    .dv-hero .partition { display: none; }
+    .dv-duo { flex-direction: column; }
+    .dv-rive--lorraine { padding: 6px 0 0; }
+    .dv-rive--alsace { padding: 24px 0 0; }
+    .dv-line { display: none; }
+    .dv-feat { flex-direction: column; }
+    .dv-feat__photo { width: 100%; min-height: 240px; }
+    .dv-feat__body { padding: 40px 28px; }
+    .dv-cards { grid-template-columns: 1fr; }
+    .dv-asso-grid { grid-template-columns: 1fr; }
+  }
+</style>

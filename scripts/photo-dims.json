@@ -1,0 +1,42 @@
+{
+  "galerie-saint-jean": {
+    "w": 1500,
+    "h": 2000,
+    "kb": 219
+  },
+  "galerie-saint-jean-2": {
+    "w": 1500,
+    "h": 2000,
+    "kb": 197
+  },
+  "argent-tetraedrite": {
+    "w": 1500,
+    "h": 1302,
+    "kb": 117
+  },
+  "pointerolle": {
+    "w": 1500,
+    "h": 1125,
+    "kb": 129
+  },
+  "vue-ville": {
+    "w": 1500,
+    "h": 1125,
+    "kb": 227
+  },
+  "echery-vallee": {
+    "w": 1500,
+    "h": 1125,
+    "kb": 250
+  },
+  "maison-reber-40": {
+    "w": 1500,
+    "h": 1125,
+    "kb": 137
+  },
+  "maison-colombage": {
+    "w": 1200,
+    "h": 1600,
+    "kb": 251
+  }
+}

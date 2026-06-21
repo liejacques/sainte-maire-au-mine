@@ -1,0 +1,154 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { mainNav, footerNav, legalNav } from "../../data/nav";
+
+const fil = [{ label: "Accueil", href: "/" }, { label: "Plan du site" }];
+
+// Rubriques transverses non rattachées au menu principal.
+const transverses = [
+  { label: "Actualités", href: "/actualites/" },
+  { label: "Agenda", href: "/agenda/" },
+  { label: "Contact", href: "/contact/" },
+  { label: "Espace de gestion", href: "/admin/" },
+];
+
+const description =
+  "Plan du site de la Ville de Sainte-Marie-aux-Mines : toutes les rubriques, pages et services en ligne accessibles depuis une seule page.";
+---
+<InnerPage
+  title="Plan du site"
+  description={description}
+  eyebrow="Naviguer"
+  breadcrumb={fil}
+  lede="L'ensemble des rubriques et des pages du site, regroupées pour un accès rapide."
+>
+  <section class="plan" aria-labelledby="plan-rubriques">
+    <h2 id="plan-rubriques" class="plan__heading">Rubriques principales</h2>
+    <div class="plan__grid">
+      {mainNav.map((rubrique) => (
+        <nav class="plan-card card" aria-labelledby={`plan-${rubrique.id}`}>
+          <h3 id={`plan-${rubrique.id}`} class="plan-card__title">
+            <a href={rubrique.href}>{rubrique.label}</a>
+          </h3>
+          <ul class="plan-card__list">
+            {rubrique.children.map((lien) => (
+              <li><a href={lien.href}>{lien.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </section>
+
+  <hr class="vein plan__vein" />
+
+  <section class="plan" aria-labelledby="plan-services">
+    <h2 id="plan-services" class="plan__heading">Services &amp; accès direct</h2>
+    <div class="plan__grid plan__grid--cols">
+      <nav class="plan-card card" aria-labelledby="plan-transverses">
+        <h3 id="plan-transverses" class="plan-card__title">Information &amp; contact</h3>
+        <ul class="plan-card__list">
+          {transverses.map((lien) => (
+            <li><a href={lien.href}>{lien.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      {footerNav.map((colonne) => (
+        <nav class="plan-card card" aria-label={colonne.titre}>
+          <h3 class="plan-card__title">{colonne.titre}</h3>
+          <ul class="plan-card__list">
+            {colonne.liens.map((lien) => (
+              <li><a href={lien.href}>{lien.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </section>
+
+  <hr class="vein plan__vein" />
+
+  <section class="plan" aria-labelledby="plan-legal">
+    <h2 id="plan-legal" class="plan__heading">Informations légales</h2>
+    <nav class="plan-card card plan-card--wide" aria-label="Informations légales">
+      <ul class="plan-card__list plan-card__list--inline">
+        {legalNav.map((lien) => (
+          <li><a href={lien.href}>{lien.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+
+  <style>
+    .plan + .plan { margin-top: 8px; }
+    .plan__heading {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.375rem, 3.4vw, 1.75rem);
+      line-height: 1.1;
+      color: var(--encre);
+      margin: 0 0 22px;
+    }
+    .plan__vein { margin: 44px 0; }
+
+    .plan__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .plan__grid--cols { grid-template-columns: repeat(3, 1fr); }
+
+    .plan-card { padding: 22px 24px 24px; }
+    .plan-card--wide { grid-column: 1 / -1; }
+    .plan-card__title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 1.2;
+      color: var(--encre);
+      margin: 0 0 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--bord-fin);
+    }
+    .plan-card__title a { color: var(--gueules); text-decoration: none; }
+    .plan-card__title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .plan-card__list { list-style: none; margin: 0; padding: 0; }
+    .plan-card__list li + li { margin-top: 2px; }
+    .plan-card__list a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 40px;
+      color: var(--texte);
+      font: 500 0.90625rem/1.35 var(--sans);
+      text-decoration: none;
+    }
+    .plan-card__list a::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      flex: none;
+      background: var(--or);
+      border-radius: 50%;
+    }
+    .plan-card__list a:hover { color: var(--gueules); text-decoration: underline; text-underline-offset: 3px; }
+
+    .plan-card__list--inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 28px;
+    }
+    .plan-card__list--inline li + li { margin-top: 0; }
+
+    @media (max-width: 880px) {
+      .plan__grid,
+      .plan__grid--cols { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .plan__grid,
+      .plan__grid--cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</InnerPage>

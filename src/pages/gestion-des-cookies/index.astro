@@ -1,0 +1,74 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+
+const fil = [{ label: "Accueil", href: "/" }, { label: "Gestion des cookies" }];
+const description =
+  "Gestion des cookies du site de la Ville de Sainte-Marie-aux-Mines : aucun cookie de mesure d'audience ni traceur tiers ; seul un stockage local mémorise vos préférences d'accessibilité.";
+---
+<InnerPage
+  title="Gestion des cookies"
+  description={description}
+  eyebrow="Traceurs et stockage local"
+  breadcrumb={fil}
+  lede="Ce site est conçu pour respecter votre vie privée : il n'utilise aucun cookie de mesure d'audience ni traceur publicitaire."
+>
+  <article class="prose">
+    <h2>Aucun cookie de suivi</h2>
+    <p>
+      Le site de la Ville de Sainte-Marie-aux-Mines <strong>n'utilise aucun cookie
+      de mesure d'audience</strong> (analytics), <strong>aucun traceur publicitaire</strong>
+      et <strong>aucun cookie tiers</strong>. Aucun consentement préalable n'est donc
+      requis et aucune bannière cookies n'est nécessaire&nbsp;: il n'y a tout
+      simplement rien à accepter ou à refuser.
+    </p>
+    <p>
+      Votre navigation n'est pas pistée. Le site ne dépose pas de cookie permettant
+      de vous identifier ou de suivre votre parcours d'un site à l'autre.
+    </p>
+
+    <h2>Stockage local pour vos préférences d'accessibilité</h2>
+    <p>
+      Pour vous offrir une expérience plus confortable, le site enregistre vos
+      préférences d'affichage directement dans votre navigateur, au moyen du
+      <strong>stockage local</strong> (<em>localStorage</em>). Il ne s'agit pas de
+      cookies&nbsp;: ces informations restent sur votre appareil et ne sont jamais
+      transmises à la mairie ni à un tiers.
+    </p>
+    <p>Les préférences mémorisées sont&nbsp;:</p>
+    <ul>
+      <li>la <strong>taille du texte</strong> que vous avez choisie&nbsp;;</li>
+      <li>l'activation du <strong>mode de contraste renforcé</strong>.</li>
+    </ul>
+    <p>
+      Ces informations servent uniquement à réappliquer vos choix lors de vos
+      prochaines visites. Elles ne contiennent aucune donnée personnelle et ne
+      permettent pas de vous identifier.
+    </p>
+
+    <h2>Effacer ces préférences</h2>
+    <p>
+      Vous pouvez à tout moment supprimer ces données enregistrées localement&nbsp;:
+    </p>
+    <ul>
+      <li>
+        en réinitialisant la taille du texte et le contraste depuis le sélecteur
+        d'accessibilité présent en haut de chaque page&nbsp;;
+      </li>
+      <li>
+        ou en effaçant les données de navigation de votre navigateur (rubrique
+        « données de sites » ou « stockage local »).
+      </li>
+    </ul>
+    <p>
+      La suppression du stockage local n'altère en rien le fonctionnement du site&nbsp;;
+      seules vos préférences d'affichage reviendront à leurs valeurs par défaut.
+    </p>
+
+    <h2>Pour aller plus loin</h2>
+    <p>
+      Le traitement de vos données personnelles est détaillé dans notre
+      <a href="/confidentialite/">politique de confidentialité</a>. Pour toute
+      question, vous pouvez <a href="/contact/">contacter la mairie</a>.
+    </p>
+  </article>
+</InnerPage>

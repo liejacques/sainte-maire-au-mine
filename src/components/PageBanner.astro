@@ -1,0 +1,32 @@
+---
+// Bandeau sombre des pages internes : fil d'Ariane + surtitre + titre H1.
+// Texture de strate rocheuse en fond. Le <slot> permet d'ajouter une barre de
+// recherche, une pastille « en ligne », etc.
+import Breadcrumb from "./Breadcrumb.astro";
+import MinerTools from "./MinerTools.astro";
+
+interface Crumb { label: string; href?: string; }
+interface Props {
+  title: string;
+  breadcrumb: Crumb[];
+  eyebrow?: string;
+  /** Affiche le motif marteau + pointerolle devant le surtitre. */
+  mark?: boolean;
+  lede?: string;
+}
+const { title, breadcrumb, eyebrow, mark, lede } = Astro.props;
+---
+<section class="page-banner">
+  <div class="page-banner__inner">
+    <Breadcrumb items={breadcrumb} variant="light" />
+    {eyebrow && (
+      <span class={`eyebrow${mark ? " eyebrow--mark" : ""}`}>
+        {mark && <MinerTools size={20} />}
+        {eyebrow}
+      </span>
+    )}
+    <h1 class="page-banner__title">{title}</h1>
+    {lede && <p class="page-banner__lede">{lede}</p>}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,409 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+
+const description =
+  "Écoles et périscolaire, petite enfance, santé, action sociale et CCAS, seniors : tous les services qui accompagnent le quotidien des habitants de Sainte-Marie-aux-Mines.";
+
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Mon quotidien" },
+];
+
+// Sommaire d'ancres (navigation interne de la page).
+const sommaire = [
+  { id: "ecoles", label: "Écoles & périscolaire" },
+  { id: "petite-enfance", label: "Petite enfance" },
+  { id: "sante", label: "Santé" },
+  { id: "social", label: "Action sociale & CCAS" },
+  { id: "seniors", label: "Seniors" },
+];
+
+// Établissements scolaires (données génériques de démonstration — à vérifier
+// avant publication ; aucun nom propre ni effectif réel inventé).
+const ecoles = [
+  {
+    type: "Maternelles",
+    desc: "Accueil des enfants de la première à la dernière section de maternelle, répartis sur plusieurs groupes scolaires de la commune.",
+    icon: '<path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11v5c0 1 2 2 5 2s5-1 5-2v-5"/>',
+  },
+  {
+    type: "Élémentaires",
+    desc: "Écoles élémentaires publiques pour le cycle CP-CM2, avec restauration scolaire et accueil périscolaire associés.",
+    icon: '<path d="M4 19V6a2 2 0 0 1 2-2h12v15M4 19h16M4 19l2-2h12M9 8h6M9 12h4"/>',
+  },
+  {
+    type: "Collège & lycée",
+    desc: "Enseignement secondaire géré par le Département (collège) et la Région (lycée). La commune relaie les démarches utiles aux familles.",
+    icon: '<path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-7h6v7"/>',
+  },
+];
+
+// Périscolaire : temps d'accueil autour de l'école.
+const periscolaire = [
+  { label: "Accueil du matin", desc: "Avant la classe, dès l'ouverture des portes." },
+  { label: "Restauration scolaire", desc: "Repas équilibrés préparés pour les écoles de la commune." },
+  { label: "Garderie du soir", desc: "Accueil après la classe jusqu'en début de soirée." },
+  { label: "Accueil de loisirs", desc: "Mercredis et vacances scolaires, activités encadrées." },
+];
+
+// Petite enfance : modes d'accueil des tout-petits.
+const petiteEnfance = [
+  {
+    label: "Multi-accueil",
+    desc: "Structure collective proposant accueil régulier ou occasionnel pour les enfants jusqu'à leur entrée à l'école.",
+    icon: '<path d="M9 11a3 3 0 1 0 6 0 3 3 0 0 0-6 0z"/><path d="M5 21a7 7 0 0 1 14 0"/>',
+  },
+  {
+    label: "Relais petite enfance",
+    desc: "Information et accompagnement des familles et des assistant(e)s maternel(le)s : recherche de mode de garde, démarches, temps d'éveil.",
+    icon: '<path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/>',
+  },
+  {
+    label: "Assistant(e)s maternel(le)s",
+    desc: "Accueil individuel au domicile d'un(e) professionnel(le) agréé(e). La liste est tenue à jour par les services départementaux.",
+    icon: '<path d="M3 9l2-2 2 2M5 7v6a4 4 0 0 0 8 0M13 5a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM16 8v4a4 4 0 0 1-4 4"/>',
+  },
+];
+
+// Offre de santé du territoire.
+const sante = [
+  {
+    label: "Médecins & cabinets",
+    desc: "Médecins généralistes, infirmiers et professionnels paramédicaux installés sur la commune et le Val d'Argent.",
+    icon: '<path d="M9 3v6H3v6h6v6h6v-6h6V9h-6V3z"/>',
+  },
+  {
+    label: "Pharmacies",
+    desc: "Officines de la commune. Les gardes de nuit et de week-end sont consultables auprès de votre pharmacie habituelle.",
+    icon: '<path d="M9 3v6H3v6h6v6h6v-6h6V9h-6V3z"/>',
+  },
+  {
+    label: "Centre hospitalier",
+    desc: "Établissement de proximité pour les soins, consultations et le suivi médical du bassin de vie.",
+    icon: '<path d="M3 21h18M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M10 7h4M12 5v4M9 12h6M9 16h6"/>',
+  },
+];
+
+// Aides et accompagnement social (CCAS).
+const social = [
+  {
+    label: "Accompagnement social",
+    desc: "Écoute, orientation et aide aux démarches pour les personnes en difficulté : logement, budget, accès aux droits.",
+    icon: '<path d="M16 11a4 4 0 1 0-8 0M4 21a8 8 0 0 1 16 0M12 3v0"/>',
+  },
+  {
+    label: "Aides facultatives",
+    desc: "Le CCAS peut instruire des aides ponctuelles, sous conditions, pour faire face à une situation imprévue.",
+    icon: '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  },
+  {
+    label: "Domiciliation",
+    desc: "Élection de domicile pour les personnes sans adresse stable, afin de recevoir leur courrier et faire valoir leurs droits.",
+    icon: '<path d="M3 11l9-7 9 7M5 9v11h14V9M9 20v-6h6v6"/>',
+  },
+];
+
+// Services dédiés aux seniors.
+const seniors = [
+  {
+    label: "Maintien à domicile",
+    desc: "Information sur le portage de repas, l'aide à domicile et l'adaptation du logement pour bien vieillir chez soi.",
+    icon: '<path d="M3 11l9-7 9 7M5 9v11h14V9M12 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>',
+  },
+  {
+    label: "Lien social & animations",
+    desc: "Sorties, rencontres et ateliers proposés tout au long de l'année pour rompre l'isolement.",
+    icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM19 8v6M16 11h6"/>',
+  },
+  {
+    label: "Registre canicule & grand froid",
+    desc: "Inscription des personnes âgées ou fragiles pour bénéficier d'un suivi attentif lors des épisodes climatiques.",
+    icon: '<path d="M12 2v20M4 6l16 12M20 6 4 18M2 12h20"/>',
+  },
+];
+---
+<InnerPage
+  title="Mon quotidien — Sainte-Marie-aux-Mines"
+  bannerTitle="Mon quotidien"
+  description={description}
+  active="quotidien"
+  eyebrow="Au quotidien"
+  breadcrumb={fil}
+  lede="Écoles, petite enfance, santé, action sociale et seniors : les services de la commune accompagnent chaque étape de la vie des habitants du Val d'Argent."
+>
+  <div class="quotidien">
+
+    <!-- Sommaire d'ancres -->
+    <nav class="toc" aria-label="Sommaire de la page">
+      <span class="toc__label">Sur cette page</span>
+      <ul class="toc__list">
+        {sommaire.map((s) => (
+          <li><a href={`#${s.id}`}>{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- ============ ÉCOLES & PÉRISCOLAIRE ============ -->
+    <section class="block" id="ecoles" aria-labelledby="ecoles-title">
+      <div class="block__head">
+        <span class="eyebrow">Enfance & école</span>
+        <h2 id="ecoles-title" class="section-title">Écoles &amp; périscolaire</h2>
+        <p class="lead">La commune gère les écoles publiques maternelles et élémentaires, ainsi que les temps d'accueil qui entourent la journée de classe.</p>
+      </div>
+
+      <div class="cards cards--3">
+        {ecoles.map((e) => (
+          <article class="card tile">
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={e.icon} /></span>
+            <h3 class="tile__title">{e.type}</h3>
+            <p class="tile__desc">{e.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="split">
+        <div class="split__main">
+          <h3 class="sub-title">Le périscolaire au fil de la journée</h3>
+          <ul class="featlist">
+            {periscolaire.map((p) => (
+              <li class="featlist__item">
+                <span class="featlist__check" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <span><strong>{p.label}.</strong> {p.desc}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <aside class="note-card note-card--gueules split__aside">
+          <h3>Inscription scolaire</h3>
+          <p class="prose">L'inscription à l'école maternelle ou élémentaire, ainsi qu'à la restauration et au périscolaire, se fait directement en ligne.</p>
+          <p><a class="btn btn--primary btn--block" href="/mes-demarches/#scolaire">Inscrire mon enfant →</a></p>
+          <p class="aside__hint">Pensez à préparer le livret de famille et un justificatif de domicile récent.</p>
+        </aside>
+      </div>
+    </section>
+
+    <hr class="vein" />
+
+    <!-- ============ PETITE ENFANCE ============ -->
+    <section class="block" id="petite-enfance" aria-labelledby="petite-enfance-title">
+      <div class="block__head">
+        <span class="eyebrow">De la naissance à la maternelle</span>
+        <h2 id="petite-enfance-title" class="section-title">Petite enfance</h2>
+        <p class="lead">Plusieurs modes d'accueil, collectifs ou individuels, accompagnent les familles avant l'entrée à l'école.</p>
+      </div>
+
+      <div class="cards cards--3">
+        {petiteEnfance.map((p) => (
+          <article class="card tile">
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={p.icon} /></span>
+            <h3 class="tile__title">{p.label}</h3>
+            <p class="tile__desc">{p.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="note-card">
+        <h3>Trouver un mode de garde</h3>
+        <p class="prose">Le relais petite enfance oriente gratuitement les parents vers la solution la mieux adaptée à leur situation. Pour connaître les disponibilités et les coordonnées précises, <a href="/contact/">contactez la mairie</a>.</p>
+      </div>
+    </section>
+
+    <hr class="vein" />
+
+    <!-- ============ SANTÉ ============ -->
+    <section class="block" id="sante" aria-labelledby="sante-title">
+      <div class="block__head">
+        <span class="eyebrow">Se soigner près de chez soi</span>
+        <h2 id="sante-title" class="section-title">Santé</h2>
+        <p class="lead">Professionnels de santé, pharmacies et établissement hospitalier assurent une offre de soins de proximité sur le territoire.</p>
+      </div>
+
+      <div class="cards cards--3">
+        {sante.map((s) => (
+          <article class="card tile">
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={s.icon} /></span>
+            <h3 class="tile__title">{s.label}</h3>
+            <p class="tile__desc">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="note-card note-card--gueules">
+        <h3>Urgences</h3>
+        <p class="prose">En cas d'urgence vitale, composez le <strong>15</strong> (SAMU) ou le <strong>112</strong> (numéro d'urgence européen). Pour une urgence médicale non vitale, le <strong>116 117</strong> met en relation avec un médecin de garde.</p>
+      </div>
+    </section>
+
+    <hr class="vein" />
+
+    <!-- ============ ACTION SOCIALE & CCAS ============ -->
+    <section class="block" id="social" aria-labelledby="social-title">
+      <div class="block__head">
+        <span class="eyebrow">Solidarité</span>
+        <h2 id="social-title" class="section-title">Action sociale &amp; CCAS</h2>
+        <p class="lead">Le Centre communal d'action sociale (CCAS) accompagne les habitants confrontés à une difficulté et facilite l'accès aux droits.</p>
+      </div>
+
+      <div class="cards cards--3">
+        {social.map((s) => (
+          <article class="card tile">
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={s.icon} /></span>
+            <h3 class="tile__title">{s.label}</h3>
+            <p class="tile__desc">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="note-card">
+        <h3>Rencontrer le CCAS</h3>
+        <p class="prose">Les échanges avec le CCAS sont confidentiels et gratuits. Les aides sont instruites au cas par cas, sous conditions. Pour prendre rendez-vous ou obtenir les coordonnées et horaires d'accueil, <a href="/contact/">contactez la mairie</a>.</p>
+      </div>
+    </section>
+
+    <hr class="vein" />
+
+    <!-- ============ SENIORS ============ -->
+    <section class="block" id="seniors" aria-labelledby="seniors-title">
+      <div class="block__head">
+        <span class="eyebrow">Bien vieillir au Val d'Argent</span>
+        <h2 id="seniors-title" class="section-title">Seniors</h2>
+        <p class="lead">Maintien à domicile, lien social et vigilance lors des épisodes climatiques : plusieurs dispositifs accompagnent nos aînés.</p>
+      </div>
+
+      <div class="cards cards--3">
+        {seniors.map((s) => (
+          <article class="card tile">
+            <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={s.icon} /></span>
+            <h3 class="tile__title">{s.label}</h3>
+            <p class="tile__desc">{s.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="split">
+        <aside class="note-card note-card--gueules split__aside">
+          <h3>Registre des personnes fragiles</h3>
+          <p class="prose">L'inscription est volontaire, gratuite et confidentielle. Elle permet aux services communaux de prendre des nouvelles des personnes isolées en cas de canicule ou de grand froid.</p>
+          <p><a class="btn btn--ghost" href="/contact/">S'inscrire ou inscrire un proche →</a></p>
+        </aside>
+        <div class="split__main">
+          <h3 class="sub-title">Un proche à accompagner&nbsp;?</h3>
+          <p class="prose">Les familles aidantes peuvent être orientées vers les bons interlocuteurs : aide à domicile, adaptation du logement, démarches administratives. Les coordonnées précises des structures partenaires sont communiquées sur demande auprès de la mairie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AIDE ============ -->
+    <section class="help" aria-label="Besoin d'aide">
+      <p>Vous ne trouvez pas l'information recherchée&nbsp;? Les services de la commune vous orientent.</p>
+      <a class="btn btn--primary" href="/contact/">Contacter la mairie</a>
+    </section>
+
+  </div>
+
+  <style>
+    .quotidien { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ---- Sommaire d'ancres ---- */
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-left: 4px solid var(--or);
+      border-radius: var(--rayon);
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .toc__label {
+      font: 700 0.75rem/1 var(--sans);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--texte-muet);
+    }
+    .toc__list { display: flex; flex-wrap: wrap; gap: 8px 10px; list-style: none; margin: 0; padding: 0; }
+    .toc__list a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border: 1px solid var(--bord-clair);
+      border-radius: 999px;
+      color: var(--gueules);
+      font: 600 0.84375rem/1 var(--sans);
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .toc__list a:hover { border-color: var(--gueules); background: #fbf6ee; }
+
+    /* ---- Blocs de section ---- */
+    .block { padding-block: 36px; scroll-margin-top: var(--header-offset); }
+    .block__head { margin-bottom: 24px; }
+    .block__head .lead { margin-top: 12px; max-width: 64ch; }
+
+    /* ---- Grilles de cartes ---- */
+    .cards { display: grid; gap: 16px; }
+    .cards--3 { grid-template-columns: repeat(3, 1fr); }
+    .tile { padding: 24px 22px; display: flex; flex-direction: column; gap: 12px; }
+    .tile__title { font-family: var(--serif); font-weight: 600; font-size: 1.125rem; line-height: 1.2; color: var(--encre); margin: 0; }
+    .tile__desc { font: 400 0.90625rem/1.55 var(--sans); color: var(--texte-2); margin: 0; }
+
+    /* ---- Bloc en deux colonnes (liste + encadré) ---- */
+    .split { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; align-items: start; margin-top: 22px; }
+    .split__main { padding-top: 4px; }
+    .sub-title { font-family: var(--serif); font-weight: 600; font-size: 1.1875rem; line-height: 1.25; color: var(--encre); margin: 0 0 14px; }
+
+    .featlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+    .featlist__item { display: flex; gap: 12px; font: 400 0.9375rem/1.55 var(--sans); color: var(--texte); }
+    .featlist__item strong { color: var(--encre-2); }
+    .featlist__check {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--vert-pale);
+      border: 1px solid var(--vert-bord);
+      color: var(--vert-fonce);
+      margin-top: 1px;
+    }
+
+    .split__aside .prose { margin-top: 0; }
+    .split__aside .btn { margin-top: 16px; }
+    .aside__hint { font: 400 0.8125rem/1.5 var(--sans); color: var(--texte-muet); margin-top: 12px; }
+
+    .note-card .prose { max-width: none; }
+    .note-card p + p { margin-top: 14px; }
+
+    /* ---- Bloc d'aide final ---- */
+    .help {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px 24px;
+      margin-top: 36px;
+      padding: 26px 28px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-radius: var(--rayon-lg);
+    }
+    .help p { font: 500 1rem/1.5 var(--sans); color: var(--texte); margin: 0; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 880px) {
+      .cards--3 { grid-template-columns: 1fr 1fr; }
+      .split { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .cards--3 { grid-template-columns: 1fr; }
+      .help { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</InnerPage>

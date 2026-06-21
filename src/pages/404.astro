@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import Blason from "../components/Blason.astro";
+
+const description =
+  "La page demandée est introuvable. Revenez à l'accueil ou consultez le plan du site de la Ville de Sainte-Marie-aux-Mines.";
+---
+<Base title="Page introuvable" description={description}>
+  <main id="contenu" class="notfound">
+    <div class="notfound__inner">
+      <Blason width={72} height={83} class="notfound__blason" />
+      <p class="notfound__code">Erreur 404</p>
+      <h1 class="notfound__title">Page introuvable</h1>
+      <p class="notfound__text">
+        La page que vous cherchez n'existe pas, a été déplacée ou son adresse a
+        changé. Vérifiez l'adresse saisie, ou repartez de l'accueil pour
+        retrouver votre chemin.
+      </p>
+      <div class="notfound__actions">
+        <a class="btn btn--primary" href="/">Retour à l'accueil</a>
+        <a class="btn btn--ghost" href="/plan-du-site/">Consulter le plan du site</a>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .notfound {
+      max-width: var(--largeur);
+      margin-inline: auto;
+      padding: 80px var(--gouttiere) 96px;
+      display: flex;
+      justify-content: center;
+    }
+    .notfound__inner {
+      max-width: 540px;
+      text-align: center;
+    }
+    .notfound__blason { display: block; margin: 0 auto 24px; }
+    .notfound__code {
+      font: 700 0.75rem/1 var(--sans);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gueules);
+      margin: 0 0 12px;
+    }
+    .notfound__title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.875rem, 5vw, 2.625rem);
+      line-height: 1.05;
+      color: var(--encre);
+      margin: 0;
+    }
+    .notfound__text {
+      font: 400 1.0625rem/1.6 var(--sans);
+      color: var(--texte-2);
+      margin: 18px auto 32px;
+      max-width: 46ch;
+    }
+    .notfound__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    @media (max-width: 520px) {
+      .notfound { padding: 56px var(--gouttiere) 72px; }
+      .notfound__actions .btn { width: 100%; }
+    }
+  </style>
+</Base>

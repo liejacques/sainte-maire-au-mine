@@ -1,0 +1,899 @@
+/* =========================================================================
+   Sainte-Marie-aux-Mines — Styles globaux & design system partagé.
+   Reproduit la maquette : galeries sombres + parchemin clair, argent natif,
+   gueules de Ribeaupierre, or héraldique, outils de mineur croisés.
+   Les styles propres à une section vivent en <style> scopé dans chaque page ;
+   ce fichier ne porte que ce qui est réellement partagé.
+   ========================================================================= */
+
+/* ---------- Base ---------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* Sélecteur d'accessibilité « taille du texte » : l'échelle (1 / 1.15 / 1.3)
+     est posée par SiteScripts sur :root et se propage à tout le texte exprimé
+     en rem. 100 % = 16px = réglage par défaut du navigateur (donc respecté).
+     Remplace l'ancien `zoom` non standard (absent de Firefox avant la v126). */
+  font-size: calc(100% * var(--smam-text-scale, 1));
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--parchemin);
+  color: var(--texte);
+  font-family: var(--sans);
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4 { font-family: var(--serif); color: var(--encre); font-weight: 600; line-height: 1.1; }
+
+a { color: var(--gueules); }
+
+strong { font-weight: 600; }
+
+::selection { background: var(--gueules); color: #fff; }
+
+/* Focus visible net sur tout élément interactif (RGAA — ne jamais retirer). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--gueules);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+/* Sur les fonds sombres, l'outline passe en argent pour rester visible. */
+.is-dark a:focus-visible,
+.is-dark button:focus-visible,
+.is-dark input:focus-visible,
+.is-dark summary:focus-visible,
+.utility-bar :focus-visible,
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--argent);
+}
+
+/* Lien d'évitement */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--gueules);
+  color: #fff;
+  padding: 10px 16px;
+  font: 600 0.9375rem/1 var(--sans);
+  text-decoration: none;
+  border-radius: 3px;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* ---------- Conteneur & rythme ------------------------------------- */
+.wrap {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+.section { padding-block: 56px; }
+.section--tight { padding-block: 44px; }
+.bg-parchemin { background: var(--parchemin); }
+.bg-parchemin-2 { background: var(--parchemin-2); }
+.bg-nuit { background: var(--nuit); }
+.bg-sable { background: var(--sable); }
+.bg-sable-2 { background: var(--sable-2); }
+
+/* ---------- Surtitre (eyebrow) & titres de section ----------------- */
+.eyebrow {
+  display: inline-block;
+  font: 700 0.75rem/1 var(--sans);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gueules);
+}
+.eyebrow--gold { color: var(--or); }
+.eyebrow--mark { display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow--mark svg { flex: none; }
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.625rem, 4vw, 2rem);
+  line-height: 1.1;
+  color: var(--encre);
+  margin: 10px 0 0;
+}
+.section-title--light { color: var(--clair-2); }
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+/* Texte « argent natif » : dégradé métallique clippé (décoratif). */
+.metal-text {
+  background: var(--metal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Liens « lire la suite » -------------------------------- */
+.link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--gueules);
+  font: 600 0.90625rem/1 var(--sans);
+  text-decoration: none;
+}
+.link-more--gold {
+  border-bottom: 2px solid var(--or);
+  padding-bottom: 2px;
+}
+.link-more--light { color: var(--clair-3); }
+.link-more--silver { color: var(--argent); border-bottom: 2px solid var(--or); padding-bottom: 2px; }
+.link-more:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Boutons ------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  font: 600 0.9375rem/1 var(--sans);
+  text-decoration: none;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.btn--primary { background: var(--gueules); color: #fff; }
+.btn--primary:hover { background: var(--gueules-fonce); }
+.btn--ghost {
+  background: transparent;
+  color: var(--gueules);
+  border: 1px solid var(--gueules);
+}
+.btn--ghost:hover { background: var(--gueules); color: #fff; }
+.btn--ghost-dark {
+  background: transparent;
+  color: var(--clair-2);
+  border: 1px solid rgba(199, 204, 209, 0.4);
+}
+.btn--ghost-dark:hover { background: rgba(199, 204, 209, 0.1); }
+.btn--block { width: 100%; }
+
+/* ---------- Cartes -------------------------------------------------- */
+.card {
+  background: var(--parchemin-2);
+  border: 1px solid var(--bord-clair);
+  border-radius: var(--rayon);
+}
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.card-link:hover {
+  border-color: var(--gueules);
+  box-shadow: var(--ombre-carte);
+  transform: translateY(-2px);
+}
+
+/* Icône carrée « ardoise » (puits de mine) pour les tuiles de service. */
+.tile-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  background: var(--nuit);
+  border-radius: var(--rayon);
+  color: var(--argent);
+}
+
+/* Pastille « réalisable en ligne ». */
+.badge-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 700 0.59375rem/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vert);
+  background: var(--vert-pale);
+  border: 1px solid var(--vert-bord);
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
+/* ---------- Veine minérale (séparateur) ---------------------------- */
+.vein {
+  height: 2px;
+  border: 0;
+  margin: 0;
+  background: var(--veine);
+}
+
+/* ---------- Textures décoratives ----------------------------------- */
+.strata::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--strate);
+  pointer-events: none;
+}
+.partition {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--partage);
+  pointer-events: none;
+}
+
+/* =========================================================================
+   BARRE UTILITAIRE + EN-TÊTE + NAVIGATION
+   ========================================================================= */
+.utility-bar {
+  background: var(--nuit);
+  border-bottom: 1px solid var(--bord-nuit-2);
+}
+.utility-bar__inner {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.utility-bar__extra { display: flex; align-items: center; gap: 20px; }
+.utility-bar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--brume);
+  font: 500 0.8125rem/2.625rem var(--sans);
+  text-decoration: none;
+}
+.utility-bar__link:hover { color: var(--clair-3); }
+.utility-bar__a11y { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.a11y-label {
+  color: #8c866f;
+  font: 600 0.6875rem/1 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+.a11y-group { display: flex; align-items: center; gap: 3px; }
+.a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+  border: 1px solid rgba(199, 204, 209, 0.32);
+  background: transparent;
+  color: var(--clair-3);
+  font-family: var(--serif);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.a11y-btn[aria-pressed="true"] { background: var(--gueules); border-color: var(--gueules); }
+.a11y-btn--sm { font-size: 0.8125rem; }
+.a11y-btn--md { font-size: 1rem; }
+.a11y-btn--lg { font-size: 1.1875rem; }
+.a11y-btn--text { gap: 6px; font: 600 0.78125rem/1 var(--sans); }
+
+.site-header { background: var(--sable); position: relative; z-index: 50; }
+.site-header__inner {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 84px;
+}
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; flex: none; }
+.brand__name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.3125rem;
+  line-height: 1.05;
+  color: var(--clair);
+  letter-spacing: 0.01em;
+}
+.brand__baseline {
+  display: block;
+  font: 500 0.75rem/1.2 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-top: 3px;
+}
+
+/* Navigation principale (bureau) — menus déroulants en CSS pur (hover + focus). */
+.main-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.nav-item { position: relative; }
+.nav-item__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 44px;
+  padding: 0 13px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--clair-3);
+  font: 600 0.90625rem/1 var(--sans);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.nav-item__link:hover,
+.nav-item:hover .nav-item__link,
+.nav-item:focus-within .nav-item__link,
+.nav-item__link[aria-current="page"] {
+  border-bottom-color: var(--or);
+  color: var(--clair);
+}
+.nav-item__caret { transition: transform 0.15s; }
+.nav-item:hover .nav-item__caret,
+.nav-item:focus-within .nav-item__caret { transform: rotate(180deg); }
+
+.nav-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 264px;
+  background: var(--parchemin-2);
+  border: 1px solid var(--bord-clair);
+  border-top: 3px solid var(--gueules);
+  border-radius: 0 0 4px 4px;
+  box-shadow: var(--ombre-forte);
+  padding: 8px;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.14s, transform 0.14s, visibility 0.14s;
+}
+.nav-item:hover .nav-panel,
+.nav-item:focus-within .nav-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-panel a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  min-height: 44px;
+  color: #2a261c;
+  font: 500 0.90625rem/1.3 var(--sans);
+  text-decoration: none;
+  border-radius: 3px;
+}
+.nav-panel a::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--or);
+  border-radius: 50%;
+  flex: none;
+}
+.nav-panel a:hover,
+.nav-panel a:focus-visible { background: #f1ebdd; color: var(--gueules); }
+
+/* Bouton burger + tiroir mobile */
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-left: auto;
+  background: var(--gueules);
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  list-style: none;
+}
+.burger::-webkit-details-marker { display: none; }
+.mobile-menu { position: static; margin-left: auto; }
+.mobile-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 60;
+  background: var(--nuit);
+  border-top: 1px solid var(--bord-nuit-2);
+  padding: 10px 18px 20px;
+  max-height: 78vh;
+  overflow-y: auto;
+  box-shadow: var(--ombre-forte);
+}
+.mobile-panel details { border-bottom: 1px solid rgba(199, 204, 209, 0.1); }
+.mobile-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  color: var(--clair-3);
+  font: 600 0.96875rem/1 var(--sans);
+  cursor: pointer;
+  list-style: none;
+}
+.mobile-panel summary::-webkit-details-marker { display: none; }
+.mobile-panel summary svg { transition: transform 0.15s; }
+.mobile-panel details[open] summary svg { transform: rotate(180deg); }
+.mobile-panel__sub { padding: 4px 0 10px 8px; }
+.mobile-panel__sub a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--brume-2);
+  font: 500 0.90625rem/1 var(--sans);
+  text-decoration: none;
+}
+.mobile-panel__sub a:hover { color: var(--clair-3); }
+
+/* =========================================================================
+   BANDEAU DE PAGE (gabarit interne)
+   ========================================================================= */
+.page-banner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fbf8f1, var(--parchemin));
+  padding: 36px var(--gouttiere) 40px;
+}
+/* Filet « veine minérale » en bas du bandeau : identité, sans assombrir. */
+.page-banner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--veine);
+}
+.page-banner__inner { position: relative; max-width: var(--largeur); margin-inline: auto; }
+.page-banner__title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.875rem, 5vw, 2.625rem);
+  line-height: 1.05;
+  color: var(--encre);
+  margin: 10px 0 0;
+}
+.page-banner__lede {
+  font: 400 1rem/1.5 var(--sans);
+  color: var(--texte-2);
+  max-width: 600px;
+  margin: 14px 0 0;
+}
+
+/* Fil d'Ariane */
+.breadcrumb { margin-bottom: 16px; }
+.breadcrumb ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  font: 500 0.8125rem/1 var(--sans);
+  color: var(--brume-muet);
+}
+.breadcrumb a { color: var(--or); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.breadcrumb [aria-current="page"] { color: var(--brume); }
+.breadcrumb__sep { color: var(--brume-muet); }
+
+/* Fil d'Ariane sur fond clair (réutilisable) */
+.breadcrumb--light ol { color: var(--texte-muet); }
+.breadcrumb--light a { color: var(--gueules); }
+.breadcrumb--light [aria-current="page"] { color: var(--texte); }
+
+/* =========================================================================
+   FORMULAIRES
+   ========================================================================= */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label { font: 600 0.84375rem/1 var(--sans); color: var(--texte); }
+.input,
+.textarea,
+.select {
+  border: 1px solid var(--bord-champ);
+  border-radius: 3px;
+  padding: 12px 13px;
+  font: 400 0.9375rem/1.4 var(--sans);
+  color: var(--encre-2);
+  min-height: 46px;
+  background: var(--blanc);
+  width: 100%;
+}
+.textarea { resize: vertical; min-height: 120px; }
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font: 400 0.84375rem/1.5 var(--sans);
+  color: var(--texte-3);
+  cursor: pointer;
+}
+.consent input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--gueules); flex: none; }
+.form-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--vert-pale);
+  border: 1px solid var(--vert-bord);
+  border-radius: 5px;
+  padding: 18px 20px;
+  font: 600 0.9375rem/1.4 var(--sans);
+  color: var(--vert-fonce);
+}
+
+/* Champ de recherche emblématique (loupe gueules + bouton plein) */
+.search-bar {
+  display: flex;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: var(--ombre-champ);
+}
+.search-bar__icon { display: flex; align-items: center; padding-left: 16px; color: var(--gueules); }
+.search-bar input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  padding: 15px 14px;
+  font: 400 1rem/1 var(--sans);
+  color: var(--encre-2);
+  min-width: 0;
+}
+.search-bar button {
+  border: 0;
+  background: var(--gueules);
+  color: #fff;
+  font: 600 0.9375rem/1 var(--sans);
+  padding: 0 22px;
+  cursor: pointer;
+  min-height: 44px;
+}
+.search-bar button:hover { background: var(--gueules-fonce); }
+.visually-hidden {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* =========================================================================
+   PIED DE PAGE
+   ========================================================================= */
+.site-footer {
+  background: var(--nuit);
+  color: var(--brume);
+  padding: 54px var(--gouttiere) 0;
+}
+.site-footer__inner { max-width: var(--largeur); margin-inline: auto; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(199, 204, 209, 0.14);
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-brand__name { font-family: var(--serif); font-weight: 600; font-size: 1.125rem; line-height: 1.1; color: var(--clair); }
+.footer-address { font-style: normal; font: 400 0.875rem/1.7 var(--sans); color: var(--brume-muet); }
+.footer-address a { color: var(--brume); text-decoration: none; }
+.footer-address a:hover { color: var(--clair-3); }
+.footer-social { display: flex; gap: 10px; margin-top: 16px; }
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(199, 204, 209, 0.25);
+  border-radius: 4px;
+  color: var(--brume);
+}
+.footer-social a:hover { border-color: var(--or); color: var(--clair-3); }
+.footer-col h2 {
+  font: 700 0.75rem/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin: 0 0 14px;
+}
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.footer-col a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  color: var(--brume);
+  font: 400 0.875rem/1.4 var(--sans);
+  text-decoration: none;
+}
+.footer-col a:hover { color: var(--clair-3); text-decoration: underline; text-underline-offset: 3px; }
+.footer-partners { display: flex; flex-direction: column; gap: 10px; }
+.footer-partner {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid rgba(199, 204, 209, 0.2);
+  border-radius: 3px;
+  font: 500 0.71875rem/1.2 var(--sans);
+  color: var(--brume-muet);
+  text-align: center;
+}
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 22px 0 28px;
+}
+.footer-legal nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.footer-legal a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  color: var(--brume);
+  font: 500 0.84375rem/1 var(--sans);
+  text-decoration: none;
+}
+.footer-legal a:hover { color: var(--clair-3); text-decoration: underline; text-underline-offset: 3px; }
+.footer-legal__copy { font: 400 0.8125rem/1 var(--sans); color: var(--brume-faible); margin: 0; }
+.rgaa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--rgaa-bg);
+  color: var(--rgaa-txt);
+  font: 700 0.65625rem/1 var(--sans);
+  letter-spacing: 0.04em;
+  padding: 4px 7px;
+  border-radius: 2px;
+}
+
+/* =========================================================================
+   CONTENU DES PAGES INTERNES (classes réutilisables)
+   ========================================================================= */
+.page-main {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding: 48px var(--gouttiere) 64px;
+}
+
+/* Prose éditoriale (pages légales, fiches démarche, rubriques) */
+.prose { color: var(--texte); font-size: 1rem; line-height: 1.65; max-width: 70ch; }
+.prose > * + * { margin-top: 1em; }
+.prose h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.625rem;
+  color: var(--encre);
+  margin-top: 1.6em;
+}
+.prose h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  color: var(--encre);
+  margin-top: 1.4em;
+}
+.prose a { color: var(--gueules); text-decoration: underline; text-underline-offset: 2px; }
+.prose ul, .prose ol { padding-left: 20px; }
+.prose li + li { margin-top: 0.35em; }
+.prose strong { color: var(--encre-2); }
+
+.lead { font-size: 1.125rem; line-height: 1.6; color: var(--texte-2); }
+
+/* Encadré à filet d'accent (or ou gueules) */
+.note-card {
+  background: var(--parchemin-2);
+  border: 1px solid var(--bord-clair);
+  border-left: 4px solid var(--or);
+  border-radius: 5px;
+  padding: 20px 24px;
+}
+.note-card--gueules { border-left-color: var(--gueules); }
+.note-card h3 {
+  font: 700 0.8125rem/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gueules);
+  margin: 0 0 10px;
+}
+
+/* Pastille de catégorie (actualités, événements) */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font: 600 0.6875rem/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 2px;
+  background: var(--gueules);
+}
+.tag--vert { background: var(--vert); }
+.tag--or { background: var(--or); }
+
+/* Date d'actualité */
+.meta-date { font: 600 0.8125rem/1 var(--sans); color: var(--gueules); letter-spacing: 0.04em; }
+
+/* Carte d'action sombre (barre latérale de fiche) */
+.action-card {
+  background: var(--nuit);
+  border-radius: var(--rayon-lg);
+  padding: 24px;
+  color: var(--brume-2);
+}
+.action-card h2 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; color: var(--clair-2); margin: 0 0 14px; }
+.action-card dl { margin: 18px 0 0; font: 400 0.84375rem/1.5 var(--sans); color: var(--brume-2); }
+.action-card dl > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-top: 1px solid rgba(199, 204, 209, 0.14);
+}
+.action-card dd { margin: 0; color: var(--argent); font-weight: 600; }
+
+/* Carte d'information claire (coordonnées, horaires) */
+.info-card {
+  background: var(--parchemin-2);
+  border: 1px solid var(--bord-clair);
+  border-radius: var(--rayon-lg);
+  padding: 22px;
+}
+.info-card h2,
+.info-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 700 0.8125rem/1 var(--sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gueules);
+  margin: 0 0 12px;
+}
+.info-card dl { margin: 0; font: 400 0.90625rem/1.6 var(--sans); color: var(--texte); }
+.info-card dl > div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--bord-fin); }
+.info-card dl > div:first-child { border-top: 0; }
+.info-card dd { margin: 0; font-weight: 600; }
+.info-card address { font-style: normal; font: 400 0.90625rem/1.7 var(--sans); color: var(--texte); }
+.info-card a { color: var(--gueules); font-weight: 600; text-decoration: none; }
+.info-card a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Faux plan d'accès (placeholder cartographique stylisé) */
+.map-placeholder {
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  background: linear-gradient(160deg, #dfe3df, #c9d0c9);
+  border: 1px solid #c2c8bf;
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+}
+.map-placeholder__grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(0, 0, 0, 0.04) 38px 39px),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(0, 0, 0, 0.04) 38px 39px);
+}
+.map-placeholder__river { position: absolute; top: 0; bottom: 0; left: 46%; width: 6px; background: rgba(110, 140, 170, 0.4); }
+.map-placeholder__label { position: relative; display: inline-flex; align-items: center; gap: 7px; font: 600 0.6875rem/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: #41463f; }
+.map-placeholder__sub { position: relative; font-family: var(--serif); font-size: 0.875rem; color: #2a2e28; margin-top: 6px; }
+
+/* Bloc média « photo » stylisé (placeholder en attendant les clichés) */
+.photo-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  background: linear-gradient(160deg, #2b2920, #100f0a);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  min-height: 150px;
+}
+.photo-block__strata { position: absolute; inset: 0; background: repeating-linear-gradient(125deg, transparent 0 26px, rgba(199, 204, 209, 0.05) 26px 27px); }
+.photo-block__kicker { position: relative; display: inline-flex; align-items: center; gap: 7px; color: var(--argent); font: 600 0.65625rem/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; }
+.photo-block__title { position: relative; color: var(--clair-2); font: 500 0.875rem/1.3 var(--serif); margin-top: 6px; }
+.photo-block__alt { position: relative; color: var(--brume-muet); font: 400 0.75rem/1.4 var(--sans); margin-top: 3px; }
+
+/* Photo réelle remplissant un cadre .photo-block (cliché du patrimoine). */
+.photo-block--photo .photo-block__strata { display: none; }
+.photo-block__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Voile dégradé pour la lisibilité d'une éventuelle légende en bas. */
+.photo-block--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 18, 12, 0) 45%, rgba(20, 18, 12, 0.72));
+  pointer-events: none;
+}
+.photo-block--photo .photo-block__title,
+.photo-block--photo .photo-block__kicker { z-index: 1; }
+/* Crédit photo discret (auteur · licence). */
+.photo-credit {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  z-index: 2;
+  font: 500 0.59375rem/1 var(--sans);
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(0, 0, 0, 0.34);
+  padding: 3px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================================================
+   MODE CONTRASTE RENFORCÉ (sélecteur d'accessibilité)
+   Souligne tous les liens et renforce les focus. Aucune info par la couleur.
+   ========================================================================= */
+[data-contrast="on"] a { text-decoration: underline !important; text-underline-offset: 3px; }
+[data-contrast="on"] :focus-visible { outline-width: 4px !important; outline-color: #ffffff !important; }
+[data-contrast="on"] body { background: #fff; }
+[data-contrast="on"] .nav-panel a { color: #1b1810; }
+
+/* =========================================================================
+   RESPONSIVE — en-tête, pied de page, conteneurs partagés
+   ========================================================================= */
+@media (max-width: 980px) {
+  .main-nav { display: none; }
+  .mobile-menu { display: block; }
+  .burger { display: inline-flex; }
+  .utility-bar__extra { display: none; }
+}
+@media (min-width: 981px) {
+  .mobile-menu { display: none; }
+}
+@media (max-width: 880px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  :root { --gouttiere: 18px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-legal { flex-direction: column; align-items: flex-start; }
+}

@@ -1,0 +1,114 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { mairie, commune } from "../../data/commune";
+
+const fil = [{ label: "Accueil", href: "/" }, { label: "Mentions légales" }];
+const description =
+  "Mentions légales du site officiel de la Ville de Sainte-Marie-aux-Mines : éditeur, directeur de la publication, hébergeur, propriété intellectuelle et crédits.";
+---
+<InnerPage
+  title="Mentions légales"
+  description={description}
+  eyebrow="Informations légales"
+  breadcrumb={fil}
+  lede="Informations relatives à l'éditeur, à l'hébergement et aux conditions d'utilisation du site officiel de la Ville de Sainte-Marie-aux-Mines."
+>
+  <article class="prose">
+    <h2>Éditeur du site</h2>
+    <p>Le présent site est édité par&nbsp;:</p>
+    <address>
+      <strong>Ville de {commune.nom}</strong><br />
+      {mairie.adresse}<br />
+      {mairie.cp} {mairie.ville}<br />
+      Téléphone&nbsp;: <a href={`tel:${mairie.telE164}`}>{mairie.tel}</a><br />
+      Courriel&nbsp;: <a href={`mailto:${mairie.email}`}>{mairie.email}</a>
+    </address>
+    <p>
+      Commune du département du {commune.departement} ({commune.codeDepartement}),
+      région {commune.region}. Code INSEE&nbsp;: {commune.codeInsee}.
+    </p>
+
+    <h2>Directeur de la publication</h2>
+    <!-- Élu à vérifier avant publication -->
+    <p>
+      Le directeur de la publication est <strong>[Le Maire — à confirmer]</strong>,
+      en sa qualité de maire de {commune.nom}.
+    </p>
+
+    <h2>Hébergement</h2>
+    <p>Le site est hébergé par&nbsp;:</p>
+    <address>
+      <strong>[Hébergeur — à fournir]</strong><br />
+      [Raison sociale — à fournir]<br />
+      [Adresse — à fournir]<br />
+      [Téléphone — à fournir]
+    </address>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L'ensemble de ce site relève de la législation française et internationale
+      sur le droit d'auteur et la propriété intellectuelle. Tous les droits de
+      reproduction sont réservés, y compris pour les documents téléchargeables et
+      les représentations iconographiques et photographiques.
+    </p>
+    <p>
+      La reproduction de tout ou partie de ce site sur un support quel qu'il soit
+      est formellement interdite sauf autorisation expresse et préalable de la
+      Ville de {commune.nom}. Toute reproduction non autorisée est susceptible de
+      constituer une contrefaçon au sens des articles L.335-2 et suivants du Code
+      de la propriété intellectuelle.
+    </p>
+    <p>
+      Les marques, logos et blason de la commune figurant sur le site sont la
+      propriété de la Ville de {commune.nom}. Toute reproduction ou utilisation est
+      soumise à autorisation préalable.
+    </p>
+
+    <h2>Liens hypertextes</h2>
+    <p>
+      Les liens vers d'autres sites mis en place dans le cadre du présent site
+      n'engagent pas la responsabilité de la Ville de {commune.nom} quant au contenu
+      de ces sites. La création de liens vers le présent site est libre, sous
+      réserve de ne pas porter atteinte à l'image de la commune et de ne pas
+      l'insérer au sein de pages au contenu contraire aux lois en vigueur.
+    </p>
+
+    <h2>Crédits</h2>
+    <ul>
+      <li>
+        Conception et réalisation&nbsp;: services de la Ville de {commune.nom}.
+        <strong>[Prestataire éventuel — à compléter]</strong>
+      </li>
+      <li>
+        Photographies&nbsp;: les crédits détaillés sont indiqués sur la page
+        <a href="/credits-photos/">Crédits photos</a>.
+      </li>
+      <li>
+        Polices de caractères&nbsp;: Spectral et Source Sans 3, auto-hébergées sur le
+        site (sous licence libre SIL Open Font License).
+      </li>
+    </ul>
+
+    <h2>Protection des données personnelles</h2>
+    <p>
+      Les modalités de traitement de vos données personnelles sont décrites dans la
+      <a href="/confidentialite/">politique de confidentialité</a>. Les informations
+      relatives aux traceurs et au stockage local sont précisées sur la page
+      <a href="/gestion-des-cookies/">gestion des cookies</a>.
+    </p>
+
+    <h2>Accessibilité</h2>
+    <p>
+      L'état de conformité du site au Référentiel général d'amélioration de
+      l'accessibilité (RGAA) est détaillé dans la
+      <a href="/accessibilite/">déclaration d'accessibilité</a>.
+    </p>
+  </article>
+</InnerPage>
+
+<style>
+  .prose address {
+    font-style: normal;
+    margin-block: 1em;
+  }
+</style>

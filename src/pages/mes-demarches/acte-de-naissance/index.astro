@@ -1,0 +1,263 @@
+---
+import InnerPage from "../../../layouts/InnerPage.astro";
+import { mairie } from "../../../data/commune";
+
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Mes démarches", href: "/mes-demarches/" },
+  { label: "Acte de naissance" },
+];
+
+const lede =
+  "Obtenez une copie intégrale ou un extrait d'acte de naissance, pour vous-même ou un proche, si la naissance a eu lieu à Sainte-Marie-aux-Mines.";
+
+const description =
+  "Demander un acte de naissance à Sainte-Marie-aux-Mines : copie intégrale ou extrait, qui peut faire la demande, étapes, pièces à fournir, coût et délai. Démarche réalisable en ligne.";
+
+const etapes = [
+  {
+    n: "1",
+    title: "Vérifiez votre droit à la demande",
+    body: "Assurez-vous d'être une personne autorisée. Pour un extrait sans filiation, aucune justification n'est nécessaire.",
+  },
+  {
+    n: "2",
+    title: "Remplissez le formulaire en ligne",
+    body: "Indiquez les informations d'état civil de la personne concernée et le type d'acte souhaité.",
+  },
+  {
+    n: "3",
+    title: "Joignez vos justificatifs",
+    body: "Téléversez une pièce d'identité et, le cas échéant, un justificatif de lien de parenté.",
+  },
+  {
+    n: "4",
+    title: "Recevez votre acte",
+    body: "L'acte vous est adressé par courrier à votre domicile sous 3 à 5 jours ouvrés.",
+  },
+];
+
+const pieces = [
+  "Pièce d'identité du demandeur (carte d'identité ou passeport)",
+  "Justificatif de lien de parenté pour une copie intégrale ou un extrait avec filiation",
+  "Indication des date et lieu de naissance, noms et prénoms des parents",
+];
+---
+<InnerPage
+  title="Demander un acte de naissance"
+  description={description}
+  active="demarches"
+  eyebrow="État civil"
+  breadcrumb={fil}
+  lede={lede}
+  mainClass="demarche-main"
+>
+  <span slot="banner" class="badge-online badge-online--banner">
+    <span class="badge-online__dot" aria-hidden="true"></span>
+    Démarche réalisable en ligne
+  </span>
+
+  <div class="demarche-grid">
+    <!-- ============ COLONNE PRINCIPALE ============ -->
+    <div class="demarche-content">
+      <section aria-labelledby="apropos-title">
+        <h2 id="apropos-title" class="demarche-h2">En quelques mots</h2>
+        <div class="prose">
+          <p>
+            L'acte de naissance est délivré par la mairie du lieu de naissance.
+            Trois types de documents existent : la <strong>copie intégrale</strong>,
+            l'<strong>extrait avec filiation</strong> et l'<strong>extrait sans
+            filiation</strong>. La demande est gratuite.
+          </p>
+        </div>
+
+        <div class="note-card demarche-who">
+          <h3>Qui peut faire la demande ?</h3>
+          <ul>
+            <li>La personne concernée (majeure), son conjoint ou son représentant légal</li>
+            <li>Ses ascendants et descendants directs</li>
+            <li>Un professionnel autorisé (notaire, avocat)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="proceder-title">
+        <h2 id="proceder-title" class="demarche-h2">Comment procéder</h2>
+        <ol class="steps">
+          {etapes.map((st) => (
+            <li class="step">
+              <div class="step__rail">
+                <span class="step__num">{st.n}</span>
+                <span class="step__line" aria-hidden="true"></span>
+              </div>
+              <div class="step__body">
+                <h3 class="step__title">{st.title}</h3>
+                <p class="step__text">{st.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="pieces-title">
+        <h2 id="pieces-title" class="demarche-h2">Pièces à fournir</h2>
+        <ul class="docs">
+          {pieces.map((doc) => (
+            <li class="doc">
+              <span class="doc__check" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span class="doc__label">{doc}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <!-- ============ COLONNE LATÉRALE STICKY ============ -->
+    <aside class="demarche-aside">
+      <div class="action-card">
+        <h2>Faire ma demande</h2>
+        <a class="btn btn--primary btn--block action-card__cta" href="#">
+          Demander en ligne
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost-dark btn--block action-card__alt" href="#">
+          Télécharger le formulaire
+        </a>
+        <dl>
+          <div><dt>Coût</dt><dd>Gratuit</dd></div>
+          <div><dt>Délai</dt><dd>3 à 5 jours</dd></div>
+          <div><dt>Réception</dt><dd>Courrier postal</dd></div>
+        </dl>
+      </div>
+
+      <div class="info-card">
+        <h2>Service état civil</h2>
+        <address>
+          {mairie.nom.replace("Mairie de Sainte-Marie-aux-Mines", "Mairie")} · {mairie.adresse}<br />
+          <a href={`tel:${mairie.telE164}`}>{mairie.tel}</a><br />
+          Lun–Ven · 8h30–12h / 14h–17h
+        </address>
+      </div>
+    </aside>
+  </div>
+</InnerPage>
+
+<style>
+  /* ---- Pastille « en ligne » agrandie dans le bandeau ---- */
+  .badge-online--banner {
+    margin-top: 16px;
+    font-size: 0.6875rem;
+    padding: 6px 12px;
+    border-radius: 3px;
+  }
+  .badge-online__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--vert);
+    flex: none;
+  }
+
+  /* ---- Grille 2 colonnes : contenu + aside sticky ---- */
+  .demarche-main { max-width: var(--largeur); margin-inline: auto; padding: 44px var(--gouttiere) 64px; }
+  .demarche-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 44px;
+    align-items: start;
+  }
+  .demarche-content > section + section { margin-top: 32px; }
+
+  .demarche-h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.625rem;
+    line-height: 1.15;
+    color: var(--encre);
+    margin: 0 0 14px;
+  }
+
+  /* ---- Encadré « qui peut demander » ---- */
+  .demarche-who { margin: 24px 0 0; }
+  .demarche-who ul {
+    margin: 0;
+    padding-left: 20px;
+    font: 400 0.9375rem/1.7 var(--sans);
+    color: var(--texte);
+  }
+  .demarche-who li + li { margin-top: 0.3em; }
+
+  /* ---- Étapes numérotées avec pastilles ---- */
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step { display: flex; gap: 18px; }
+  .step__rail { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: var(--nuit);
+    color: var(--argent);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    border-radius: 50%;
+    flex: none;
+  }
+  .step__line {
+    flex: 1;
+    width: 2px;
+    background: linear-gradient(180deg, var(--bord-champ), var(--bord-clair));
+    margin: 6px 0;
+  }
+  .step:last-child .step__line { display: none; }
+  .step__body { padding-bottom: 22px; }
+  .step__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.1875rem;
+    color: var(--encre);
+    margin: 6px 0 5px;
+  }
+  .step__text {
+    font: 400 0.9375rem/1.6 var(--sans);
+    color: var(--texte-2);
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* ---- Pièces à fournir (coche verte) ---- */
+  .docs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .doc {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--parchemin-2);
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon);
+    padding: 14px 18px;
+  }
+  .doc__check { display: inline-flex; align-items: center; color: var(--vert); flex: none; }
+  .doc__label { font: 500 0.9375rem/1.4 var(--sans); color: var(--texte); }
+
+  /* ---- Colonne latérale sticky ---- */
+  .demarche-aside {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .action-card__cta { margin-bottom: 10px; }
+  .action-card__alt { font-size: 0.90625rem; }
+  .demarche-aside .info-card address { line-height: 1.65; }
+
+  /* ---- Responsive : pile l'aside sous le contenu ---- */
+  @media (max-width: 880px) {
+    .demarche-grid { grid-template-columns: 1fr; gap: 32px; }
+    .demarche-aside { position: static; }
+  }
+</style>

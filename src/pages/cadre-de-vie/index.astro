@@ -1,0 +1,603 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Cadre de vie" },
+];
+
+const description =
+  "Cadre de vie & urbanisme à Sainte-Marie-aux-Mines : PLU et autorisations d'urbanisme, travaux & voirie, déchets et propreté, environnement de la vallée vosgienne et de la Lièpvrette, logement.";
+
+// Sommaire d'ancrage de la page (navigation interne).
+const sommaire = [
+  { id: "urbanisme", label: "PLU & urbanisme" },
+  { id: "travaux", label: "Travaux & voirie" },
+  { id: "dechets", label: "Déchets & propreté" },
+  { id: "environnement", label: "Environnement" },
+  { id: "logement", label: "Logement" },
+];
+
+// Pièces du PLU consultables en mairie.
+const plu = [
+  {
+    titre: "Rapport de présentation",
+    desc: "Diagnostic du territoire, état initial de l'environnement et justification des choix d'aménagement.",
+  },
+  {
+    titre: "Plan de zonage",
+    desc: "Découpage de la commune en zones urbaines, à urbaniser, agricoles et naturelles.",
+  },
+  {
+    titre: "Règlement écrit",
+    desc: "Règles applicables à chaque zone : implantation, hauteur, emprise au sol, stationnement, aspect extérieur.",
+  },
+  {
+    titre: "Servitudes d'utilité publique",
+    desc: "Périmètres miniers, protection des captages, lignes et réseaux grevant certaines parcelles.",
+  },
+];
+
+// Autorisations d'urbanisme les plus courantes.
+const autorisations = [
+  {
+    titre: "Déclaration préalable",
+    desc: "Ravalement, clôture, abri de jardin, fenêtre de toit, petite extension : travaux de faible ampleur ou modifiant l'aspect extérieur.",
+  },
+  {
+    titre: "Permis de construire",
+    desc: "Construction neuve, extension importante ou changement de destination avec travaux sur la structure ou les façades.",
+  },
+  {
+    titre: "Permis de démolir",
+    desc: "Obligatoire pour toute démolition, notamment dans les secteurs protégés du centre ancien.",
+  },
+  {
+    titre: "Certificat d'urbanisme",
+    desc: "Information sur les règles applicables à un terrain et sa constructibilité, utile avant tout projet d'achat.",
+  },
+];
+
+// Étapes pour signaler un dysfonctionnement sur le domaine public.
+const signalement = [
+  "Repérez l'emplacement précis (rue, numéro le plus proche, point de repère).",
+  "Décrivez le désordre : nid-de-poule, éclairage défaillant, mobilier dégradé, dépôt sauvage…",
+  "Transmettez votre signalement aux services techniques via le formulaire de contact.",
+  "Un accusé de réception vous est adressé ; les interventions sont priorisées selon l'urgence.",
+];
+
+// Collectes en porte-à-porte (jours indicatifs — à confirmer par le calendrier).
+const collectes = [
+  { flux: "Ordures ménagères résiduelles", rythme: "1 fois par semaine", bac: "Bac à couvercle gris" },
+  { flux: "Tri sélectif (emballages, papiers)", rythme: "1 fois par semaine", bac: "Bac à couvercle jaune" },
+  { flux: "Verre", rythme: "Apport volontaire", bac: "Colonnes réparties dans les quartiers" },
+  { flux: "Déchets verts & encombrants", rythme: "Sur rendez-vous / déchèterie", bac: "Déchèterie du Val d'Argent" },
+];
+
+// Filières acceptées en déchèterie.
+const filieres = [
+  "Cartons, papiers et emballages",
+  "Déchets verts et végétaux",
+  "Gravats inertes et déchets de bricolage",
+  "Ferraille, bois et mobilier",
+  "Déchets dangereux (peintures, solvants, huiles)",
+  "Déchets d'équipements électriques et électroniques",
+];
+
+// Repères environnementaux de la vallée.
+const environnement = [
+  {
+    titre: "La Lièpvrette, fil de la vallée",
+    desc: "Rivière qui traverse la commune et structure les deux rives historiques. Sa préservation guide la gestion des berges, des zones humides et du risque d'inondation.",
+  },
+  {
+    titre: "Massif vosgien & forêts communales",
+    desc: "Versants boisés, sentiers et chaumes d'altitude. La forêt communale est gérée durablement en lien avec l'Office national des forêts.",
+  },
+  {
+    titre: "Biodiversité & continuités écologiques",
+    desc: "Haies, prairies de fond de vallée et corridors le long de la rivière abritent une faune et une flore caractéristiques de la moyenne montagne vosgienne.",
+  },
+  {
+    titre: "Énergie & sobriété",
+    desc: "Rénovation de l'éclairage public, accompagnement à la rénovation énergétique des logements et valorisation des ressources locales.",
+  },
+];
+
+// Repères logement.
+const logement = [
+  {
+    titre: "Logement social",
+    desc: "Demande de logement social via le portail national ; les bailleurs présents sur la commune instruisent les dossiers selon les contingents.",
+  },
+  {
+    titre: "Rénovation de l'habitat",
+    desc: "Conseils gratuits et aides à la rénovation énergétique de l'habitat ancien, nombreux dans le centre historique.",
+  },
+  {
+    titre: "Lutte contre l'habitat indigne",
+    desc: "Signalement des situations de péril, d'insalubrité ou de logements impropres à l'habitation auprès des services compétents.",
+  },
+];
+---
+<InnerPage
+  title="Cadre de vie & urbanisme"
+  description={description}
+  active="cadre"
+  eyebrow="Cadre de vie"
+  mark={true}
+  breadcrumb={fil}
+  lede="Aménager, entretenir et préserver la ville : règles d'urbanisme, travaux et voirie, gestion des déchets, environnement de la vallée vosgienne et logement."
+>
+  <!-- ============ SOMMAIRE ============ -->
+  <nav class="cadre-toc" aria-label="Sommaire de la page">
+    <span class="cadre-toc__label">Sur cette page</span>
+    <ul class="cadre-toc__list">
+      {sommaire.map((s) => (
+        <li><a class="cadre-toc__link" href={`#${s.id}`}>{s.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- ============ PLU & URBANISME ============ -->
+  <section class="cadre-section" id="urbanisme" aria-labelledby="urbanisme-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Réglementation</span>
+        <h2 id="urbanisme-title" class="section-title">PLU &amp; autorisations d'urbanisme</h2>
+      </div>
+      <a class="link-more link-more--gold" href="/mes-demarches/#urbanisme">Déposer une demande →</a>
+    </div>
+
+    <div class="cadre-intro">
+      <div class="prose">
+        <p>
+          Le <strong>Plan local d'urbanisme (PLU)</strong> fixe les règles de construction
+          et d'aménagement sur l'ensemble du territoire communal. Avant tout projet —
+          extension, clôture, ravalement, abri de jardin ou construction neuve —
+          vérifiez la zone dont relève votre parcelle et les règles qui s'y appliquent.
+        </p>
+        <p>
+          Le service urbanisme vous accompagne dans le choix de l'autorisation adaptée
+          et l'instruction de votre dossier. Le dépôt s'effectue en ligne ou au guichet
+          de la mairie.
+        </p>
+      </div>
+      <div class="note-card note-card--gueules">
+        <h3>Secteur sauvegardé</h3>
+        <p class="cadre-note-text">
+          Le centre ancien compte de nombreuses façades à colombages et oriels
+          Renaissance protégés. Dans ces périmètres, l'avis de l'Architecte des
+          Bâtiments de France peut être requis : anticipez vos délais.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="cadre-subtitle">Les pièces du PLU</h3>
+    <div class="cadre-grid">
+      {plu.map((p) => (
+        <article class="card cadre-card">
+          <span class="cadre-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V8l-4-4H9z"/><path d="M15 4v4h4"/><path d="M8 13h8M8 17h6"/></svg>
+          </span>
+          <h4 class="cadre-card__title">{p.titre}</h4>
+          <p class="cadre-card__desc">{p.desc}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="cadre-subtitle">Quelle autorisation pour mon projet&nbsp;?</h3>
+    <div class="cadre-grid cadre-grid--2">
+      {autorisations.map((a) => (
+        <article class="card cadre-card">
+          <span class="cadre-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+          </span>
+          <h4 class="cadre-card__title">{a.titre}</h4>
+          <p class="cadre-card__desc">{a.desc}</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="cadre-aside">
+      Consultation des documents du PLU&nbsp;: au service urbanisme de la mairie aux
+      heures d'ouverture, ou sur le géoportail national de l'urbanisme.
+    </p>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ TRAVAUX & VOIRIE ============ -->
+  <section class="cadre-section" id="travaux" aria-labelledby="travaux-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Espace public</span>
+        <h2 id="travaux-title" class="section-title">Travaux &amp; voirie</h2>
+      </div>
+    </div>
+
+    <div class="cadre-split">
+      <div class="prose">
+        <p>
+          La commune entretient les rues, trottoirs, places et réseaux du domaine
+          public&nbsp;: réfection de chaussées, signalisation, éclairage public et
+          mobilier urbain. Les chantiers d'envergure font l'objet d'une information
+          aux riverains et, le cas échéant, d'un arrêté de circulation.
+        </p>
+        <p>
+          Un trou dans la chaussée, un lampadaire éteint, un panneau couché ou un
+          tag&nbsp;? Signalez-le aux services techniques&nbsp;: chaque demande est
+          enregistrée et suivie.
+        </p>
+        <h3>Demandes d'autorisation de voirie</h3>
+        <p>
+          Occuper temporairement le domaine public (échafaudage, benne, déménagement,
+          terrasse) nécessite une autorisation préalable. Déposez votre demande au
+          moins quinze jours avant le début de l'occupation.
+        </p>
+      </div>
+
+      <aside class="action-card cadre-action is-dark">
+        <h2>Signaler un problème</h2>
+        <p class="cadre-action__lede">Voirie, éclairage, propreté&nbsp;: un désordre sur le domaine public&nbsp;?</p>
+        <ol class="cadre-steps">
+          {signalement.map((etape, i) => (
+            <li class="cadre-step">
+              <span class="cadre-step__n" aria-hidden="true">{i + 1}</span>
+              <span class="cadre-step__txt">{etape}</span>
+            </li>
+          ))}
+        </ol>
+        <a class="btn btn--primary btn--block" href="/contact/">Faire un signalement</a>
+      </aside>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ DÉCHETS & PROPRETÉ ============ -->
+  <section class="cadre-section" id="dechets" aria-labelledby="dechets-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Au quotidien</span>
+        <h2 id="dechets-title" class="section-title">Déchets &amp; propreté</h2>
+      </div>
+    </div>
+
+    <p class="lead cadre-lead">
+      La collecte des déchets et la déchèterie du Val d'Argent sont gérées à l'échelle
+      intercommunale. Le tri et le compostage réduisent le volume des ordures
+      résiduelles et le coût du service pour tous.
+    </p>
+
+    <h3 class="cadre-subtitle">Calendrier de collecte</h3>
+    <div class="cadre-table-wrap">
+      <table class="cadre-table">
+        <caption class="visually-hidden">Jours et bacs de collecte par flux de déchets</caption>
+        <thead>
+          <tr>
+            <th scope="col">Flux</th>
+            <th scope="col">Fréquence</th>
+            <th scope="col">Contenant</th>
+          </tr>
+        </thead>
+        <tbody>
+          {collectes.map((c) => (
+            <tr>
+              <th scope="row">{c.flux}</th>
+              <td>{c.rythme}</td>
+              <td>{c.bac}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="cadre-aside">
+      Jours indicatifs&nbsp;: reportez-vous au calendrier de collecte distribué chaque
+      année et disponible en mairie. Sortez vos bacs la veille au soir.
+    </p>
+
+    <div class="cadre-split cadre-split--top">
+      <article class="info-card cadre-decheterie">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/><path d="M10 11v5M14 11v5"/></svg>
+          Déchèterie du Val d'Argent
+        </h3>
+        <p class="cadre-decheterie__txt">
+          Ouverte aux particuliers de la commune sur présentation d'un justificatif.
+          Plusieurs filières y sont triées et valorisées&nbsp;:
+        </p>
+        <ul class="cadre-pills">
+          {filieres.map((f) => (
+            <li class="cadre-pill">{f}</li>
+          ))}
+        </ul>
+      </article>
+
+      <aside class="note-card cadre-compost">
+        <h3>Réduire ses déchets</h3>
+        <ul class="cadre-list">
+          <li>Compostez les biodéchets&nbsp;: composteurs individuels et partagés disponibles.</li>
+          <li>Déposez le verre dans les colonnes d'apport volontaire des quartiers.</li>
+          <li>Réemployez et donnez plutôt que de jeter (recyclerie du Val).</li>
+          <li>Refusez les imprimés publicitaires avec un autocollant «&nbsp;Stop pub&nbsp;».</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ ENVIRONNEMENT ============ -->
+  <section class="cadre-section" id="environnement" aria-labelledby="environnement-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Vallée vosgienne</span>
+        <h2 id="environnement-title" class="section-title">Environnement &amp; nature</h2>
+      </div>
+    </div>
+
+    <div class="cadre-split cadre-split--media">
+      <div class="prose">
+        <p>
+          Lovée entre les versants du massif vosgien, la commune s'étire de part et
+          d'autre de la <strong>Lièpvrette</strong>. Forêts communales, prairies de
+          fond de vallée et chaumes d'altitude composent un cadre de moyenne montagne
+          que la collectivité s'attache à préserver.
+        </p>
+        <p>
+          Protection de la ressource en eau, gestion durable des forêts, maintien des
+          continuités écologiques le long de la rivière&nbsp;: autant d'enjeux qui
+          guident l'action environnementale au quotidien.
+        </p>
+      </div>
+      <div class="photo-block cadre-photo">
+        <span class="photo-block__strata"></span>
+        <span class="photo-block__kicker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 20h18"/><path d="M5 20l4-9 3 5 2-3 5 7"/></svg>
+          Photo paysage
+        </span>
+        <span class="photo-block__title">La Lièpvrette au pied des versants boisés</span>
+        <span class="photo-block__alt">alt&nbsp;: Rivière de fond de vallée bordée de prairies, forêts vosgiennes en arrière-plan</span>
+      </div>
+    </div>
+
+    <div class="cadre-grid cadre-grid--2 cadre-grid--top">
+      {environnement.map((e) => (
+        <article class="card cadre-card">
+          <span class="cadre-card__icon cadre-card__icon--vert">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22c5-2 8-6 8-12V5l-8-3-8 3v5c0 6 3 10 8 12z"/><path d="M12 8v8M9 11l3-3 3 3"/></svg>
+          </span>
+          <h3 class="cadre-card__title">{e.titre}</h3>
+          <p class="cadre-card__desc">{e.desc}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <hr class="vein" />
+
+  <!-- ============ LOGEMENT ============ -->
+  <section class="cadre-section" id="logement" aria-labelledby="logement-title">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Se loger</span>
+        <h2 id="logement-title" class="section-title">Logement</h2>
+      </div>
+    </div>
+
+    <p class="lead cadre-lead">
+      De la demande de logement social à la rénovation de l'habitat ancien, la commune
+      oriente les habitants vers les bons interlocuteurs et les dispositifs d'aide.
+    </p>
+
+    <div class="cadre-grid">
+      {logement.map((l) => (
+        <article class="card cadre-card">
+          <span class="cadre-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+          </span>
+          <h3 class="cadre-card__title">{l.titre}</h3>
+          <p class="cadre-card__desc">{l.desc}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="note-card cadre-logement-note">
+      <h3>Un projet, une question&nbsp;?</h3>
+      <p class="cadre-note-text">
+        Le service logement et le centre communal d'action sociale vous accompagnent
+        dans vos démarches. Prenez contact avec la mairie pour un rendez-vous.
+      </p>
+      <a class="link-more" href="/contact/">Contacter la mairie →</a>
+    </div>
+  </section>
+
+  <style>
+    /* ---- SOMMAIRE ANCRES ---- */
+    .cadre-toc {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      padding: 16px 20px;
+      margin-bottom: 40px;
+      background: var(--parchemin-2);
+      border: 1px solid var(--bord-clair);
+      border-left: 4px solid var(--or);
+      border-radius: var(--rayon);
+    }
+    .cadre-toc__label {
+      font: 700 0.75rem/1 var(--sans);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gueules);
+    }
+    .cadre-toc__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .cadre-toc__link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border: 1px solid var(--bord-champ);
+      border-radius: 999px;
+      color: var(--texte);
+      font: 600 0.84375rem/1 var(--sans);
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .cadre-toc__link:hover {
+      border-color: var(--gueules);
+      color: var(--gueules);
+      background: #f1ebdd;
+    }
+
+    /* ---- SECTIONS ---- */
+    .cadre-section { scroll-margin-top: var(--header-offset); }
+    .cadre-section + .vein { margin-block: 48px; }
+    .cadre-subtitle {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--encre);
+      margin: 36px 0 18px;
+    }
+    .cadre-lead { max-width: 70ch; margin-bottom: 26px; }
+    .cadre-aside {
+      font: 400 0.875rem/1.6 var(--sans);
+      color: var(--texte-muet);
+      margin-top: 16px;
+      max-width: 70ch;
+    }
+
+    /* Intro urbanisme : prose + encadré */
+    .cadre-intro {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .cadre-note-text { font: 400 0.90625rem/1.6 var(--sans); color: var(--texte-2); margin: 0; }
+
+    /* Grilles de cartes */
+    .cadre-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .cadre-grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .cadre-grid--top { margin-top: 8px; }
+    .cadre-card { padding: 22px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .cadre-card__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex: none;
+      background: var(--nuit);
+      border-radius: var(--rayon);
+      color: var(--argent);
+    }
+    .cadre-card__icon--vert { color: var(--vert); background: var(--vert-pale); border: 1px solid var(--vert-bord); }
+    .cadre-card__title {
+      font: 600 1.03125rem/1.25 var(--sans);
+      color: var(--encre-2);
+      margin: 0;
+    }
+    .cadre-card__desc { font: 400 0.875rem/1.55 var(--sans); color: var(--texte-2); margin: 0; }
+
+    /* Mises en page à deux colonnes */
+    .cadre-split {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .cadre-split--media { grid-template-columns: 1.4fr 1fr; }
+    .cadre-split--top { margin-top: 32px; }
+
+    /* Carte d'action « signalement » */
+    .cadre-action { align-self: start; }
+    .cadre-action__lede { font: 400 0.90625rem/1.55 var(--sans); color: var(--brume-2); margin: 0 0 18px; }
+    .cadre-steps { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+    .cadre-step { display: flex; align-items: flex-start; gap: 12px; }
+    .cadre-step__n {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      flex: none;
+      background: var(--gueules);
+      color: #fff;
+      border-radius: 50%;
+      font: 700 0.8125rem/1 var(--sans);
+    }
+    .cadre-step__txt { font: 400 0.875rem/1.5 var(--sans); color: var(--brume-2); }
+
+    /* Tableau de collecte */
+    .cadre-table-wrap { overflow-x: auto; border: 1px solid var(--bord-clair); border-radius: var(--rayon-lg); }
+    .cadre-table { width: 100%; border-collapse: collapse; background: var(--parchemin-2); min-width: 520px; }
+    .cadre-table caption { text-align: left; }
+    .cadre-table th,
+    .cadre-table td {
+      text-align: left;
+      padding: 14px 18px;
+      font: 400 0.90625rem/1.4 var(--sans);
+      color: var(--texte);
+      border-top: 1px solid var(--bord-fin);
+    }
+    .cadre-table thead th {
+      font: 700 0.75rem/1 var(--sans);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gueules);
+      border-top: 0;
+    }
+    .cadre-table tbody th[scope="row"] { font-weight: 600; color: var(--encre-2); }
+
+    /* Déchèterie & compost */
+    .cadre-decheterie__txt { font: 400 0.90625rem/1.6 var(--sans); color: var(--texte); margin: 0 0 14px; }
+    .cadre-pills { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .cadre-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--parchemin);
+      border: 1px solid var(--bord-clair);
+      border-radius: 999px;
+      font: 500 0.8125rem/1.3 var(--sans);
+      color: var(--texte-2);
+    }
+    .cadre-compost { align-self: start; }
+    .cadre-list { margin: 0; padding-left: 18px; font: 400 0.90625rem/1.6 var(--sans); color: var(--texte-2); }
+    .cadre-list li + li { margin-top: 8px; }
+
+    /* Photo paysage */
+    .cadre-photo { min-height: 220px; background: linear-gradient(155deg, #243024, #0f120d); }
+
+    /* Encadré logement */
+    .cadre-logement-note { margin-top: 28px; }
+    .cadre-logement-note .link-more { margin-top: 6px; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 980px) {
+      .cadre-grid { grid-template-columns: repeat(2, 1fr); }
+      .cadre-intro,
+      .cadre-split,
+      .cadre-split--media { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .cadre-grid,
+      .cadre-grid--2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</InnerPage>
