@@ -1,0 +1,147 @@
+---
+import InnerPage from "../../layouts/InnerPage.astro";
+import { mairie } from "../../data/commune";
+
+const description =
+  "Signaler un problème sur le domaine public à Sainte-Marie-aux-Mines : voirie, éclairage, propreté, espaces verts. Décrivez le désordre et sa localisation, la mairie intervient.";
+
+const fil = [
+  { label: "Accueil", href: "/" },
+  { label: "Signaler un problème" },
+];
+
+const types = [
+  "Voirie & chaussée",
+  "Éclairage public",
+  "Propreté & déchets",
+  "Espaces verts",
+  "Mobilier urbain & signalisation",
+  "Autre",
+];
+---
+<InnerPage
+  title="Signaler un problème"
+  description={description}
+  eyebrow="Services techniques"
+  mark={true}
+  breadcrumb={fil}
+  lede="Un nid-de-poule, un lampadaire en panne, un dépôt sauvage ? Signalez-le à la mairie : indiquez le type de désordre et sa localisation, les services techniques interviennent sur le domaine public."
+>
+  <div class="signal">
+    <p class="form-status" id="signal-status" role="status" hidden></p>
+
+    <form
+      id="signal-form"
+      class="signal-form card"
+      data-sujet="Signalement domaine public — Sainte-Marie-aux-Mines"
+      data-mairie-email={mairie.email}
+    >
+      <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d'écran). -->
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
+
+      <div class="field">
+        <label for="sg-type">Type de problème *</label>
+        <select id="sg-type" name="type" class="select" required>
+          <option value="">Choisir…</option>
+          {types.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sg-lieu">Localisation *</label>
+        <input id="sg-lieu" name="localisation" class="input" type="text" required
+          placeholder="Rue, lieu-dit ou point de repère" autocomplete="off" />
+        <p class="field__hint" id="sg-lieu-hint">Soyez le plus précis possible (n° de rue, intersection, repère visible).</p>
+      </div>
+
+      <div class="field">
+        <label for="sg-desc">Description du problème *</label>
+        <textarea id="sg-desc" name="message" class="textarea" rows="5" required
+          placeholder="Décrivez le désordre constaté."></textarea>
+      </div>
+
+      <fieldset class="signal-coords">
+        <legend>Vos coordonnées (facultatif)</legend>
+        <p class="field__hint">Renseignez un e-mail si vous souhaitez être tenu informé des suites.</p>
+        <div class="signal-form__row">
+          <div class="field">
+            <label for="sg-nom">Nom</label>
+            <input id="sg-nom" name="nom" class="input" type="text" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="sg-email">E-mail</label>
+            <input id="sg-email" name="email" class="input" type="email" autocomplete="email" />
+          </div>
+        </div>
+      </fieldset>
+
+      <label class="consent">
+        <input type="checkbox" name="consentement" required />
+        <span>
+          J'accepte que ce signalement et mes éventuelles coordonnées soient traités par
+          la mairie pour traiter ma demande, conformément à la
+          <a href="/confidentialite/">politique de confidentialité</a>. *
+        </span>
+      </label>
+
+      <button type="submit" class="btn btn--primary">Envoyer le signalement</button>
+    </form>
+
+    <p class="signal__alt">
+      Pour une urgence (danger immédiat, fuite, accident), contactez directement la mairie
+      au <a href={`tel:${mairie.telE164}`}>{mairie.tel}</a>.
+    </p>
+  </div>
+</InnerPage>
+
+<script>
+  import { initPublicForm } from "../../lib/forms-client";
+  const status = document.getElementById("signal-status");
+  initPublicForm("signal-form", (etat) => {
+    if (!status) return;
+    status.hidden = false;
+    status.dataset.etat = etat;
+    status.textContent =
+      etat === "chargement"
+        ? "Envoi du signalement en cours…"
+        : etat === "ok"
+          ? "Merci ! Votre signalement a bien été transmis aux services techniques."
+          : etat === "mailto"
+            ? "Votre messagerie va s'ouvrir pour finaliser l'envoi du signalement."
+            : "Une erreur est survenue. Réessayez plus tard ou appelez la mairie.";
+    try { status.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (_) {}
+  });
+</script>
+
+<style>
+  .signal { max-width: 720px; }
+  .signal-form { padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+  .signal-form .form-status[hidden] { display: none; }
+  .signal-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field__hint { margin: 6px 0 0; font: 400 0.8125rem/1.45 var(--sans); color: var(--texte-muet); }
+
+  .signal-coords {
+    border: 1px solid var(--bord-clair);
+    border-radius: var(--rayon);
+    padding: 16px 18px 18px;
+    margin: 0;
+  }
+  .signal-coords legend {
+    font: 600 0.875rem/1 var(--sans);
+    color: var(--encre-2);
+    padding: 0 6px;
+  }
+  .signal-coords .field__hint { margin: 0 0 12px; }
+
+  .signal__alt { margin-top: 18px; font: 400 0.9375rem/1.6 var(--sans); color: var(--texte-2); }
+  .signal__alt a { color: var(--gueules); font-weight: 600; }
+
+  /* Retour visuel d'état (doublé du texte annoncé via role=status). */
+  .form-status[data-etat="ok"] { color: var(--vert-fonce); }
+  .form-status[data-etat="erreur"] { color: var(--gueules); }
+
+  @media (max-width: 520px) {
+    .signal-form { padding: 22px 18px; }
+    .signal-form__row { grid-template-columns: 1fr; }
+  }
+</style>

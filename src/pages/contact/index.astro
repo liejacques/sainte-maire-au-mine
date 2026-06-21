@@ -44,8 +44,9 @@ const services = [
         class="contact-form card"
         data-sujet="Message de contact — Sainte-Marie-aux-Mines"
         data-mairie-email={mairie.email}
-        data-configured="false"
       >
+        <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d'écran). -->
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
         <div class="contact-form__row">
           <div class="field">
             <label for="ct-nom">Nom *</label>
@@ -133,12 +134,15 @@ const services = [
   initPublicForm("contact-form", (etat) => {
     if (!status) return;
     status.hidden = false;
+    status.dataset.etat = etat;
     status.textContent =
-      etat === "ok"
-        ? "Votre message a bien été envoyé. La mairie vous répondra sous 48 heures ouvrées."
-        : etat === "mailto"
-          ? "Votre messagerie va s'ouvrir pour finaliser l'envoi de votre message."
-          : "Une erreur est survenue. Réessayez plus tard.";
+      etat === "chargement"
+        ? "Envoi du message en cours…"
+        : etat === "ok"
+          ? "Votre message a bien été envoyé. La mairie vous répondra sous 48 heures ouvrées."
+          : etat === "mailto"
+            ? "Votre messagerie va s'ouvrir pour finaliser l'envoi de votre message."
+            : "Une erreur est survenue. Réessayez plus tard.";
     try { status.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (_) {}
   });
 </script>

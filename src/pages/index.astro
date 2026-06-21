@@ -216,7 +216,7 @@ const description =
                 <a href={`mailto:${mairie.email}`}>{mairie.email}</a>
               </address>
             </div>
-            <a class="signal-card" href="/contact/">
+            <a class="signal-card" href="/signalement/">
               <span class="signal-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
               <span class="signal-card__txt">
                 <span class="signal-card__t">Signaler un problème</span>
@@ -267,8 +267,9 @@ const description =
             id="newsletter-home"
             data-sujet="Inscription newsletter — Sainte-Marie-aux-Mines"
             data-mairie-email={mairie.email}
-            data-configured="false"
           >
+            <!-- Honeypot anti-spam (caché aux humains et aux lecteurs d'écran). -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden />
             <div class="newsletter__row">
               <label for="nl-email" class="visually-hidden">Votre adresse e-mail</label>
               <input id="nl-email" name="email" type="email" required placeholder="Votre adresse e-mail" class="input" />
@@ -293,12 +294,15 @@ const description =
   initPublicForm("newsletter-home", (etat) => {
     if (!status) return;
     status.hidden = false;
+    status.dataset.etat = etat;
     status.textContent =
-      etat === "ok"
-        ? "Merci ! Un e-mail de confirmation vous a été envoyé."
-        : etat === "mailto"
-          ? "Votre messagerie va s'ouvrir pour confirmer l'inscription."
-          : "Une erreur est survenue. Réessayez plus tard.";
+      etat === "chargement"
+        ? "Inscription en cours…"
+        : etat === "ok"
+          ? "Merci ! Un e-mail de confirmation vous a été envoyé."
+          : etat === "mailto"
+            ? "Votre messagerie va s'ouvrir pour confirmer l'inscription."
+            : "Une erreur est survenue. Réessayez plus tard.";
   });
 </script>
 
