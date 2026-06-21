@@ -15,6 +15,10 @@ export interface EventItem {
   horaire?: string;
   resume: string;
   contenu: string[];
+  /** Lien externe à la fiche agenda générique (ex. page vitrine dédiée). Quand
+   *  il est présent, les listings pointent ici et aucune fiche /agenda/[slug]/
+   *  n'est générée. */
+  lien?: string;
 }
 
 // Couleur d'accent par type (doublée d'un libellé : jamais l'info par la couleur seule).
@@ -26,21 +30,22 @@ export const accentByType: Record<EventType, string> = {
 export const evenements: EventItem[] = [
   {
     slug: "mineral-gem-2026",
-    titre: "Mineral & Gem 2026 — 62ᵉ bourse minéralogique",
+    titre: "Mineral & Gem 2026 — 61ᵉ édition « Nuances de Fer »",
     type: "touristique",
     typeLabel: "Mineral & Gem",
     day: "27",
     month: "Juin",
     iso: "2026-06-27",
-    lieu: "Centre-ville & Théâtre municipal",
-    horaire: "Du 27 au 30 juin · 9h–19h",
+    lieu: "Val d'Argent Expo — centre-ville",
+    horaire: "Du 24 au 28 juin · grand public sam. 27 & dim. 28 (9h–18h)",
     resume:
-      "La 2ᵉ bourse minéralogique du monde transforme la ville : près de 1 000 exposants et 42 000 visiteurs attendus.",
+      "Le 2ᵉ salon minéralogique mondial transforme la ville. Thème 2026 : « Nuances de Fer ». Ouvert au grand public les samedi 27 et dimanche 28 juin.",
     contenu: [
-      "Quatre jours durant, Sainte-Marie-aux-Mines devient la capitale mondiale du minéral. Deuxième manifestation du genre après Tucson, Mineral & Gem rassemble près de 1 000 exposants venus du monde entier et plus de 42 000 visiteurs.",
-      "Minéraux, gemmes, fossiles et bijoux s'exposent dans le centre-ville et au Théâtre municipal. Un pavillon est consacré à l'argent natif, en hommage à l'histoire de la vallée.",
-      "Accès facilité depuis les parkings relais ; le programme complet et les tarifs sont disponibles à l'office de tourisme du Val d'Argent.",
+      "Cinq jours durant, Sainte-Marie-aux-Mines devient la capitale mondiale du minéral. Deuxième manifestation du genre après Tucson et leader européen, Mineral & Gem rassemble plus de 1 000 exposants internationaux sur près de 52 000 m².",
+      "Minéraux, fossiles, météorites d'un côté ; pierres taillées, joaillerie et gemmologie de l'autre. L'édition 2026 met le fer à l'honneur avec l'exposition prestige « Nuances de Fer ».",
+      "Le salon ouvre au grand public les samedi 27 et dimanche 28 juin. Découvrez la présentation complète sur la page dédiée ; les informations pratiques figurent sur le site officiel de l'événement.",
     ],
+    lien: "/decouvrir/mineral-gem/",
   },
   {
     slug: "conseil-municipal-juin",

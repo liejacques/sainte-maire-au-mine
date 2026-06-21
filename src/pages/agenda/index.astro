@@ -30,7 +30,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
     <ul class="agenda-list" role="list">
       {evenements.map((e) => (
         <li>
-          <a class="agenda-row" href={`/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+          <a class="agenda-row" href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
             <div class="agenda-row__date">
               <div class="agenda-row__day">{e.day}</div>
               <div class="agenda-row__month">{e.month}</div>

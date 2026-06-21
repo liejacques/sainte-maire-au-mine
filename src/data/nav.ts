@@ -69,6 +69,7 @@ export const mainNav: NavItem[] = [
     href: "/decouvrir/",
     children: [
       { label: "Patrimoine & mines", href: "/decouvrir/#patrimoine" },
+      { label: "Mineral & Gem", href: "/decouvrir/mineral-gem/" },
       { label: "Pays d'art et d'histoire", href: "/decouvrir/#dualite" },
       { label: "Agenda culturel", href: "/agenda/" },
       { label: "Tourisme", href: "/decouvrir/#tourisme" },
@@ -108,6 +109,7 @@ export const footerNav: { titre: string; liens: NavLink[] }[] = [
       { label: "Budget & finances", href: "/ma-mairie/#budget" },
       { label: "Actualités", href: "/actualites/" },
       { label: "Patrimoine & mines", href: "/decouvrir/" },
+      { label: "Mineral & Gem", href: "/decouvrir/mineral-gem/" },
       { label: "Associations", href: "/decouvrir/#associations" },
     ],
   },

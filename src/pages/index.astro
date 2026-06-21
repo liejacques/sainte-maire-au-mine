@@ -140,7 +140,7 @@ const description =
         </div>
         <div class="agenda__list">
           {agendaHome.map((e) => (
-            <a class="agenda-row" href={`/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+            <a class="agenda-row" href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
               <div class="agenda-row__date">
                 <div class="agenda-row__day">{e.day}</div>
                 <div class="agenda-row__month">{e.month}</div>

@@ -26,7 +26,8 @@ const cards = [
     tagClass: "vert",
     img: photos.argentTetraedrite,
     title: "Mineral & Gem",
-    desc: "Chaque été, la 2ᵉ bourse minéralogique mondiale transforme la ville : 1 000 exposants, 42 000 visiteurs, et l'argent natif à l'honneur.",
+    href: "/decouvrir/mineral-gem/",
+    desc: "Chaque été, le 2ᵉ salon minéralogique mondial transforme la ville : 1 000+ exposants internationaux, et l'argent natif à l'honneur.",
   },
   {
     tag: "Patrimoine",
@@ -168,7 +169,7 @@ const cards = [
               <div class="dv-card__body">
                 <h3 class="dv-card__title">{c.title}</h3>
                 <p class="dv-card__desc">{c.desc}</p>
-                <a class="link-more" href="/agenda/">En savoir plus →</a>
+                <a class="link-more" href={"href" in c ? c.href : "/agenda/"}>En savoir plus →</a>
               </div>
             </article>
           ))}
