@@ -179,7 +179,7 @@ const description =
           <div class="ident-grid">
             {chiffresDecouvrir.map((s) => (
               <div class="ident-stat">
-                <div class={`ident-stat__n ident-stat__n--${s.tone}`}>{s.value}</div>
+                <div class={`ident-stat__n ident-stat__n--${s.tone}${/\d[\d\s]*\d/.test(s.value) ? " count" : ""}`}>{s.value}</div>
                 <div class="ident-stat__l">{s.label}</div>
               </div>
             ))}

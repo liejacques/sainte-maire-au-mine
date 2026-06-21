@@ -80,7 +80,7 @@ const cards = [
       <div class="wrap dv-stats__inner">
         {stats.map((st) => (
           <div class="dv-stat">
-            <span class={`dv-stat__n dv-stat__n--${st.tone}`}>{st.value}</span>
+            <span class={`dv-stat__n dv-stat__n--${st.tone}${/\d[\d\s]*\d/.test(st.value) ? " count" : ""}`}>{st.value}</span>
             <span class="dv-stat__l">{st.label}</span>
           </div>
         ))}

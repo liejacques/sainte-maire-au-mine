@@ -104,7 +104,7 @@ const stats = [
       <div class="wrap mg-stats__inner">
         {stats.map((s) => (
           <div class="mg-stat mg-reveal">
-            <span class="mg-stat__n">{s.n}</span>
+            <span class={`mg-stat__n${/\d[\d\s]*\d/.test(s.n) && !/depuis/i.test(s.n) ? " count" : ""}`}>{s.n}</span>
             <span class="mg-stat__l">{s.l}</span>
           </div>
         ))}
