@@ -28,32 +28,47 @@ const description =
 
     <h2>Résultats des tests</h2>
     <p>
-      L'audit de conformité réalisé révèle que
-      <strong>[À COMPLÉTER&nbsp;: taux %]</strong> des critères du RGAA version 4.1
-      sont respectés.
+      Cette déclaration s'appuie sur une <strong>auto-évaluation</strong> (contrôles
+      automatisés et vérifications manuelles) et non sur un audit RGAA certifié. Un
+      audit formel reste à mener pour établir le taux de conformité officiel.
     </p>
     <ul>
-      <li>Taux de conformité global au RGAA&nbsp;: <strong>[À COMPLÉTER&nbsp;: taux %]</strong></li>
-      <li>Méthode d'évaluation utilisée&nbsp;: audit RGAA 4.1 (à mener avant publication)</li>
+      <li>Taux de conformité global au RGAA&nbsp;: <strong>[À COMPLÉTER&nbsp;: taux %, après audit officiel]</strong></li>
+      <li>Méthode&nbsp;: auto-évaluation (audit RGAA 4.1 complet à mener avant publication définitive)</li>
+    </ul>
+
+    <h2>Mesures d'accessibilité en place</h2>
+    <ul>
+      <li>Un seul titre <code>&lt;h1&gt;</code> par page et hiérarchie de titres sans saut (vérifié automatiquement).</li>
+      <li>Alternative textuelle pertinente sur toutes les images&nbsp;; crédits (auteur · licence) conservés.</li>
+      <li>Lien d'évitement, navigation clavier complète, focus visibles (renforcés en mode contraste).</li>
+      <li>Sélecteur de taille du texte (mise à l'échelle en rem) et mode de contraste renforcé, mémorisés.</li>
+      <li>Animations respectant <code>prefers-reduced-motion</code> (tout est figé si l'utilisateur le demande).</li>
+      <li>Formulaires (contact, signalement, newsletter) étiquetés, avec annonce des états (envoi, succès, erreur).</li>
+      <li>Recherche interne annonçant le nombre de résultats aux technologies d'assistance.</li>
+      <li>Polices auto-hébergées&nbsp;; aucune dépendance tierce bloquante au chargement.</li>
     </ul>
 
     <h2>Contenus non accessibles</h2>
-    <p>Les contenus listés ci-dessous ne sont pas accessibles pour les raisons suivantes.</p>
+    <p>Les points listés ci-dessous présentent des limites connues.</p>
 
-    <h3>Non-conformités</h3>
+    <h3>Non-conformités et réserves connues</h3>
     <ul>
       <li>
-        Certaines images d'illustration sont actuellement représentées par des
-        blocs de remplacement&nbsp;; les photographies définitives devront comporter
-        une alternative textuelle pertinente.
+        <strong>Carte d'accès interactive</strong> (accueil et page contact)&nbsp;: la
+        manipulation fine d'une carte reste difficile avec certaines technologies
+        d'assistance. Une alternative est systématiquement proposée&nbsp;: l'adresse en
+        toutes lettres et un lien «&nbsp;plan et itinéraire en plein écran&nbsp;»
+        (OpenStreetMap, ouverture dans un nouvel onglet annoncée).
       </li>
       <li>
-        Les documents bureautiques téléchargeables (PDF) mis en ligne peuvent ne pas
-        être entièrement accessibles. <strong>[À COMPLÉTER après audit]</strong>
+        <strong>Espace de gestion</strong> (<code>/admin</code>)&nbsp;: outil interne
+        réservé à la commune, nécessitant JavaScript, non indexé et non destiné au
+        public&nbsp;; il n'entre pas dans le périmètre de cette déclaration.
       </li>
       <li>
-        Les contenus cartographiques interactifs intégrés ultérieurement pourront
-        présenter des limites d'accessibilité. <strong>[À COMPLÉTER après audit]</strong>
+        Le <strong>taux de conformité officiel</strong> n'a pas encore été établi par un
+        audit RGAA formel (voir «&nbsp;Résultats des tests&nbsp;»).
       </li>
     </ul>
 
@@ -92,15 +107,15 @@ const description =
     <ul>
       <li>Validateur W3C (HTML)</li>
       <li>Outils d'analyse de contraste</li>
-      <li><strong>[À COMPLÉTER&nbsp;: autres outils utilisés]</strong></li>
+      <li>Scripts d'audit internes du projet (liens internes, unicité du h1, alternatives d'images)</li>
     </ul>
 
-    <h3>Pages du site ayant fait l'objet de la vérification de conformité</h3>
+    <h3>Pages du site ayant fait l'objet de la vérification</h3>
     <ul>
       <li>Page d'accueil</li>
-      <li>Pages de rubrique et fiches de démarche</li>
-      <li>Formulaires (contact, signalement, newsletter)</li>
-      <li><strong>[À COMPLÉTER&nbsp;: échantillon de pages audité]</strong></li>
+      <li>Mes démarches (liste filtrable) et fiche de démarche</li>
+      <li>Découvrir &amp; sortir, dont la page Mineral &amp; Gem</li>
+      <li>Contact, Signalement et Recherche</li>
     </ul>
 
     <h2>Retour d'information et contact</h2>

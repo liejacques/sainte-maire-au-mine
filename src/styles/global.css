@@ -870,12 +870,21 @@ summary:focus-visible,
 
 /* =========================================================================
    MODE CONTRASTE RENFORCÉ (sélecteur d'accessibilité)
-   Souligne tous les liens et renforce les focus. Aucune info par la couleur.
+   Pousse le texte au maximum sur fond clair, souligne tous les liens (info
+   jamais portée par la couleur seule) et épaissit le focus en gardant sa
+   couleur contextuelle (gueules sur clair, argent sur sombre) — donc toujours
+   visible. Les valeurs ci-dessous sont des redéfinitions de jetons.
    ========================================================================= */
+[data-contrast="on"] {
+  --texte: #161310;
+  --texte-2: #161310;
+  --texte-3: #1d190f;
+  --texte-muet: #2b2519;
+  --texte-faible: #463f2e;
+}
 [data-contrast="on"] a { text-decoration: underline !important; text-underline-offset: 3px; }
-[data-contrast="on"] :focus-visible { outline-width: 4px !important; outline-color: #ffffff !important; }
-[data-contrast="on"] body { background: #fff; }
-[data-contrast="on"] .nav-panel a { color: #1b1810; }
+[data-contrast="on"] :focus-visible { outline-width: 4px !important; outline-offset: 2px !important; }
+[data-contrast="on"] .nav-panel a { color: var(--encre); }
 
 /* =========================================================================
    RESPONSIVE — en-tête, pied de page, conteneurs partagés
