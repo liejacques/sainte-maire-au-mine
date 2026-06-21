@@ -53,7 +53,7 @@ for (const t of themesDemarches) {
               class="md-theme"
               data-theme-btn={t.id}
               aria-current={t.id === "all" ? "true" : "false"}
-              id={"anchor" in t && t.anchor ? `theme-${t.anchor}` : undefined}
+              id={"anchor" in t && t.anchor ? t.anchor : undefined}
             >
               <span>{t.label}</span>
               <span class="md-theme__count">{counts[t.id]}</span>
