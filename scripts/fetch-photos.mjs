@@ -13,7 +13,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT_DIR = path.resolve(__dirname, "..", "public", "images");
+const OUT_DIR = path.resolve(__dirname, "..", "src", "assets", "images");
 const MAX_W = 1500;
 const QUALITY = 80;
 const UA =

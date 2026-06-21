@@ -6,6 +6,7 @@ import Base from "../../../layouts/Base.astro";
 import MinerTools from "../../../components/MinerTools.astro";
 import { mineralGem as mg } from "../../../data/mineral-gem";
 import { photos } from "../../../data/photos";
+import PhotoImg from "../../../components/PhotoImg.astro";
 
 const description = `Mineral & Gem à Sainte-Marie-aux-Mines (${mg.dates}) : ${mg.rang}. ${mg.edition}, thème « ${mg.theme} ». ${mg.exposants}, ${mg.surface}. Présentation de l’événement.`;
 
@@ -142,7 +143,7 @@ const stats = [
       <div class="wrap mg-prestige__grid">
         <div class="mg-prestige__sticky">
           <div class="mg-prestige__visual">
-            <img class="mg-prestige__img" src={photos.argentTetraedrite.src} alt={photos.argentTetraedrite.alt} width={photos.argentTetraedrite.w} height={photos.argentTetraedrite.h} loading="lazy" />
+            <PhotoImg photo={photos.argentTetraedrite} class="mg-prestige__img" sizes="(max-width: 900px) 100vw, 45vw" />
             <span class="photo-credit">© {photos.argentTetraedrite.auteur} · {photos.argentTetraedrite.licence}</span>
           </div>
         </div>

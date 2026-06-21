@@ -1,0 +1,38 @@
+---
+// Image responsive d'un cliché de la photothèque (astro:assets).
+// Génère AVIF + WebP en plusieurs largeurs (srcset), dimensions explicites
+// (zéro CLS), chargement paresseux par défaut. Effet « blur-up » (fondu au
+// chargement) géré par la classe `blur-up` + SiteScripts, neutralisé sans JS
+// et en prefers-reduced-motion. Le crédit (auteur · licence) reste géré à côté.
+import { Picture } from "astro:assets";
+import type { Photo } from "../data/photos";
+
+interface Props {
+  photo: Photo;
+  /** Classe de l'<img> (par défaut, le cadre photo-block). */
+  class?: string;
+  /** Attribut sizes pour le srcset. */
+  sizes?: string;
+  /** Image prioritaire (hero) : chargement immédiat, haute priorité. */
+  eager?: boolean;
+}
+
+const {
+  photo,
+  class: cls = "photo-block__img",
+  sizes = "(max-width: 980px) 100vw, 50vw",
+  eager = false,
+} = Astro.props;
+---
+<Picture
+  src={photo.img}
+  formats={["avif", "webp"]}
+  fallbackFormat="webp"
+  widths={[480, 768, 1100, 1500]}
+  sizes={sizes}
+  alt={photo.alt}
+  class={`${cls} blur-up`}
+  loading={eager ? "eager" : "lazy"}
+  decoding="async"
+  fetchpriority={eager ? "high" : undefined}
+/>

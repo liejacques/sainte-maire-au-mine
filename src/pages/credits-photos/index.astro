@@ -1,5 +1,6 @@
 ---
 import InnerPage from "../../layouts/InnerPage.astro";
+import { Image } from "astro:assets";
 import { photosList } from "../../data/photos";
 
 const fil = [{ label: "Accueil", href: "/" }, { label: "Crédits photos" }];
@@ -33,7 +34,7 @@ const description =
     <ul class="credits__gallery" role="list">
       {photosList.map((p) => (
         <li class="credits__item">
-          <img class="credits__thumb" src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" />
+          <Image class="credits__thumb" src={p.img} alt={p.alt} width={480} densities={[1, 1.5]} loading="lazy" decoding="async" />
           <div class="credits__meta">
             <span class="credits__title">
               {p.source

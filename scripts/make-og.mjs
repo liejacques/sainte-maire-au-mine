@@ -69,7 +69,7 @@ const overlay = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
 </svg>`;
 
 async function run() {
-  const base = await sharp(path.join(ROOT, "public", "images", "vue-ville.webp"))
+  const base = await sharp(path.join(ROOT, "src", "assets", "images", "vue-ville.webp"))
     .resize(W, H, { fit: "cover", position: "centre" })
     .toBuffer();
 

@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import MinerTools from "../../components/MinerTools.astro";
+import PhotoImg from "../../components/PhotoImg.astro";
 import { associations } from "../../data/vie-locale";
 import { photos } from "../../data/photos";
 
@@ -97,7 +98,7 @@ const cards = [
         <div class="dv-duo">
           <div class="dv-rive dv-rive--lorraine">
             <div class="photo-block photo-block--photo dv-rive__photo">
-              <img class="photo-block__img" src={photos.egliseSaintLouis.src} alt={photos.egliseSaintLouis.alt} width={photos.egliseSaintLouis.w} height={photos.egliseSaintLouis.h} loading="lazy" />
+              <PhotoImg photo={photos.egliseSaintLouis} sizes="(max-width: 880px) 100vw, 480px" />
               <span class="photo-credit">© {photos.egliseSaintLouis.auteur} · {photos.egliseSaintLouis.licence}</span>
               <span class="photo-block__title">Église Saint-Louis, rive lorraine</span>
             </div>
@@ -111,7 +112,7 @@ const cards = [
 
           <div class="dv-rive dv-rive--alsace">
             <div class="photo-block photo-block--photo dv-rive__photo">
-              <img class="photo-block__img" src={photos.maisonReber32.src} alt={photos.maisonReber32.alt} width={photos.maisonReber32.w} height={photos.maisonReber32.h} loading="lazy" />
+              <PhotoImg photo={photos.maisonReber32} sizes="(max-width: 880px) 100vw, 480px" />
               <span class="photo-credit">© {photos.maisonReber32.auteur} · {photos.maisonReber32.licence}</span>
               <span class="photo-block__title">Maisons à oriels, rive alsacienne</span>
             </div>
@@ -127,7 +128,7 @@ const cards = [
     <section id="tourisme" class="dv-feat-section bg-parchemin" aria-labelledby="tellure-title">
       <div class="wrap dv-feat">
         <div class="photo-block photo-block--photo dv-feat__photo">
-          <img class="photo-block__img" src={photos.galerieSaintJean2.src} alt={photos.galerieSaintJean2.alt} width={photos.galerieSaintJean2.w} height={photos.galerieSaintJean2.h} loading="lazy" />
+          <PhotoImg photo={photos.galerieSaintJean2} sizes="(max-width: 880px) 100vw, 46vw" />
           <span class="photo-credit">© {photos.galerieSaintJean2.auteur} · {photos.galerieSaintJean2.licence}</span>
           <span class="photo-block__title">Galerie de la mine Saint-Jean, Val d’Argent</span>
         </div>
@@ -162,7 +163,7 @@ const cards = [
           {cards.map((c, i) => (
             <article class={`dv-card card reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`}>
               <div class="photo-block photo-block--photo dv-card__photo">
-                <img class="photo-block__img" src={c.img.src} alt={c.img.alt} width={c.img.w} height={c.img.h} loading="lazy" />
+                <PhotoImg photo={c.img} sizes="(max-width: 880px) 100vw, 300px" />
                 <span class="photo-credit">© {c.img.auteur} · {c.img.licence}</span>
                 <span class={`dv-card__tag dv-card__tag--${c.tagClass}`}>{c.tag}</span>
               </div>

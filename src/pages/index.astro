@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import MinerTools from "../components/MinerTools.astro";
 import AccessMap from "../components/AccessMap.astro";
+import PhotoImg from "../components/PhotoImg.astro";
 import { mairie } from "../data/commune";
 import { demarchesRapides, heroChips, democratie, chiffresDecouvrir } from "../data/home";
 import { aLaUne, autresActus } from "../data/actualites";
@@ -45,7 +46,7 @@ const description =
           </div>
 
           <div class="hero-photo photo-block photo-block--photo">
-            <img class="photo-block__img" src={photos.galerieSaintJean.src} alt={photos.galerieSaintJean.alt} width={photos.galerieSaintJean.w} height={photos.galerieSaintJean.h} fetchpriority="high" />
+            <PhotoImg photo={photos.galerieSaintJean} eager sizes="(max-width: 980px) 100vw, 430px" />
             <span class="photo-credit">© {photos.galerieSaintJean.auteur} · {photos.galerieSaintJean.licence}</span>
             <span class="photo-block__title">Galerie de la mine Saint-Jean</span>
             <div class="hero-badge">
@@ -93,7 +94,7 @@ const description =
         <div class="news-grid">
           <article class="news-featured card reveal">
             <div class="news-featured__photo photo-block photo-block--photo">
-              <img class="photo-block__img" src={aLaUne.image.src} alt={aLaUne.image.alt} width={aLaUne.image.w} height={aLaUne.image.h} loading="lazy" />
+              <PhotoImg photo={aLaUne.image} sizes="(max-width: 980px) 100vw, 500px" />
               <span class="photo-credit">© {aLaUne.image.auteur} · {aLaUne.image.licence}</span>
               <span class={`tag tag--${aLaUne.tag} news-featured__tag`}>{aLaUne.categorie}</span>
             </div>
@@ -108,7 +109,7 @@ const description =
           {actusCotes.map((n, i) => (
             <article class={`news-card card reveal ${i === 0 ? "reveal-delay-1" : "reveal-delay-2"}`}>
               <div class="news-card__photo photo-block photo-block--photo">
-                <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />
+                <PhotoImg photo={n.image} sizes="(max-width: 980px) 50vw, 300px" />
                 <span class="photo-credit">© {n.image.auteur} · {n.image.licence}</span>
                 <span class={`tag tag--${n.tag} news-card__tag`}>{n.categorie}</span>
               </div>
@@ -185,7 +186,7 @@ const description =
             ))}
           </div>
           <div class="photo-block photo-block--photo decouvrir__photo">
-            <img class="photo-block__img" src={photos.argentTetraedrite.src} alt={photos.argentTetraedrite.alt} width={photos.argentTetraedrite.w} height={photos.argentTetraedrite.h} loading="lazy" />
+            <PhotoImg photo={photos.argentTetraedrite} sizes="(max-width: 980px) 100vw, 480px" />
             <span class="photo-credit">© {photos.argentTetraedrite.auteur} · {photos.argentTetraedrite.licence}</span>
             <span class="photo-block__title">Tétraédrite — minerai d’argent natif</span>
           </div>

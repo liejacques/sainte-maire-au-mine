@@ -1,5 +1,6 @@
 ---
 import InnerPage from "../../layouts/InnerPage.astro";
+import PhotoImg from "../../components/PhotoImg.astro";
 import { filtresActualites, aLaUne, autresActus } from "../../data/actualites";
 
 const description =
@@ -34,7 +35,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
     data-une
   >
     <div class="actus-featured__photo photo-block photo-block--photo">
-      <img class="photo-block__img" src={aLaUne.image.src} alt={aLaUne.image.alt} width={aLaUne.image.w} height={aLaUne.image.h} loading="lazy" />
+      <PhotoImg photo={aLaUne.image} sizes="(max-width: 880px) 100vw, 52vw" />
       <span class="photo-credit">© {aLaUne.image.auteur} · {aLaUne.image.licence}</span>
       <span class={`tag tag--${aLaUne.tag} actus-featured__tag`}>{aLaUne.categorie}</span>
     </div>
@@ -52,7 +53,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
       <article class={`actus-card card reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} data-filtre={n.filtre}>
         <a class="actus-card__link card-link" href={`/actualites/${n.slug}/`}>
           <div class="actus-card__photo photo-block photo-block--photo">
-            <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />
+            <PhotoImg photo={n.image} sizes="(max-width: 560px) 100vw, 300px" />
             <span class="photo-credit">© {n.image.auteur} · {n.image.licence}</span>
             <span class={`tag tag--${n.tag} actus-card__tag`}>{n.categorie}</span>
           </div>

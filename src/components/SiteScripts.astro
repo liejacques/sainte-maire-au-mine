@@ -139,4 +139,10 @@
     requestAnimationFrame(tick);
   };
   document.querySelectorAll(".count").forEach((el) => onVisible(el, animateCount));
+
+  // ---- 5) Blur-up : fondu des images au chargement ------------------
+  document.querySelectorAll("img.blur-up").forEach((img) => {
+    if (img instanceof HTMLImageElement && img.complete) img.classList.add("is-loaded");
+    else img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
+  });
 </script>

@@ -1,5 +1,6 @@
 ---
 import InnerPage from "../../layouts/InnerPage.astro";
+import PhotoImg from "../../components/PhotoImg.astro";
 import { articles } from "../../data/actualites";
 
 export function getStaticPaths() {
@@ -29,7 +30,7 @@ const fil = [
     <time datetime={article.iso} class="meta-date">{article.date}</time>
 
     <figure class="actu-article__photo photo-block photo-block--photo">
-      <img class="photo-block__img" src={article.image.src} alt={article.image.alt} width={article.image.w} height={article.image.h} />
+      <PhotoImg photo={article.image} eager sizes="(max-width: 980px) 100vw, 760px" />
       <span class="photo-credit">© {article.image.auteur} · {article.image.licence}</span>
       <figcaption class="photo-block__title">{article.image.titre}</figcaption>
     </figure>
