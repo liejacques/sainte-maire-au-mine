@@ -29,7 +29,7 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
 
   <!-- Article « à la une » -->
   <a
-    class="actus-featured card card-link"
+    class="actus-featured card card-link reveal"
     href={`/actualites/${aLaUne.slug}/`}
     data-une
   >
@@ -48,8 +48,8 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Actualités" }];
 
   <!-- Grille 3 colonnes -->
   <div class="actus-grid">
-    {autresActus.map((n) => (
-      <article class="actus-card card" data-filtre={n.filtre}>
+    {autresActus.map((n, i) => (
+      <article class={`actus-card card reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} data-filtre={n.filtre}>
         <a class="actus-card__link card-link" href={`/actualites/${n.slug}/`}>
           <div class="actus-card__photo photo-block photo-block--photo">
             <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />

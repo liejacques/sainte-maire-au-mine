@@ -28,9 +28,9 @@ const fil = [{ label: "Accueil", href: "/" }, { label: "Agenda" }];
     </div>
 
     <ul class="agenda-list" role="list">
-      {evenements.map((e) => (
+      {evenements.map((e, i) => (
         <li>
-          <a class="agenda-row" href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+          <a class={`agenda-row reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
             <div class="agenda-row__date">
               <div class="agenda-row__day">{e.day}</div>
               <div class="agenda-row__month">{e.month}</div>

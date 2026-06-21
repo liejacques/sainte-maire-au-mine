@@ -60,15 +60,15 @@ const description =
     <!-- ============ DÉMARCHES EN 1 CLIC ============ -->
     <section class="section bg-parchemin" id="demarches" aria-labelledby="demarches-title">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <span class="eyebrow">Services en ligne</span>
             <h2 id="demarches-title" class="section-title">Vos démarches en un clic</h2>
           </div>
         </div>
         <div class="quick-grid">
-          {demarchesRapides.map((d) => (
-            <a class="quick-tile card card-link" href={d.href}>
+          {demarchesRapides.map((d, i) => (
+            <a class={`quick-tile card card-link reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} href={d.href}>
               <span class="tile-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={d.icon} /></span>
               <span class="quick-tile__label">{d.label}</span>
               <span class="quick-tile__desc">{d.desc}</span>
@@ -83,7 +83,7 @@ const description =
     <!-- ============ ACTUALITÉS ============ -->
     <section class="section bg-parchemin-2" aria-labelledby="actus-title">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <span class="eyebrow">La ville bouge</span>
             <h2 id="actus-title" class="section-title">Actualités</h2>
@@ -91,7 +91,7 @@ const description =
           <a class="link-more link-more--gold" href="/actualites/">Toutes les actualités →</a>
         </div>
         <div class="news-grid">
-          <article class="news-featured card">
+          <article class="news-featured card reveal">
             <div class="news-featured__photo photo-block photo-block--photo">
               <img class="photo-block__img" src={aLaUne.image.src} alt={aLaUne.image.alt} width={aLaUne.image.w} height={aLaUne.image.h} loading="lazy" />
               <span class="photo-credit">© {aLaUne.image.auteur} · {aLaUne.image.licence}</span>
@@ -105,8 +105,8 @@ const description =
             </div>
           </article>
 
-          {actusCotes.map((n) => (
-            <article class="news-card card">
+          {actusCotes.map((n, i) => (
+            <article class={`news-card card reveal ${i === 0 ? "reveal-delay-1" : "reveal-delay-2"}`}>
               <div class="news-card__photo photo-block photo-block--photo">
                 <img class="photo-block__img" src={n.image.src} alt={n.image.alt} width={n.image.w} height={n.image.h} loading="lazy" />
                 <span class="photo-credit">© {n.image.auteur} · {n.image.licence}</span>
@@ -127,7 +127,7 @@ const description =
     <!-- ============ AGENDA ============ -->
     <section class="section bg-parchemin" aria-labelledby="agenda-title">
       <div class="wrap agenda">
-        <div class="agenda__intro">
+        <div class="agenda__intro reveal">
           <span class="eyebrow">Temps forts</span>
           <h2 id="agenda-title" class="section-title">Agenda</h2>
           <p class="agenda__lede">Rendez-vous habitants et grands événements du Val d’Argent.</p>
@@ -139,8 +139,8 @@ const description =
           <a class="link-more link-more--gold" href="/agenda/">Tout l’agenda →</a>
         </div>
         <div class="agenda__list">
-          {agendaHome.map((e) => (
-            <a class="agenda-row" href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
+          {agendaHome.map((e, i) => (
+            <a class={`agenda-row reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} href={e.lien ?? `/agenda/${e.slug}/`} style={`border-left-color:${accentByType[e.type]}`}>
               <div class="agenda-row__date">
                 <div class="agenda-row__day">{e.day}</div>
                 <div class="agenda-row__month">{e.month}</div>
@@ -197,10 +197,10 @@ const description =
     <section class="section bg-parchemin-2" id="services" aria-labelledby="services-title">
       <div class="wrap">
         <span class="eyebrow">En un coup d'œil</span>
-        <h2 id="services-title" class="section-title" style="margin-bottom:28px">Services pratiques</h2>
+        <h2 id="services-title" class="section-title reveal" style="margin-bottom:28px">Services pratiques</h2>
         <div class="services-grid">
           <div class="services-cards">
-            <div class="info-card">
+            <div class="info-card reveal">
               <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horaires de la mairie</h3>
               <dl>
                 {mairie.horaires.map((h) => (
@@ -208,7 +208,7 @@ const description =
                 ))}
               </dl>
             </div>
-            <div class="info-card">
+            <div class="info-card reveal reveal-delay-1">
               <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 16.5v3a2 2 0 0 1-2.2 2 19 19 0 0 1-8.3-3 19 19 0 0 1-6-6 19 19 0 0 1-3-8.3A2 2 0 0 1 3.5 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.5 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>Coordonnées</h3>
               <address>
                 {mairie.adresse}<br />{mairie.cp} {mairie.ville}<br />
@@ -216,7 +216,7 @@ const description =
                 <a href={`mailto:${mairie.email}`}>{mairie.email}</a>
               </address>
             </div>
-            <a class="signal-card" href="/signalement/">
+            <a class="signal-card reveal reveal-delay-2" href="/signalement/">
               <span class="signal-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
               <span class="signal-card__txt">
                 <span class="signal-card__t">Signaler un problème</span>
@@ -233,7 +233,7 @@ const description =
     <!-- ============ DÉMOCRATIE LOCALE ============ -->
     <section class="section bg-parchemin" aria-labelledby="demo-title">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div>
             <span class="eyebrow">Vie municipale</span>
             <h2 id="demo-title" class="section-title">Démocratie locale &amp; transparence</h2>
@@ -241,8 +241,8 @@ const description =
           <a class="link-more link-more--gold" href="/ma-mairie/#conseil">Le conseil municipal →</a>
         </div>
         <div class="quick-grid">
-          {democratie.map((g) => (
-            <a class="demo-tile" href={g.href}>
+          {democratie.map((g, i) => (
+            <a class={`demo-tile reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`} href={g.href}>
               <span class="demo-tile__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" set:html={g.icon} /></span>
               <span class="demo-tile__label">{g.label}</span>
               <span class="demo-tile__desc">{g.desc}</span>
@@ -254,7 +254,7 @@ const description =
 
     <!-- ============ NEWSLETTER ============ -->
     <section class="section bg-parchemin" aria-labelledby="news-title">
-      <div class="wrap newsletter">
+      <div class="wrap newsletter reveal">
         <div class="newsletter__accent" aria-hidden="true"></div>
         <div class="newsletter__inner">
           <div class="newsletter__txt">

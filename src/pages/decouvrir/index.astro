@@ -159,8 +159,8 @@ const cards = [
           <a class="link-more link-more--gold" href="/agenda/">Voir l’agenda →</a>
         </div>
         <div class="dv-cards">
-          {cards.map((c) => (
-            <article class="dv-card card">
+          {cards.map((c, i) => (
+            <article class={`dv-card card reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`}>
               <div class="photo-block photo-block--photo dv-card__photo">
                 <img class="photo-block__img" src={c.img.src} alt={c.img.alt} width={c.img.w} height={c.img.h} loading="lazy" />
                 <span class="photo-credit">© {c.img.auteur} · {c.img.licence}</span>
