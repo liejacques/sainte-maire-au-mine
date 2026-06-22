@@ -126,6 +126,9 @@
     const idx = m.index ?? 0;
     const prefix = raw.slice(0, idx);
     const suffix = raw.slice(idx + m[0].length);
+    // Le lecteur d'écran lit toujours la valeur finale, jamais un nombre en
+    // cours d'animation.
+    el.setAttribute("aria-label", prefix + frThousands(target) + suffix);
     if (reduceMotion) { el.textContent = prefix + frThousands(target) + suffix; return; }
     const duration = 1200;
     const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);

@@ -17,6 +17,11 @@ html {
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* Décalage d'ancrage : un titre ciblé par une ancre (#conseil, #elus, #budget…)
+   n'est pas collé au bord haut de la fenêtre. L'en-tête n'étant pas collant,
+   une marge modeste suffit. */
+:target { scroll-margin-top: 2rem; }
+
 /* ---------- Révélations au défilement (socle accessible) ------------
    L'état caché ne s'applique QUE si JS est actif (html.js) ET si
    l'utilisateur n'a pas demandé moins d'animations. Donc : sans JS ou en
