@@ -160,32 +160,36 @@ const description =
       </div>
     </section>
 
-    <!-- ============ DÉCOUVRIR (identité immersive) ============ -->
-    <section class="section decouvrir strata is-dark" aria-labelledby="decouvrir-title">
+    <!-- ============ DÉCOUVRIR — récit « Mille ans d'argent » ============ -->
+    <!-- Bloc narratif qui se révèle par étapes au défilement ; visuel
+         d'accompagnement collant (léger), sans jamais détourner le scroll. -->
+    <section class="section decouvrir decouvrir--recit strata is-dark" aria-labelledby="decouvrir-title">
       <div class="partition" style="left:50%"></div>
       <div class="wrap decouvrir__grid">
-        <div class="decouvrir__col">
-          <span class="eyebrow eyebrow--gold eyebrow--mark">
+        <div class="decouvrir__col decouvrir__narr">
+          <span class="eyebrow eyebrow--gold eyebrow--mark reveal">
             <MinerTools size={20} />
             Découvrir Sainte-Marie-aux-Mines
           </span>
-          <h2 id="decouvrir-title" class="decouvrir__title">La ville née de <span class="metal-text" style="font-style:italic">l’argent</span> et de la roche</h2>
-          <p class="decouvrir__text">Mille ans d’exploitation, 1&nbsp;100 mines, 300&nbsp;km de galeries. Une ville née sur deux rives de la Lièpvrette — lorraine et alsacienne — réunies en 1790. Goethe collectionnait nos minéraux ; Charles Quint reçut notre argent.</p>
-          <div class="decouvrir__cta">
+          <h2 id="decouvrir-title" class="decouvrir__title reveal">La ville née de <span class="metal-text" style="font-style:italic">l’argent</span> et de la roche</h2>
+          <p class="decouvrir__step reveal">Mille ans d’exploitation, 1&nbsp;100 mines, 300&nbsp;km de galeries.</p>
+          <p class="decouvrir__step reveal">Une ville née sur deux rives de la Lièpvrette — lorraine et alsacienne — réunies en 1790.</p>
+          <p class="decouvrir__step reveal">Goethe collectionnait nos minéraux ; Charles Quint reçut notre argent.</p>
+          <div class="decouvrir__cta reveal">
             <a class="btn btn--primary" href="/decouvrir/#tourisme">Mine-musée Tellure</a>
             <a class="btn btn--ghost-dark" href="/decouvrir/#dualite">Pays d’art &amp; d’histoire</a>
           </div>
         </div>
-        <div class="decouvrir__col">
+        <div class="decouvrir__col decouvrir__visual">
           <div class="ident-grid">
-            {chiffresDecouvrir.map((s) => (
-              <div class="ident-stat">
+            {chiffresDecouvrir.map((s, i) => (
+              <div class={`ident-stat reveal ${["", "reveal-delay-1", "reveal-delay-2", "reveal-delay-3"][i % 4]}`}>
                 <div class={`ident-stat__n ident-stat__n--${s.tone}${/\d[\d\s]*\d/.test(s.value) ? " count" : ""}`}>{s.value}</div>
                 <div class="ident-stat__l">{s.label}</div>
               </div>
             ))}
           </div>
-          <div class="photo-block photo-block--photo decouvrir__photo">
+          <div class="photo-block photo-block--photo decouvrir__photo reveal">
             <PhotoImg photo={photos.argentTetraedrite} sizes="(max-width: 980px) 100vw, 480px" />
             <span class="photo-credit">© {photos.argentTetraedrite.auteur} · {photos.argentTetraedrite.licence}</span>
             <span class="photo-block__title">Tétraédrite — minerai d’argent natif</span>
@@ -413,6 +417,15 @@ const description =
   .decouvrir { position: relative; overflow: hidden; background: var(--nuit); padding-block: 64px; }
   .decouvrir__grid { position: relative; display: flex; gap: 56px; align-items: flex-start; }
   .decouvrir__col { flex: 1; }
+  /* Récit « Mille ans d'argent » : étapes de texte + visuel d'accompagnement. */
+  .decouvrir__narr { max-width: 32rem; }
+  .decouvrir__step { font: 400 1rem/1.65 var(--sans); color: var(--brume-2); margin: 0 0 0.875rem; max-width: 30rem; }
+  .decouvrir__step:first-of-type { margin-top: 0.5rem; }
+  /* Visuel collant : léger, et seulement avec animations + sur grand écran.
+     En reduced-motion / mobile : flux normal (pile linéaire). */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 981px) {
+    .decouvrir__visual { position: sticky; top: calc(var(--header-offset) - 2rem); align-self: start; }
+  }
   .decouvrir__title { font-family: var(--serif); font-weight: 500; font-size: clamp(1.75rem, 4.4vw, 2.375rem); line-height: 1.08; color: var(--clair-2); margin: 14px 0 16px; }
   .decouvrir__text { font-size: 1rem; line-height: 1.6; color: var(--brume-2); margin: 0 0 18px; max-width: 480px; }
   .decouvrir__cta { display: flex; gap: 12px; flex-wrap: wrap; }
