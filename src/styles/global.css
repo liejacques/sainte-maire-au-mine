@@ -40,6 +40,12 @@ html {
   html.js img.blur-up.is-loaded { opacity: 1; }
 }
 
+/* Parallaxe du hero : pilotée par SiteScripts (translate3d throttlé en rAF).
+   Activée seulement avec JS, hors reduced-motion et hors mobile. */
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  html.js .hero-parallax { will-change: transform; }
+}
+
 body {
   background: var(--parchemin);
   color: var(--texte);

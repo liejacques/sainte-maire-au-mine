@@ -145,4 +145,30 @@
     if (img instanceof HTMLImageElement && img.complete) img.classList.add("is-loaded");
     else img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
   });
+
+  // ---- 6) Parallaxe TRÈS légère du hero -----------------------------
+  // translate3d piloté au scroll, throttlé en requestAnimationFrame.
+  // Désactivée en reduced-motion et sur mobile (rendu plus fluide, public
+  // souvent senior). Le texte du hero (autre élément) ne bouge jamais.
+  const heroImg = document.querySelector(".hero-parallax");
+  if (
+    heroImg instanceof HTMLElement &&
+    !reduceMotion &&
+    window.matchMedia("(min-width: 768px)").matches
+  ) {
+    let ticking = false;
+    const update = () => {
+      const offset = Math.round(window.scrollY * 0.06);
+      heroImg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.12)`;
+      ticking = false;
+    };
+    update();
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      },
+      { passive: true },
+    );
+  }
 </script>
